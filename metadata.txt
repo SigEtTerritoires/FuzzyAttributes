@@ -1,0 +1,17 @@
+[general]
+name=FuzzyAttributes
+description=Plugin pour convertir des champs en valeurs floues
+version=0.1
+qgisMinimumVersion=3.28
+qgisMaximumVersion=3.99
+author=Atilio FRANCOIS
+email=f2lmyvhnh@mozmail.com
+about=Convertit des attributs numériques en valeurs floues
+category=Analysis
+repository=https://github.com/SigEtTerritoires/FuzzyAttributes
+icon=fuzzyattributes_icon.png
+homepage=https://github.com/SigEtTerritoires/FuzzyAttributes
+tracker=https://github.com/SigEtTerritoires/FuzzyAttributes/issues
+tags=fuzzy,attributes,aggregation,geopackage,QGIS
+deprecated=false
+translate=True

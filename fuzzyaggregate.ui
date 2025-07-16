@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FuzzyAggregateDialog</class>
+ <widget class="QDialog" name="FuzzyAggregateDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>461</width>
+    <height>361</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Fuzzy Aggregate</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelLayer1">
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Couche 1</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="layerCombo1"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelField1">
+     <property name="text">
+      <string>Champ flou 1</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="fieldCombo1"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelLayer2">
+     <property name="text">
+      <string>Couche 2</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="layerCombo2"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelField2">
+     <property name="text">
+      <string>Champ flou 2</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="fieldCombo2"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelOperation">
+     <property name="text">
+      <string>Type d’opération spatiale</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QRadioButton" name="radioIntersection">
+       <property name="text">
+        <string>Intersection</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioUnion">
+       <property name="text">
+        <string>Union</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelOutput">
+     <property name="text">
+      <string>Nom de la couche résultat (ajout de _agg à la fin automatique)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="outputLayerName"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnShowMetadata">
+     <property name="text">
+      <string>Voir l'historique des transformations</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="defineFunctionButton">
+     <property name="text">
+      <string>Définir la fonction</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="functionLabel">
+     <property name="text">
+      <string>Code : </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
