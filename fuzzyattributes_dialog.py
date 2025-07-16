@@ -13,7 +13,7 @@ import math
 import os
 from datetime import datetime
 import getpass
-
+from qgis.PyQt.QtGui import QPixmap
 
 
 
@@ -80,6 +80,11 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             self.tr("gaussienne")
         ]
         self.fuzzyTypeComboBox.addItems(self.fuzzy_types)
+       
+
+        self.fuzzyTypeComboBox.currentTextChanged.connect(self.updateFunctionPreview)
+        # Appel initial
+        self.updateFunctionPreview(self.fuzzyTypeComboBox.currentText())
 
         # Connexions
         self.layerComboBox.currentIndexChanged.connect(self.update_fields)
@@ -448,4 +453,29 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
 
     def _(text):
         return QCoreApplication.translate("FuzzyAttributes", text)
+    def updateFunctionPreview(self, name: str):
+        """
+        Charge l’image correspondant au nom de la fonction fuzzyTypeComboBox
+        et l’affiche dans labelFunctionPreview.
+        """
+        # Dictionnaire de correspondance texte → fichier
+        mapping = {
+            "linéaire croissante": "linearcroiss.png",
+            "linéaire décroissante": "lineardecroiss.png",
+            "triangulaire": "triangulaire.png",
+            "trapézoïdale": "trapezoidale.png",
+            "sigmoïde croissante (S)": "sigmocroiss.png",
+            "sigmoïde décroissante (Z)": "sigmodecroiss",
+            "gaussienne": "gaussienne.png"
+        }
+
+        fname = mapping.get(name)
+        if fname:
+            # Construis le chemin absolu vers ton image
+            img_path = os.path.join(os.path.dirname(__file__), "resources", "images", fname)
+            pix = QPixmap(img_path)
+        else:
+            pix = QPixmap()  # vide
+
+        self.labelFunctionPreview.setPixmap(pix)
 

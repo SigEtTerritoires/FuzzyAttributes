@@ -35,8 +35,26 @@
     </layout>
    </item>
    <item>
-    <widget class="QComboBox" name="fuzzyTypeComboBox"/>
-   </item>
+  <layout class="QHBoxLayout" name="horizontalLayoutFunction">
+    <item>
+      <widget class="QComboBox" name="fuzzyTypeComboBox"/>
+    </item>
+    <item>
+      <widget class="QLabel" name="labelFunctionPreview">
+        <property name="minimumSize">
+          <size>
+            <width>100</width>
+            <height>100</height>
+          </size>
+        </property>
+        <property name="scaledContents">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+  </layout>
+</item>
+
    <item>
     <layout class="QHBoxLayout" name="paramLayout">
      <item>

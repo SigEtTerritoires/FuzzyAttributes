@@ -10,7 +10,7 @@
 * **Spatial Aggregation**: Combine two fuzzy attribute layers using intersection or union operations.
 * **Decision-Based Aggregation**: Guide users through a three-question process to select or generate a custom fuzzy aggregation function.
 * **Metadata Logging**: Automatically record transformation parameters, sources, and user information in a GeoPackage metadata table.
-* **Multilingual**: Supports English, French, Spanish (additional translations can be added).
+* **Multilingual**: Supports English, French, Spanish, Portuguese (additional translations can be added).
 
 ## Installation
 
@@ -29,8 +29,18 @@
 ## Usage
 
 1. **Fuzzy Transformation**: Under menu **FuzzyAttributes > Transformation floue**, select a layer, a field, and a fuzzy function type. Enter parameters and apply.
-2. **Fuzzy Aggregation**: Under menu **FuzzyAttributes > Agrégation floue**, choose two fuzzy layers, select intersection or union, define or select an aggregation function, and run. The result is saved in the same GeoPackage and added to the project.
+![Fuzzy transformation dialog](resources/images/attributs.jpg)
 
+2. **Fuzzy Aggregation**: Under menu **FuzzyAttributes > Agrégation floue**, choose two fuzzy layers, select intersection or union, define or select an aggregation function, and run. The result is saved in the same GeoPackage and added to the project.
+![Fuzzy aggregation dialog](resources/images/aggregation.jpg)
+
+### Fuzzy aggregation function
+
+The plugin offers a flexible and intuitive method for constructing a **fuzzy aggregation function** from a combination of qualitative criteria. The user expresses his evaluation by means of classic linguistic judgments - *Very good, Good, Average, Mediocre, Very bad* - on 3 or 4 criteria. Each combination of “natural” responses, i.e. balanced and symmetrical, corresponds directly to one of the plugin's **50 predefined functions**.
+
+However, in more complex situations - such as when criteria have **unequal weight**, or responses are **asymmetrical or atypical** - it becomes necessary to go beyond the 50 basic functions. The plugin then offers a **generalization based on an underlying mathematical model**: a projection or interpolation method is used to build a customized aggregation function, close to the behavior expected by the user, while remaining consistent within the framework of fuzzy analysis.
+
+This approach makes it possible to integrate nuanced, non-standard human judgments into a fuzzy analysis process, while ensuring logical continuity and mathematical validity of the aggregation function used.
 ## Plugin Menus
 
 * **FuzzyAttributes**: Main fuzzy transformation dialog.
