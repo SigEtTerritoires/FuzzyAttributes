@@ -1,17 +1,18 @@
 [general]
 name=FuzzyAttributes
-description=Plugin pour convertir des champs en valeurs floues
-version=0.1
+description=FR: Convertit des champs numériques ou catégoriels en valeurs floues avec plusieurs fonctions d’appartenance. EN: Converts numeric or categorical fields into fuzzy values using various membership functions.
+version=1.0.0
 qgisMinimumVersion=3.28
 qgisMaximumVersion=3.99
 author=Atilio FRANCOIS
 email=f2lmyvhnh@mozmail.com
-about=Convertit des attributs numériques en valeurs floues
+about=FR: FuzzyAttributes est un plugin QGIS permettant de convertir des attributs numériques ou catégoriels en valeurs floues (degrés d’appartenance entre 0 et 1) selon plusieurs types de fonctions d’appartenance : linéaire croissante/décroissante, trapézoïdale, triangulaire, sigmoïde (S et Z) et gaussienne. L’interface graphique facilite la configuration des paramètres pour chaque fonction, affiche un exemple visuel de la transformation, et propose une aide intégrée pour comprendre chaque type de fonction floue. Le plugin permet également l’agrégation souple (fuzzy aggregation) de plusieurs critères à l’aide de méthodes paramétrées, avec vérification de cohérence et messages d’avertissement en cas de configurations contradictoires. EN: FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into fuzzy values (membership degrees between 0 and 1) using various membership functions: increasing/decreasing linear, trapezoidal, triangular, sigmoid (S and Z), and Gaussian. The graphical interface makes it easy to configure parameters for each function, displays a visual example of the transformation, and provides built-in help to explain each fuzzy function type. The plugin also supports flexible (fuzzy) aggregation of multiple criteria using parameterized methods, with logical consistency checks and warning messages in case of contradictory configurations.
 category=Analysis
 repository=https://github.com/SigEtTerritoires/FuzzyAttributes
-icon=fuzzyattributes_icon.png
 homepage=https://github.com/SigEtTerritoires/FuzzyAttributes
 tracker=https://github.com/SigEtTerritoires/FuzzyAttributes/issues
-tags=fuzzy,attributes,aggregation,geopackage,QGIS
+tags=fuzzy,attributes,aggregation,geopackage,QGIS,flou,décision,membership,functions
+icon=fuzzyattributes_icon.png
 deprecated=false
-translate=True
+license=GPL-3.0
+translate=true
