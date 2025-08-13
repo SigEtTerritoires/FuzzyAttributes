@@ -15,6 +15,8 @@ Il offre également la possibilité d’agréger plusieurs critères flous avec 
 
 **Mode d’emploi complet** : [Guide utilisateur FuzzyAttributes](https://www.sigterritoires.fr/index.php/fuzzyattributes/)
 
+---
+
 **EN :**  
 FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into **fuzzy values** (membership degrees between 0 and 1) using common membership functions (increasing/decreasing linear, triangular, trapezoidal, sigmoid S and Z, Gaussian).  
 
