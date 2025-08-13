@@ -79,7 +79,8 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
    * Select a layer and a field.
    * Choose a fuzzy function type.
    * Enter parameters and apply.
-     ![Fuzzy transformation dialog]	 (https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/FuzzyAttributes/resources/images/attributs.jpg)
+     ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
+
 
 
 
@@ -89,8 +90,8 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
    * Select two fuzzy layers.
    * Choose intersection or union.
    * Define or select an aggregation function.
-     ![Fuzzy aggregation dialog](
-	 https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/FuzzyAttributes/resources/images/aggregation.jpg)
+     ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
+
 
 
 
