@@ -11,11 +11,19 @@
 **FR :**  
 FuzzyAttributes est un plugin QGIS qui permet de convertir des attributs numériques ou catégoriels en **valeurs floues** (degrés d’appartenance entre 0 et 1) à l’aide de fonctions d’appartenance courantes (linéaire croissante/décroissante, triangulaire, trapézoïdale, sigmoïde S et Z, gaussienne).  
 Il offre également la possibilité d’agréger plusieurs critères flous avec des fonctions personnalisables, tout en intégrant une interface graphique conviviale, des exemples visuels et une aide intégrée multilingue.
-
+**Mode d’emploi complet** : [Guide utilisateur FuzzyAttributes](https://www.sigterritoires.fr/index.php/fuzzyattributes/)
 **EN :**  
 FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into **fuzzy values** (membership degrees between 0 and 1) using common membership functions (increasing/decreasing linear, triangular, trapezoidal, sigmoid S and Z, Gaussian).  
 It also allows aggregation of multiple fuzzy criteria with customizable functions, featuring a user-friendly interface, visual examples, and built-in multilingual help.
-
+**Complete user guide**: [FuzzyAttributes User Guide](https://www.sigterritoires.fr/index.php/en/fuzzyattributesen/)
+**ES:**  
+FuzzyAttributes es un complemento de QGIS que permite convertir atributos numéricos o categóricos en **valores difusos** (grados de pertenencia entre 0 y 1) utilizando funciones de pertenencia comunes (lineal ascendente/descendente, triangular, trapezoidal, sigmoide S y Z, gaussiana).  
+También ofrece la posibilidad de agregar varios criterios difusos con funciones personalizables, al tiempo que integra una interfaz gráfica fácil de usar, ejemplos visuales y ayuda integrada en varios idiomas.
+**Instrucciones completas**: [Guía del usuario de FuzzyAttributes](https://www.sigterritoires.fr/index.php/es/fuzzyattributeses/)
+**PT:**  
+O FuzzyAttributes é um plugin do QGIS que permite converter atributos numéricos ou categóricos em **valores difusos** (graus de pertencimento entre 0 e 1) utilizando funções de pertencimento comuns (linear crescente/decrescente, triangular, trapezoidal, sigmoide S e Z, gaussiana).  
+Ele também oferece a possibilidade de agregar vários critérios difusos com funções personalizáveis, além de integrar uma interface gráfica amigável, exemplos visuais e ajuda integrada multilíngue.
+**Manual de instruções completo**: [Guia do usuário FuzzyAttributes](https://www.sigterritoires.fr/index.php/pt/fuzzyattributespt/)
 ---
 
 ## Features
