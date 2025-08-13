@@ -57,11 +57,14 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
 
 ## Installation
 
+```md
 1. **Download or Clone** this repository:
    ```bash
    git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git
+   ```
 ```
 
+---
 2. Copy the plugin folder to your QGIS plugin directory:
 
    * **Windows**: `%APPDATA%/QGIS/QGIS3/profiles/default/python/plugins/`
