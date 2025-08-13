@@ -60,7 +60,7 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
 
 1. **Download or Clone** this repository:
    
-   '''git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git'''
+   ```git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git```
 
 
 ---
@@ -81,7 +81,7 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
    * Select a layer and a field.
    * Choose a fuzzy function type.
    * Enter parameters and apply.
-     ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/tree/main/resources/images/attributs.jpg)
+     ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
 
 
 
@@ -92,7 +92,7 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
    * Select two fuzzy layers.
    * Choose intersection or union.
    * Define or select an aggregation function.
-     ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/tree/main/resources/images/aggregation.jpg)
+     ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
 
 
