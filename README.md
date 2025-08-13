@@ -20,9 +20,9 @@ FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes
 
 It also allows aggregation of multiple fuzzy criteria with customizable functions, featuring a user-friendly interface, visual examples, and built-in multilingual help.
 
----
-
 **Complete user guide**: [FuzzyAttributes User Guide](https://www.sigterritoires.fr/index.php/en/fuzzyattributesen/)
+
+---
 
 **ES:**  
 FuzzyAttributes es un complemento de QGIS que permite convertir atributos numéricos o categóricos en **valores difusos** (grados de pertenencia entre 0 y 1) utilizando funciones de pertenencia comunes (lineal ascendente/descendente, triangular, trapezoidal, sigmoide S y Z, gaussiana).
