@@ -69,18 +69,21 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
         self.layerComboBox.currentTextChanged.connect(self.update_current_layer)
 
 
-        # Types flous disponibles
+        # Types flous disponibles avec codes internes
         self.fuzzy_types = [
-            self.tr("linéaire croissante"),
-            self.tr("linéaire décroissante"),
-            self.tr("triangulaire"),
-            self.tr("trapézoïdale"),
-            self.tr("sigmoïde croissante (S)"),
-            self.tr("sigmoïde décroissante (Z)"),
-            self.tr("gaussienne")
+            ("linear_inc", self.tr("linéaire croissante")),
+            ("linear_dec", self.tr("linéaire décroissante")),
+            ("triangular", self.tr("triangulaire")),
+            ("trapezoidal", self.tr("trapézoïdale")),
+            ("sigmoid_inc", self.tr("sigmoïde croissante (S)")),
+            ("sigmoid_dec", self.tr("sigmoïde décroissante (Z)")),
+            ("gaussian", self.tr("gaussienne"))
         ]
-        self.fuzzyTypeComboBox.addItems(self.fuzzy_types)
-       
+
+        # Ajout à la combo : texte affiché + code interne en data
+        for code, label in self.fuzzy_types:
+            self.fuzzyTypeComboBox.addItem(label, code)
+         
 
         self.fuzzyTypeComboBox.currentTextChanged.connect(self.updateFunctionPreview)
         # Appel initial
@@ -453,29 +456,25 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
 
     def _(text):
         return QCoreApplication.translate("FuzzyAttributes", text)
-    def updateFunctionPreview(self, name: str):
-        """
-        Charge l’image correspondant au nom de la fonction fuzzyTypeComboBox
-        et l’affiche dans labelFunctionPreview.
-        """
-        # Dictionnaire de correspondance texte → fichier
+    def updateFunctionPreview(self, _unused=None):
         mapping = {
-            "linéaire croissante": "linearcroiss.png",
-            "linéaire décroissante": "lineardecroiss.png",
-            "triangulaire": "triangulaire.png",
-            "trapézoïdale": "trapezoidale.png",
-            "sigmoïde croissante (S)": "sigmocroiss.png",
-            "sigmoïde décroissante (Z)": "sigmodecroiss",
-            "gaussienne": "gaussienne.png"
+            "linear_inc": "linearcroiss.png",
+            "linear_dec": "lineardecroiss.png",
+            "triangular": "triangulaire.png",
+            "trapezoidal": "trapezoidale.png",
+            "sigmoid_inc": "sigmocroiss.png",
+            "sigmoid_dec": "sigmodecroiss.png",
+            "gaussian": "gaussienne.png"
         }
 
-        fname = mapping.get(name)
+        code = self.fuzzyTypeComboBox.currentData()  # Récupère le code interne
+        fname = mapping.get(code)
         if fname:
-            # Construis le chemin absolu vers ton image
             img_path = os.path.join(os.path.dirname(__file__), "resources", "images", fname)
             pix = QPixmap(img_path)
         else:
             pix = QPixmap()  # vide
 
         self.labelFunctionPreview.setPixmap(pix)
+
 
