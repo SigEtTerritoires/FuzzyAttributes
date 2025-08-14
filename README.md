@@ -94,7 +94,7 @@ Ele também oferece a possibilidade de agregar vários critérios difusos com fu
    * Define or select an aggregation function.
      ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
-
+     ![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
 
 
 ---
