@@ -1,0 +1,50 @@
+# Changelog  
+Toutes les modifications notables du plugin **FuzzyAttributes** seront documentées ici.  
+
+Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)  
+et ce projet suit approximativement le versionnage sémantique (SemVer).  
+## [Unreleased]
+- Support du format postgis pour les données
+
+---
+
+## [1.0.3] - 2025-08-19
+### Ajouté
+- Vérification de cohérence des fonctions d’agrégation :  
+  - Avertissement en cas de combinaison incohérente.  
+  - Possibilité de confirmer ou d’annuler le traitement.  
+
+### Modifié
+- Amélioration de la stabilité du lancement des agrégations.  
+- Meilleure gestion des aperçus de fonctions floues (compatibilité langues).  
+- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
+
+### Corrigé
+- Bug d’appel à `updateFunctionPreview()` corrigé.  
+- Divers correctifs mineurs dans les dialogues.  
+
+---
+
+## [1.2.0] - 2025-07-15
+### Ajouté
+- Aperçu graphique dynamique des fonctions d’appartenance.  
+- Infobulles et aide contextuelle pour chaque type de fonction floue.  
+- Début du support multilingue (français, anglais, espagnol, portugais).  
+
+### Corrigé
+- Problèmes mineurs d’interface utilisateur.  
+
+---
+
+## [1.0.1] - 2025-08-13
+### Corrigé
+- affichage de l'image de la fonction floue dans toutes les langues.
+- Amélioration du mapping interne pour compatibilité avec les traductions.
+- Mise à jour de la documentation et images dans README.
+---
+
+## [1.0.0] - 2025-08-10
+### Ajouté
+- Première version publiée sur le dépôt QGIS.  
+- Conversion d’attributs numériques en nombres flous.  
+- Fonctions disponibles : linéaire croissante, linéaire décroissante, triangulaire, trapézoïdale,sigmoïde (S), sigmoïde inversée (Z), gaussienne.  

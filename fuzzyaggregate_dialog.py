@@ -813,16 +813,22 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             }
         # Test d’incohérence (pour code à 4 chiffres)
         
-        if len(function_code) == 4 and not is_aggregation_code_consistent(function_code):
+        code = self.aggregation_function_code  # 'XYZ' ou 'WXYZ'
+
+        if not self.is_aggregation_code_consistent(function_code):
+            details = self.explain_inconsistency(function_code)
+            # Affiche un avertissement et demande confirmation
+            from qgis.PyQt.QtWidgets import QMessageBox
             reply = QMessageBox.question(
                 self,
-                "Code potentiellement incohérent",
-                "Le code sélectionné semble incohérent (A meilleur que B donne un moins bon résultat).\nVoulez-vous continuer ?",
+                self.tr("Vérification de la combinaison"),
+                self.tr("La combinaison semble incohérente :\n\n{0}\n\nVoulez-vous procéder quand même ?").format(details),
                 QMessageBox.Yes | QMessageBox.No,
                 QMessageBox.No
             )
             if reply == QMessageBox.No:
-                return
+                return  # annuler le traitement
+
         
         
         
@@ -834,6 +840,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
         if code4[0] == code4[3]:  # Symétrique
             if code3 in agg_functions:
                 func = agg_functions[code3]
+                fuzzy_params = None
                 function_id = f"fuzzy_{code3}"
             else:
                 func, fuzzy_params = generate_fuzzy_function(code3)
@@ -844,7 +851,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             function_id = f"asymmetric_{code4}"
 
         if func is None:
-            QMessageBox.warning(self, "Erreur", "La fonction d’agrégation n’a pas pu être générée.")
+            QMessageBox.warning(self, self.tr("Erreur"), self.tr("La fonction d’agrégation n’a pas pu être générée."))
             return
 
         
@@ -1157,22 +1164,91 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
 
     def _(text):
         return QCoreApplication.translate("FuzzyAttributes", text)
-def is_aggregation_code_consistent(code):
-    """
-    Vérifie si une combinaison est logiquement cohérente :
-    - On compare (A=1, B=0) et (A=0, B=1)
-    - Si A meilleur que B donne un moins bon score que B meilleur que A → incohérence
-    """
-    
-    if len(code) != 4:
-        return True  # Pas de vérification si ce n’est pas un code asymétrique
 
-    try:
-        a1b0 = int(code[0])
-        a0b1 = int(code[3])
-        return a1b0 <= a0b1
-    except ValueError:
-        return True  # Ne pas bloquer pour code malformé
+    def _decode_digit(self,d):
+        """'0'→1.0, '1'→0.75, '2'→0.5, '3'→0.25, '4'→0.0"""
+        mapping = {"0": 1.0, "1": 0.75, "2": 0.5, "3": 0.25, "4": 0.0}
+        return mapping.get(d, None)
+
+    def _extract_Rs(self,code):
+        """
+        Retourne (R1, R2, R3) selon la logique demandée ou (None, None, None)
+        si le code ne doit pas être vérifié (ex: 4 chiffres asymétrique) ou invalide.
+        - 3 chiffres (symétrique) : R1=code[0], R2=code[1], R3=code[2]
+        - 4 chiffres :
+            * asymétrique (code[0] != code[3]) → None (on ne vérifie pas)
+            * symétrique (code[0] == code[3]) :
+                R1=code[3] (A=0,B=1), R2=code[1] (0.5,0.5), R3=code[2] (0.5,1)
+        """
+        if not code:
+            return (None, None, None)
+
+        code = code.strip()
+        if len(code) == 3:
+            R1 = self._decode_digit(code[0])
+            R2 = self._decode_digit(code[1])
+            R3 = self._decode_digit(code[2])
+            if None in (R1, R2, R3):
+                return (None, None, None)
+            return (R1, R2, R3)
+
+        if len(code) == 4:
+            # asymétrique → on NE vérifie PAS
+            if code[0] != code[3]:
+                return (None, None, None)
+            # symétrique → mêmes règles que 3 chiffres,
+            # mais R1 doit venir du scénario (A=0,B=1) = 4e chiffre
+            R1 = self._decode_digit(code[3])
+            R2 = self._decode_digit(code[1])
+            R3 = self._decode_digit(code[2])
+            if None in (R1, R2, R3):
+                return (None, None, None)
+            return (R1, R2, R3)
+
+        # autres longueurs : on ne vérifie pas
+        return (None, None, None)
+
+    def is_aggregation_code_consistent(self,code):
+        """
+        Renvoie True si le code est « cohérent » au sens des règles demandées,
+        False si une règle est violée, et True si le code ne doit pas être vérifié
+        (4 chiffres asymétrique) ou malformé (on ne bloque pas).
+        Règles :
+          1) R3 >= max(R1, R2)
+          2) R3 >= 0.5
+        """
+        R1, R2, R3 = self._extract_Rs(code)
+        # Pas de vérification (asym 4 chiffres, longueur inattendue, digits invalides)
+        if R1 is None:
+            return True
+        if R3 < max(R1, R2):
+            return False
+        if R3 < 0.5:
+            return False
+        return True
+
+    def explain_inconsistency(self,code):
+        """
+        Renvoie une chaîne expliquant quelle règle est violée,
+        ou '' si tout est cohérent / non vérifiable.
+        """
+        R1, R2, R3 = self._extract_Rs(code)
+        if R1 is None:
+            return ""  # pas de vérification => pas de message
+        msgs = []
+        if R3 < max(R1, R2):
+            msgs.append(self.tr(
+                "Règle 1 violée : R3 (A=0,5 ; B=1) doit être >= max(R1, R2).")
+            )
+        if R3 < 0.5:
+            msgs.append(self.tr(
+                "Règle 2 violée : R3 (A=0,5 ; B=1) doit être >= 0,5.")
+            )
+        return "\n".join(msgs)
+
+
+
+
 def generate_fuzzy_function(code):
     """
     Génère dynamiquement une fonction floue symétrique à partir d’un code à 3 chiffres
