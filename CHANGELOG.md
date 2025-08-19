@@ -8,7 +8,7 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 
 ---
 
-## [1.0.3] - 2025-08-19
+## [1.0.2] - 2025-08-19
 ### Ajouté
 - Vérification de cohérence des fonctions d’agrégation :  
   - Avertissement en cas de combinaison incohérente.  
@@ -25,18 +25,8 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 
 ---
 
-## [1.2.0] - 2025-07-15
-### Ajouté
-- Aperçu graphique dynamique des fonctions d’appartenance.  
-- Infobulles et aide contextuelle pour chaque type de fonction floue.  
-- Début du support multilingue (français, anglais, espagnol, portugais).  
-
-### Corrigé
-- Problèmes mineurs d’interface utilisateur.  
-
----
-
 ## [1.0.1] - 2025-08-13
+
 ### Corrigé
 - affichage de l'image de la fonction floue dans toutes les langues.
 - Amélioration du mapping interne pour compatibilité avec les traductions.

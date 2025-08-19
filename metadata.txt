@@ -17,7 +17,7 @@ deprecated=false
 license=GPL-3.0
 translate=true
 changelog=
-    [1.0.3] - 2025-08-18
+    [1.0.2] - 2025-08-18
     - Ajout du contrôle de cohérence logique pour certaines fonctions d’agrégation floue.
     - Nouveaux messages d’avertissement interactifs avec demande de confirmation.
     - Mise à jour des traductions (fr, en, es, pt).
