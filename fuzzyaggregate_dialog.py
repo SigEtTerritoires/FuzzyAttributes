@@ -8,7 +8,6 @@ import os
 import processing
 from qgis.core import QgsProcessingOutputLayerDefinition
 import sys
-
 from qgis.core import QgsMessageLog,QgsProcessing
 from qgis.core import Qgis
 from qgis.PyQt.QtCore import QFileInfo
@@ -19,6 +18,8 @@ from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
 import getpass
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
 from qgis.PyQt.QtCore import NULL
+from PyQt5 import QtWidgets
+
 _translator = None
 def load_translator():
     global _translator
@@ -986,7 +987,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             )
 
         except Exception as e:
-            QMessageBox.critical(self, "Erreur", f"Erreur pendant le traitement :\n{e}")
+            return
             
     def ensure_metadata_table_exists(self, gpkg_path):
             # Vérifie si la couche 'metafuzzy' existe déjà

@@ -7,7 +7,9 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 - Support du format postgis pour les données
 
 ---
-
+## [1.0.4] - 2025-08-19
+### Corrigé
+- Bug : Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
 ## [1.0.2] - 2025-08-19
 ### Ajouté
 - Vérification de cohérence des fonctions d’agrégation :  
