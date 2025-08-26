@@ -19,6 +19,21 @@ import getpass
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
 from qgis.PyQt.QtCore import NULL
 from PyQt5 import QtWidgets
+from qgis.core import (
+    QgsVectorLayer,
+    QgsField,
+    QgsSymbol,
+    QgsRendererRange,
+    QgsGraduatedSymbolRenderer,
+    QgsProject
+)
+
+from qgis.PyQt.QtCore import QVariant
+from qgis.PyQt.QtGui import QColor
+from qgis.PyQt.QtWidgets import QMessageBox
+
+# Si tu veux rafraîchir via l’interface QGIS :
+from qgis.utils import iface
 
 _translator = None
 def load_translator():
@@ -965,14 +980,40 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 except Exception as e:
                     print(f"Erreur lors de l’agrégation : {e}")
 
+            # Fin de l’édition
             real_layer.commitChanges()
+            real_layer.updateFields()
 
+            # Définir les classes (valeur min, valeur max, couleur, étiquette)
+            classes = [
+                (0.0, 0.125, "#ff0000", self.tr("0 – 0.125 (mauvais)")),          # rouge
+                (0.125, 0.375, "#ff7f00", self.tr("0.125 – 0.375 (médiocre)")),   # orange
+                (0.375, 0.625, "#ffff00", self.tr("0.375 – 0.625 (moyen)")),    # jaune
+                (0.625, 0.875, "#7fff00", self.tr("0.625 – 0.875 (bon)")), # vert clair
+                (0.875, 1.0, "#006400", self.tr("0.875 – 1.0 (très bon)"))    # vert foncé
+            ]
 
-            # Ajout au projet
+            ranges = []
+            for min_val, max_val, color, label in classes:
+                symbol = QgsSymbol.defaultSymbol(real_layer.geometryType())
+                symbol.setColor(QColor(color))
+                rng = QgsRendererRange(min_val, max_val, symbol, label)
+                ranges.append(rng)
+
+            # Créer un renderer gradué basé sur les plages définies
+            renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
+
+            # Inutile d’appeler setMode() → les ranges sont déjà explicites
+            real_layer.setRenderer(renderer)
+            real_layer.triggerRepaint()
+
+            # Ajouter la couche au projet
             QgsProject.instance().addMapLayer(real_layer)
 
-            
+        
+            # Message de succès
             QMessageBox.information(self, self.tr("Succès"), f"Couche '{output_name}' créée avec succès.")
+
             self.ensure_metadata_table_exists(gpkg_path)
 
             source1 = f"{self.layerCombo1.currentText()}/{self.fieldCombo1.currentText()}"

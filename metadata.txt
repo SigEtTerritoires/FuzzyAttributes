@@ -1,7 +1,7 @@
 [general]
 name=FuzzyAttributes
 description=FR: Convertit des champs numériques ou catégoriels en valeurs floues avec plusieurs fonctions d’appartenance. EN: Converts numeric or categorical fields into fuzzy values using various membership functions.
-version=1.0.4
+version=1.0.5
 qgisMinimumVersion=3.28
 qgisMaximumVersion=3.99
 author=Atilio FRANCOIS
@@ -17,6 +17,8 @@ deprecated=false
 license=GPL-3.0
 translate=true
 changelog=
+    [1.0.5] - 2025-08-27 
+#   - ajout d'une symbologie graduée par défaut de la couche résultante 
     [1.0.4] - 2025-08-24
 	- Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
     [1.0.2] - 2025-08-18

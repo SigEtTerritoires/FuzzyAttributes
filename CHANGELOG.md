@@ -7,7 +7,13 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 - Support du format postgis pour les données
 
 ---
+## [1.0.5] - 2025-08-27 
+### Ajouté
+- Symbologie graduée par défaut de la couche résultante  
+
 ## [1.0.4] - 2025-08-19
+
+
 ### Corrigé
 - Bug : Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
 ## [1.0.2] - 2025-08-19

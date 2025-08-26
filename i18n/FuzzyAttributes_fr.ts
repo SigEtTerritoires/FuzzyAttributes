@@ -4,90 +4,77 @@
 <context>
     <name>AggregationFunctionDialog</name>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="85"/>
-        <source>Critère 1 : si le critère '{0}' est Très mauvais et le critère '{1}' est Très bon, le résultat doit être :</source>
-        <translation type="unfinished">Critère 1 : si le critère '{0}' est Très mauvais et le critère '{1}' est Très bon, le résultat doit être :</translation>
+        <location filename="../aggregation_function_dialog.py" line="86"/>
+        <source>Critère 1 : si le critère &apos;{0}&apos; est Très mauvais et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</source>
+        <translation>Critère 1 : si le critère &apos;{0}&apos; est Très mauvais et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="88"/>
-        <source>Critère 2 : si le critère '{0}' est Moyen et le critère '{1}' est Moyen, le résultat doit être :</source>
-        <translation type="unfinished">Critère 2 : si le critère '{0}' est Moyen et le critère '{1}' est Moyen, le résultat doit être :</translation>
+        <location filename="../aggregation_function_dialog.py" line="89"/>
+        <source>Critère 2 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Moyen, le résultat doit être :</source>
+        <translation>Critère 2 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Moyen, le résultat doit être :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="91"/>
-        <source>Critère 3 : si le critère '{0}' est Moyen et le critère '{1}' est Très bon, le résultat doit être :</source>
-        <translation type="unfinished">Critère 3 : si le critère '{0}' est Moyen et le critère '{1}' est Très bon, le résultat doit être :</translation>
+        <location filename="../aggregation_function_dialog.py" line="92"/>
+        <source>Critère 3 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</source>
+        <translation>Critère 3 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="122"/>
-        <source>Définir la fonction d'agrégation</source>
-        <translation type="unfinished">Définir la fonction d'agrégation</translation>
+        <source>Définir la fonction d&apos;agrégation</source>
+        <translation type="obsolete">Définir la fonction d&apos;agrégation</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="123"/>
         <source>Critère 1</source>
-        <translation type="unfinished">Critère 1</translation>
+        <translation type="obsolete">Critère 1</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="144"/>
         <source>Très bon</source>
-        <translation type="unfinished">Très bon</translation>
+        <translation type="obsolete">Très bon</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="145"/>
         <source>Bon</source>
-        <translation type="unfinished">Bon</translation>
+        <translation type="obsolete">Bon</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="146"/>
         <source>Moyen</source>
-        <translation type="unfinished">Moyen</translation>
+        <translation type="obsolete">Moyen</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="147"/>
         <source>Médiocre</source>
-        <translation type="unfinished">Médiocre</translation>
+        <translation type="obsolete">Médiocre</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="148"/>
         <source>Très mauvais</source>
-        <translation type="unfinished">Très mauvais</translation>
+        <translation type="obsolete">Très mauvais</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="129"/>
         <source>Critère 2</source>
-        <translation type="unfinished">Critère 2</translation>
+        <translation type="obsolete">Critère 2</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="135"/>
         <source>Critère 3</source>
-        <translation type="unfinished">Critère 3</translation>
+        <translation type="obsolete">Critère 3</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="94"/>
-        <source>Critère 4 : si le critère '{0}' est Très bon et le critère '{1}' est Très mauvais, le résultat doit être :</source>
-        <translation type="unfinished">Critère 4 : si le critère '{0}' est Très bon et le critère '{1}' est Très mauvais, le résultat doit être :</translation>
+        <location filename="../aggregation_function_dialog.py" line="95"/>
+        <source>Critère 4 : si le critère &apos;{0}&apos; est Très bon et le critère &apos;{1}&apos; est Très mauvais, le résultat doit être :</source>
+        <translation>Critère 4 : si le critère &apos;{0}&apos; est Très bon et le critère &apos;{1}&apos; est Très mauvais, le résultat doit être :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="142"/>
         <source>Test de symétrie des réponses</source>
-        <translation type="unfinished">Test de symétrie des réponses</translation>
+        <translation type="obsolete">Test de symétrie des réponses</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="143"/>
         <source>Critère 4</source>
-        <translation type="unfinished">Critère 4</translation>
+        <translation type="obsolete">Critère 4</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog_ui.py" line="141"/>
         <source>Vérifier la symétrie</source>
-        <translation type="unfinished">Vérifier la symétrie</translation>
+        <translation type="obsolete">Vérifier la symétrie</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="../fuzzyagregates_dialog_base.ui" line="14"/>
         <source>Dialog</source>
         <translation type="obsolete">Dialog</translation>
     </message>
@@ -95,164 +82,184 @@
 <context>
     <name>FuzzyAggregateDialog</name>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="697"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="713"/>
         <source>Le chemin GPKG doit se terminer par .gpkg</source>
         <translation>Le chemin GPKG doit se terminer par .gpkg</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="910"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="728"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="926"/>
         <source>Le résultat du traitement est inattendu</source>
         <translation>Le résultat du traitement est inattendu</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="913"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="731"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="929"/>
         <source>La sortie n&apos;est pas une couche vectorielle valide</source>
-        <translation>La sortie n'est pas une couche vectorielle valide</translation>
+        <translation>La sortie n&apos;est pas une couche vectorielle valide</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="793"/>
         <source>Aucune fonction sélectionnée</source>
         <translation type="obsolete">Aucune fonction sélectionnée</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="793"/>
-        <source>Veuillez d'abord sélectionner une fonction d'agrégation floue.</source>
-        <translation type="obsolete">Veuillez d'abord sélectionner une fonction d'agrégation floue.</translation>
+        <source>Veuillez d&apos;abord sélectionner une fonction d&apos;agrégation floue.</source>
+        <translation type="obsolete">Veuillez d&apos;abord sélectionner une fonction d&apos;agrégation floue.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="802"/>
-        <source>La fonction sélectionnée n'existe pas</source>
-        <translation type="obsolete">La fonction sélectionnée n'existe pas</translation>
+        <source>La fonction sélectionnée n&apos;existe pas</source>
+        <translation type="obsolete">La fonction sélectionnée n&apos;existe pas</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="802"/>
-        <source>Ce choix n'est peut-être pas logique (ex. : deux critères faibles → excellent résultat)</source>
-        <translation type="obsolete">Ce choix n'est peut-être pas logique (ex. : deux critères faibles → excellent résultat)</translation>
+        <source>Ce choix n&apos;est peut-être pas logique (ex. : deux critères faibles → excellent résultat)</source>
+        <translation type="obsolete">Ce choix n&apos;est peut-être pas logique (ex. : deux critères faibles → excellent résultat)</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1107"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="870"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="887"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="891"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1074"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1111"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1149"/>
         <source>Erreur</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="871"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="887"/>
         <source>Veuillez sélectionner une opération.</source>
         <translation>Veuillez sélectionner une opération.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="875"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="891"/>
         <source>Tous les champs doivent être remplis.</source>
         <translation>Tous les champs doivent être remplis.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="974"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="989"/>
+        <source>0 – 0.125 (mauvais)</source>
+        <translation>0 – 0.125 (mauvais)</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregate_dialog.py" line="990"/>
+        <source>0.125 – 0.375 (médiocre)</source>
+        <translation>0.125 – 0.375 (médiocre)</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregate_dialog.py" line="991"/>
+        <source>0.375 – 0.625 (moyen)</source>
+        <translation>0.375 – 0.625 (moyen)</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregate_dialog.py" line="992"/>
+        <source>0.625 – 0.875 (bon)</source>
+        <translation>0.625 – 0.875 (bon)</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregate_dialog.py" line="993"/>
+        <source>0.875 – 1.0 (très bon)</source>
+        <translation>0.875 – 1.0 (très bon)</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregate_dialog.py" line="1015"/>
         <source>Succès</source>
         <translation>Succès</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1032"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1074"/>
         <source>La table metafuzzy n’a pas pu être chargée.</source>
         <translation>La table metafuzzy n’a pas pu être chargée.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1107"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1111"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1149"/>
         <source>Aucune couche sélectionnée.</source>
         <translation>Aucune couche sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1116"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1120"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1158"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1116"/>
-        <source>Aucune table 'metafuzzy' trouvée dans le GeoPackage.</source>
-        <translation>Aucune table 'metafuzzy' trouvée dans le GeoPackage.</translation>
+        <location filename="../fuzzyaggregate_dialog.py" line="1120"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1158"/>
+        <source>Aucune table &apos;metafuzzy&apos; trouvée dans le GeoPackage.</source>
+        <translation>Aucune table &apos;metafuzzy&apos; trouvée dans le GeoPackage.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1121"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1125"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1163"/>
         <source>Historique des transformations</source>
         <translation>Historique des transformations</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="83"/>
         <source>Fuzzy Aggregate</source>
-        <translation type="unfinished">Fuzzy Aggregate</translation>
+        <translation type="obsolete">Fuzzy Aggregate</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="84"/>
         <source>Couche 1</source>
-        <translation type="unfinished">Couche 1</translation>
+        <translation type="obsolete">Couche 1</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="85"/>
         <source>Champ flou 1</source>
-        <translation type="unfinished">Champ flou 1</translation>
+        <translation type="obsolete">Champ flou 1</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="86"/>
         <source>Couche 2</source>
-        <translation type="unfinished">Couche 2</translation>
+        <translation type="obsolete">Couche 2</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="87"/>
         <source>Champ flou 2</source>
-        <translation type="unfinished">Champ flou 2</translation>
+        <translation type="obsolete">Champ flou 2</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="88"/>
         <source>Type d’opération spatiale</source>
-        <translation type="unfinished">Type d’opération spatiale</translation>
+        <translation type="obsolete">Type d’opération spatiale</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="89"/>
         <source>Intersection</source>
-        <translation type="unfinished">Intersection</translation>
+        <translation type="obsolete">Intersection</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="90"/>
         <source>Union</source>
-        <translation type="unfinished">Union</translation>
+        <translation type="obsolete">Union</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="91"/>
         <source>Nom de la couche résultat (ajout de _agg à la fin automatique)</source>
-        <translation type="unfinished">Nom de la couche résultat (ajout de _agg à la fin automatique)</translation>
+        <translation type="obsolete">Nom de la couche résultat (ajout de _agg à la fin automatique)</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="93"/>
         <source>Définir la fonction</source>
-        <translation type="unfinished">Définir la fonction</translation>
+        <translation type="obsolete">Définir la fonction</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="94"/>
         <source>Code : </source>
-        <translation type="unfinished">Code : </translation>
+        <translation type="obsolete">Code : </translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="564"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="582"/>
         <source>Aucune couche GeoPackage</source>
         <translation>Aucune couche GeoPackage</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="564"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="585"/>
         <source>Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.
 Veuillez en ajouter une pour utiliser ce plugin.</source>
         <translation>Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.
 Veuillez en ajouter une pour utiliser ce plugin.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_ui.py" line="92"/>
         <source>Voir l&apos;historique des transformations</source>
-        <translation type="unfinished">Voir l'historique des transformations</translation>
+        <translation type="obsolete">Voir l&apos;historique des transformations</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="822"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="840"/>
         <source>Vérification de la combinaison</source>
         <translation>Vérification de la combinaison</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="822"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="841"/>
         <source>La combinaison semble incohérente :
 
 {0}
@@ -265,17 +272,17 @@ Voulez-vous procéder quand même ?</source>
 Voulez-vous procéder quand même ?</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="854"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="870"/>
         <source>La fonction d’agrégation n’a pas pu être générée.</source>
         <translation>La fonction d’agrégation n’a pas pu être générée.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1240"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1284"/>
         <source>Règle 1 violée : R3 (A=0,5 ; B=1) doit être &gt;= max(R1, R2).</source>
         <translation>Règle 1 violée : R3 (A=0,5 ; B=1) doit être &gt;= max(R1, R2).</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregate_dialog.py" line="1244"/>
+        <location filename="../fuzzyaggregate_dialog.py" line="1288"/>
         <source>Règle 2 violée : R3 (A=0,5 ; B=1) doit être &gt;= 0,5.</source>
         <translation>Règle 2 violée : R3 (A=0,5 ; B=1) doit être &gt;= 0,5.</translation>
     </message>
@@ -283,180 +290,197 @@ Voulez-vous procéder quand même ?</translation>
 <context>
     <name>FuzzyAttributes</name>
     <message>
-        <location filename="../FuzzyAttributes_plugin.py" line="143"/>
+        <location filename="../FuzzyAttributes_plugin.py" line="129"/>
+        <location filename="../FuzzyAttributes_plugin.py" line="144"/>
         <source>Fuzzy Plugin</source>
-        <translation type="unfinished">Fuzzy Plugin</translation>
+        <translation>Fuzzy Plugin</translation>
     </message>
     <message>
         <location filename="../FuzzyAttributes_plugin.py" line="134"/>
         <source>Agrégation floue</source>
-        <translation type="unfinished">Agrégation floue</translation>
+        <translation>Agrégation floue</translation>
     </message>
 </context>
 <context>
     <name>FuzzyAttributesDialog</name>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="55"/>
+        <location filename="../fuzzyattributes_dialog.py" line="57"/>
         <source>Aucune couche GeoPackage</source>
-        <translation type="unfinished">Aucune couche GeoPackage</translation>
+        <translation>Aucune couche GeoPackage</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="55"/>
+        <location filename="../fuzzyattributes_dialog.py" line="60"/>
         <source>Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.
 Veuillez en ajouter une pour utiliser ce plugin.</source>
-        <translation type="unfinished">Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.
+        <translation>Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.
 Veuillez en ajouter une pour utiliser ce plugin.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="66"/>
         <source>Seules les couches provenant de fichiers GeoPackage (.gpkg) sont affichées.</source>
-        <translation type="unfinished">Seules les couches provenant de fichiers GeoPackage (.gpkg) sont affichées.</translation>
+        <translation>Seules les couches provenant de fichiers GeoPackage (.gpkg) sont affichées.</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="74"/>
         <location filename="../fuzzyattributes_dialog.py" line="131"/>
         <source>linéaire croissante</source>
-        <translation type="unfinished">linéaire croissante</translation>
+        <translation>linéaire croissante</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="75"/>
         <location filename="../fuzzyattributes_dialog.py" line="132"/>
         <source>linéaire décroissante</source>
-        <translation type="unfinished">linéaire décroissante</translation>
+        <translation>linéaire décroissante</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="76"/>
         <location filename="../fuzzyattributes_dialog.py" line="133"/>
         <source>triangulaire</source>
-        <translation type="unfinished">triangulaire</translation>
+        <translation>triangulaire</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="77"/>
         <location filename="../fuzzyattributes_dialog.py" line="134"/>
         <source>trapézoïdale</source>
-        <translation type="unfinished">trapézoïdale</translation>
+        <translation>trapézoïdale</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="78"/>
         <location filename="../fuzzyattributes_dialog.py" line="135"/>
         <source>sigmoïde croissante (S)</source>
-        <translation type="unfinished">sigmoïde croissante (S)</translation>
+        <translation>sigmoïde croissante (S)</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="79"/>
         <location filename="../fuzzyattributes_dialog.py" line="136"/>
         <source>sigmoïde décroissante (Z)</source>
-        <translation type="unfinished">sigmoïde décroissante (Z)</translation>
+        <translation>sigmoïde décroissante (Z)</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="80"/>
         <location filename="../fuzzyattributes_dialog.py" line="137"/>
         <source>gaussienne</source>
-        <translation type="unfinished">gaussienne</translation>
+        <translation>gaussienne</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="147"/>
+        <location filename="../fuzzyattributes_dialog.py" line="156"/>
         <source>&lt;b&gt;Types de fonctions floues :&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;• Linéaire croissante :&lt;/b&gt; augmente de 0 à 1 entre a et b&lt;br&gt;&lt;b&gt;• Linéaire décroissante :&lt;/b&gt; diminue de 1 à 0 entre a et b&lt;br&gt;&lt;b&gt;• Triangulaire :&lt;/b&gt; forme un pic à b entre a et c&lt;br&gt;&lt;b&gt;• Trapézoïdale :&lt;/b&gt; forme un plateau entre b et c&lt;br&gt;&lt;b&gt;• Sigmoïde (S) :&lt;/b&gt; transition douce croissante centrée en b&lt;br&gt;&lt;b&gt;• Sigmoïde (Z) :&lt;/b&gt; transition douce décroissante centrée en b&lt;br&gt;&lt;b&gt;• Gaussienne :&lt;/b&gt; courbe en cloche centrée en c avec largeur sigma&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Types de fonctions floues :&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;• Linéaire croissante :&lt;/b&gt; augmente de 0 à 1 entre a et b&lt;br&gt;&lt;b&gt;• Linéaire décroissante :&lt;/b&gt; diminue de 1 à 0 entre a et b&lt;br&gt;&lt;b&gt;• Triangulaire :&lt;/b&gt; forme un pic à b entre a et c&lt;br&gt;&lt;b&gt;• Trapézoïdale :&lt;/b&gt; forme un plateau entre b et c&lt;br&gt;&lt;b&gt;• Sigmoïde (S) :&lt;/b&gt; transition douce croissante centrée en b&lt;br&gt;&lt;b&gt;• Sigmoïde (Z) :&lt;/b&gt; transition douce décroissante centrée en b&lt;br&gt;&lt;b&gt;• Gaussienne :&lt;/b&gt; courbe en cloche centrée en c avec largeur sigma&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Types de fonctions floues :&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;• Linéaire croissante :&lt;/b&gt; augmente de 0 à 1 entre a et b&lt;br&gt;&lt;b&gt;• Linéaire décroissante :&lt;/b&gt; diminue de 1 à 0 entre a et b&lt;br&gt;&lt;b&gt;• Triangulaire :&lt;/b&gt; forme un pic à b entre a et c&lt;br&gt;&lt;b&gt;• Trapézoïdale :&lt;/b&gt; forme un plateau entre b et c&lt;br&gt;&lt;b&gt;• Sigmoïde (S) :&lt;/b&gt; transition douce croissante centrée en b&lt;br&gt;&lt;b&gt;• Sigmoïde (Z) :&lt;/b&gt; transition douce décroissante centrée en b&lt;br&gt;&lt;b&gt;• Gaussienne :&lt;/b&gt; courbe en cloche centrée en c avec largeur sigma&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="157"/>
         <source>Aide sur les fonctions floues</source>
-        <translation type="unfinished">Aide sur les fonctions floues</translation>
+        <translation>Aide sur les fonctions floues</translation>
     </message>
     <message>
+        <location filename="../fuzzyattributes_dialog.py" line="164"/>
+        <location filename="../fuzzyattributes_dialog.py" line="214"/>
+        <location filename="../fuzzyattributes_dialog.py" line="245"/>
+        <location filename="../fuzzyattributes_dialog.py" line="300"/>
+        <location filename="../fuzzyattributes_dialog.py" line="304"/>
+        <location filename="../fuzzyattributes_dialog.py" line="313"/>
+        <location filename="../fuzzyattributes_dialog.py" line="320"/>
+        <location filename="../fuzzyattributes_dialog.py" line="387"/>
+        <location filename="../fuzzyattributes_dialog.py" line="391"/>
         <location filename="../fuzzyattributes_dialog.py" line="396"/>
         <source>Erreur</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="164"/>
         <source>Paramètres invalides. Utilisez des nombres séparés par des virgules.</source>
-        <translation type="unfinished">Paramètres invalides. Utilisez des nombres séparés par des virgules.</translation>
+        <translation>Paramètres invalides. Utilisez des nombres séparés par des virgules.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="214"/>
         <source>La table metafuzzy n’a pas pu être chargée.</source>
-        <translation type="unfinished">La table metafuzzy n’a pas pu être chargée.</translation>
+        <translation>La table metafuzzy n’a pas pu être chargée.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="245"/>
         <source>Aucune couche sélectionnée.</source>
-        <translation type="unfinished">Aucune couche sélectionnée.</translation>
+        <translation>Aucune couche sélectionnée.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="254"/>
         <source>Info</source>
-        <translation type="unfinished">Info</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="254"/>
-        <source>Aucune table 'metafuzzy' trouvée dans le GeoPackage.</source>
-        <translation type="unfinished">Aucune table 'metafuzzy' trouvée dans le GeoPackage.</translation>
+        <source>Aucune table &apos;metafuzzy&apos; trouvée dans le GeoPackage.</source>
+        <translation>Aucune table &apos;metafuzzy&apos; trouvée dans le GeoPackage.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="259"/>
         <source>Historique des transformations</source>
-        <translation type="unfinished">Historique des transformations</translation>
+        <translation>Historique des transformations</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="300"/>
         <source>Les métadonnées ne peuvent être stockées que dans un fichier .gpkg.</source>
-        <translation type="unfinished">Les métadonnées ne peuvent être stockées que dans un fichier .gpkg.</translation>
+        <translation>Les métadonnées ne peuvent être stockées que dans un fichier .gpkg.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="304"/>
         <source>Impossible de créer la table metafuzzy dans le GeoPackage.</source>
-        <translation type="unfinished">Impossible de créer la table metafuzzy dans le GeoPackage.</translation>
+        <translation>Impossible de créer la table metafuzzy dans le GeoPackage.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="313"/>
         <source>Impossible d&apos;ajouter le champ.</source>
-        <translation type="unfinished">Impossible d'ajouter le champ.</translation>
+        <translation>Impossible d&apos;ajouter le champ.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="320"/>
         <source>Problème avec les champs.</source>
-        <translation type="unfinished">Problème avec les champs.</translation>
+        <translation>Problème avec les champs.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="374"/>
         <source>Succès</source>
-        <translation type="unfinished">Succès</translation>
+        <translation>Succès</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="374"/>
-        <source>Transformation floue ajoutée dans '{}'</source>
-        <translation type="unfinished">Transformation floue ajoutée dans '{}'</translation>
+        <source>Transformation floue ajoutée dans &apos;{}&apos;</source>
+        <translation>Transformation floue ajoutée dans &apos;{}&apos;</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="387"/>
         <source>Impossible de trouver la couche &apos;{}&apos;</source>
-        <translation type="unfinished">Impossible de trouver la couche '{}'</translation>
+        <translation>Impossible de trouver la couche &apos;{}&apos;</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="391"/>
         <source>Aucun champ sélectionné.</source>
-        <translation type="unfinished">Aucun champ sélectionné.</translation>
+        <translation>Aucun champ sélectionné.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="396"/>
         <source>Le champ est introuvable.</source>
-        <translation type="unfinished">Le champ est introuvable.</translation>
+        <translation>Le champ est introuvable.</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="407"/>
         <source>Aucune donnée</source>
-        <translation type="unfinished">Aucune donnée</translation>
+        <translation>Aucune donnée</translation>
     </message>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="407"/>
         <source>Aucune valeur numérique disponible pour ce champ.</source>
-        <translation type="unfinished">Aucune valeur numérique disponible pour ce champ.</translation>
+        <translation>Aucune valeur numérique disponible pour ce champ.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="417"/>
-        <source>Statistiques pour le champ '{field_name}' :
+        <location filename="../fuzzyattributes_dialog.py" line="424"/>
+        <source>Statistiques pour le champ &apos;{field_name}&apos; :
 
 Nombre de valeurs : {count}
 Min : {min_val}
 Max : {max_val}
 Moyenne : {mean_val:.2f}
 Médiane : {median_val:.2f}</source>
-        <translation type="unfinished">Statistiques pour le champ '{field_name}' :
+        <translation>Statistiques pour le champ &apos;{field_name}&apos; :
 
 Nombre de valeurs : {count}
 Min : {min_val}
@@ -467,47 +491,35 @@ Médiane : {median_val:.2f}</translation>
     <message>
         <location filename="../fuzzyattributes_dialog.py" line="433"/>
         <source>Statistiques du champ</source>
-        <translation type="unfinished">Statistiques du champ</translation>
+        <translation>Statistiques du champ</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="69"/>
         <source>Transformation floue d&apos;attributs</source>
-        <translation type="unfinished">Transformation floue d'attributs</translation>
+        <translation type="obsolete">Transformation floue d&apos;attributs</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="70"/>
         <source>Statistiques</source>
-        <translation type="unfinished">Statistiques</translation>
+        <translation type="obsolete">Statistiques</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="71"/>
         <source>Afficher les statistiques du champ</source>
-        <translation type="unfinished">Afficher les statistiques du champ</translation>
+        <translation type="obsolete">Afficher les statistiques du champ</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="72"/>
         <source>Paramètres séparés par des virgules</source>
-        <translation type="unfinished">Paramètres séparés par des virgules</translation>
+        <translation type="obsolete">Paramètres séparés par des virgules</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="73"/>
         <source>Afficher l’aide sur les fonctions floues</source>
-        <translation type="unfinished">Afficher l’aide sur les fonctions floues</translation>
+        <translation type="obsolete">Afficher l’aide sur les fonctions floues</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="74"/>
         <source>?</source>
-        <translation type="unfinished">?</translation>
+        <translation type="obsolete">?</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="75"/>
         <source>Exemple : </source>
-        <translation type="unfinished">Exemple : </translation>
-    </message>
-    <message>
-        <location filename="../fuzzyattributes_dialog_base.py" line="76"/>
-        <source>Voir l&apos;historique des transformations</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Exemple : </translation>
     </message>
 </context>
 </TS>
