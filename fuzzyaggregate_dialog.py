@@ -11,11 +11,14 @@ import processing
 from qgis.core import QgsProcessingOutputLayerDefinition, QgsMessageLog,QgsProcessing,QgsVectorFileWriter
 import sys
 import re
+from qgis.core import QgsMessageLog,QgsProcessing
+from qgis.core import Qgis
 from qgis.PyQt.QtCore import QFileInfo
 import math
 from datetime import datetime
 from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
 import getpass
+<<<<<<< HEAD
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale ,NULL,QDateTime
 import psycopg2
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
@@ -29,6 +32,27 @@ import tempfile
 from qgis.core import QgsStyle
 
             
+=======
+from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
+from qgis.PyQt.QtCore import NULL
+from PyQt5 import QtWidgets
+from qgis.core import (
+    QgsVectorLayer,
+    QgsField,
+    QgsSymbol,
+    QgsRendererRange,
+    QgsGraduatedSymbolRenderer,
+    QgsProject
+)
+
+from qgis.PyQt.QtCore import QVariant
+from qgis.PyQt.QtGui import QColor
+from qgis.PyQt.QtWidgets import QMessageBox
+
+# Si tu veux rafraîchir via l’interface QGIS :
+from qgis.utils import iface
+
+>>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
 _translator = None
 def load_translator():
     global _translator
@@ -1129,6 +1153,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 except Exception as e:
                     raise Exception(f"Erreur lors de l'opération PostGIS ({operation}) : {e}")
 
+<<<<<<< HEAD
                 # --- Ajout champ d’agrégation et calcul ---
                 all_fields = [f.name() for f in real_layer.fields()]
                 field1="a_"+ field1
@@ -1202,8 +1227,22 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
 
         real_layer.commitChanges()
         
+=======
+            # Fin de l’édition
+            real_layer.commitChanges()
+            real_layer.updateFields()
+>>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
 
+            # Définir les classes (valeur min, valeur max, couleur, étiquette)
+            classes = [
+                (0.0, 0.125, "#ff0000", self.tr("0 – 0.125 (mauvais)")),          # rouge
+                (0.125, 0.375, "#ff7f00", self.tr("0.125 – 0.375 (médiocre)")),   # orange
+                (0.375, 0.625, "#ffff00", self.tr("0.375 – 0.625 (moyen)")),    # jaune
+                (0.625, 0.875, "#7fff00", self.tr("0.625 – 0.875 (bon)")), # vert clair
+                (0.875, 1.0, "#006400", self.tr("0.875 – 1.0 (très bon)"))    # vert foncé
+            ]
 
+<<<<<<< HEAD
 # --- Appliquer la symbologie ---
         if self.radioGraduated.isChecked():
             # Symbole gradué
@@ -1214,12 +1253,15 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 (0.625, 0.875, "#7fff00", self.tr("0.625 – 0.875 (bon)")),
                 (0.875, 1.0, "#006400", self.tr("0.875 – 1.0 (très bon)"))
             ]
+=======
+>>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
             ranges = []
             for min_val, max_val, color, label in classes:
                 symbol = QgsSymbol.defaultSymbol(real_layer.geometryType())
                 symbol.setColor(QColor(color))
                 rng = QgsRendererRange(min_val, max_val, symbol, label)
                 ranges.append(rng)
+<<<<<<< HEAD
             renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
             renderer.setMode(QgsGraduatedSymbolRenderer.Custom)
             real_layer.setRenderer(renderer)
@@ -1228,6 +1270,24 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             # Vérifie si la rampe 'AboveAndBelow' existe dans le style QGIS
             style = QgsStyle.defaultStyle()
             ramp = style.colorRamp('AboveAndBelow')
+=======
+
+            # Créer un renderer gradué basé sur les plages définies
+            renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
+
+            # Inutile d’appeler setMode() → les ranges sont déjà explicites
+            real_layer.setRenderer(renderer)
+            real_layer.triggerRepaint()
+
+            # Ajouter la couche au projet
+            QgsProject.instance().addMapLayer(real_layer)
+
+        
+            # Message de succès
+            QMessageBox.information(self, self.tr("Succès"), f"Couche '{output_name}' créée avec succès.")
+
+            self.ensure_metadata_table_exists(gpkg_path)
+>>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
 
             if ramp is None:
                 ramp_name = 'Spectral'   # fallback si AboveAndBelow n’existe pas
@@ -1315,6 +1375,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 )
 
         except Exception as e:
+<<<<<<< HEAD
             QMessageBox.critical(self, "Erreur", f"Erreur pendant l'ajout des métadonnées :\n{e}")
 
 
@@ -1463,6 +1524,9 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
         Pour PostGIS : crée la table si nécessaire et insère directement en SQL
         """
         try:
+=======
+            return
+>>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
             
 
             date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

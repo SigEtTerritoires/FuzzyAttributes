@@ -121,8 +121,13 @@ Ele também permite:
      ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
      ![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
+
    * select a style for output layer: graduated or  color ramp.
    * select to apply or not as default style  for the database
+   * The resulting layer is displayed with graduated symbology based on the aggregation attribute.
+    ![Fuzzy aggregation layer](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/resultat.jpg)
+	
+
 ---
 
 ### About Fuzzy Aggregation Functions

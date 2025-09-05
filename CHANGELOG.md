@@ -6,6 +6,7 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 ## [Unreleased]
 
 ---
+
 ## [1.3.0] - 2025-09-04
 
 ### Ajouté
@@ -41,7 +42,15 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 
 ### Corrigé
 - Divers correctifs mineurs dans les dialogues.  
+
+## [1.0.5] - 2025-08-27 
+### Ajouté
+- Symbologie graduée par défaut de la couche résultante  
+
 ## [1.0.4] - 2025-08-19
+
+
+
 ### Corrigé
 - Bug : Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
 ## [1.0.2] - 2025-08-19
