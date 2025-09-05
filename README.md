@@ -71,9 +71,9 @@ Ele também permite:
 
 1. **Download or Clone** this repository:
    
-   ```bash
+   
    git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git
-````
+
 
 2. Copy the plugin folder to your QGIS plugin directory:
 
