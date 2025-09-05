@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FuzzyTextDialog</class>
+ <widget class="QDialog" name="FuzzyTextDialog">
+  <property name="windowTitle">
+   <string translatable="yes">Fuzzy Text Mapping</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+
+   <!-- Combo couches -->
+   <item>
+    <widget class="QComboBox" name="layerComboBox"/>
+   </item>
+
+   <!-- Combo champs texte -->
+   <item>
+    <widget class="QComboBox" name="comboBoxTextField"/>
+   </item>
+
+   <!-- Ligne de boutons au-dessus de la table -->
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutValues">
+     <item>
+      <widget class="QPushButton" name="btnLoadValues">
+       <property name="text">
+        <string translatable="yes">Charger valeurs uniques</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Table mapping -->
+   <item>
+    <widget class="QTableWidget" name="tableMapping"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnShowMetadata">
+     <property name="text">
+      <string>Voir l'historique des transformations</string>
+     </property>
+    </widget>
+   </item>
+   <!-- Boutons en bas -->
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutBottom">
+     <item>
+      <widget class="QPushButton" name="btnApply">
+       <property name="text">
+        <string translatable="yes">Créer attribut flou</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnClose">
+       <property name="text">
+        <string translatable="yes">Fermer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Label d'aide -->
+   <item>
+    <widget class="QLabel" name="helpLabel">
+     <property name="text">
+      <string translatable="yes">Astuce : associez chaque valeur texte du champ sélectionné à une valeur floue comprise entre 0 et 1.</string>
+     </property>
+     <property name="wordWrap"><bool>true</bool></property>
+     <property name="styleSheet"><string>color: gray; font-style: italic;</string></property>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

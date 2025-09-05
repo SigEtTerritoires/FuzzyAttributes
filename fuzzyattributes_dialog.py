@@ -13,8 +13,12 @@ import math
 import os
 from datetime import datetime
 import getpass
+import re
 from qgis.PyQt.QtGui import QPixmap
-
+from qgis.core import QgsDataSourceUri
+from qgis.core import QgsMessageLog, Qgis
+from qgis.PyQt.QtCore import QDateTime
+from qgis.core import QgsVectorLayer, QgsFeature, QgsDataSourceUri
 
 
 
@@ -41,32 +45,21 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
         self.helpButton.clicked.connect(self.show_help)
         self.btnShowStats.clicked.connect(self.show_field_statistics)
 
-        # Remplir la comboBox des couches vectorielles
-        # Remplir la comboBox des couches vectorielles GeoPackage uniquement
-        layer_names = self.vector_layer_names()
-        self.layer_map = {}
-        # Construit le dictionnaire couche -> nom
-        for layer in QgsProject.instance().mapLayers().values():
-            if layer.type() == layer.VectorLayer and layer.dataProvider().name() == 'ogr':
-                source = layer.source().lower()
-                if source.endswith('.gpkg') or '.gpkg|' in source:
-                    self.layer_map[layer.name()] = layer
-        if not layer_names:
-            QMessageBox.information(
-                self,
-                self.tr("Aucune couche GeoPackage"),
-                self.tr("Aucune couche vectorielle provenant d’un fichier .gpkg n’est chargée dans le projet.\n"
-                "Veuillez en ajouter une pour utiliser ce plugin.")
-            )
-        self.layerComboBox.addItems(layer_names)
-        # Initialiser self.current_layer avec la première couche sélectionnée
-        if layer_names:
-            self.current_layer = self.layer_map.get(layer_names[0])
+
+        self.populate_layer_combo()
+
+
         # Infobulle explicative
-        self.layerComboBox.setToolTip(self.tr("Seules les couches provenant de fichiers GeoPackage (.gpkg) sont affichées."))
+        self.layerComboBox.setToolTip(
+            self.tr("Les couches provenant de fichiers GeoPackage (.gpkg) ou de bases PostGIS sont affichées.")
+        )
+
         self.btnShowMetadata.clicked.connect(self.show_metadata_table)
         self.layerComboBox.currentIndexChanged.connect(self.on_layer_changed)
         self.layerComboBox.currentTextChanged.connect(self.update_current_layer)
+
+        # 🔹 Ajout pour mettre à jour la liste des champs quand on change de couche
+        self.layerComboBox.currentIndexChanged.connect(self.update_fields)
 
 
         # Types flous disponibles avec codes internes
@@ -95,35 +88,112 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
 
         self.update_fields()
         self.update_example_parameters()  # Affiche exemple au démarrage
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.populate_layer_combo()
+        self.update_fields()
 
     def vector_layer_names(self):
-        layers = QgsProject.instance().mapLayers().values()
-        gpkg_layers = []
-        for layer in layers:
-            if not isinstance(layer, QgsVectorLayer):
-                continue
-            source = layer.source().split('|')[0]  # enlever la partie "|layername=..."
-            if source.lower().endswith('.gpkg'):
-                gpkg_layers.append(layer.name())
-        return gpkg_layers
+        """
+        Retourne un dict {nom_affiché: QgsVectorLayer}
+        pour les couches GeoPackage et PostGIS.
+        """
+        layer_map = {}
 
+        for layer in QgsProject.instance().mapLayers().values():
+            if layer.type() != layer.VectorLayer:
+                continue
+
+            provider = layer.dataProvider().name()
+            source = layer.source().lower()
+
+            # Cas GeoPackage
+            if provider == 'ogr' and (source.endswith('.gpkg') or '.gpkg|' in source):
+                layer_map[layer.name()] = layer
+
+            # Cas PostGIS
+            elif provider == 'postgres':
+                layer_map[layer.name()] = layer
+
+        return layer_map
+
+
+    def populate_layer_combo(self):
+        """Remplit la comboBox avec les couches GeoPackage et PostGIS"""
+        self.layerComboBox.clear()
+        
+
+        layer_names = []
+        self.layer_map = {}
+
+        for layer in QgsProject.instance().mapLayers().values():
+            if layer.type() == layer.VectorLayer:
+                provider = layer.dataProvider().name()
+
+                # Cas GeoPackage
+                if provider == "ogr" and (layer.source().lower().endswith(".gpkg") or ".gpkg|" in layer.source().lower()):
+                    display_name = f"[GPKG] {layer.name()}"
+                    self.layer_map[display_name] = layer
+                    layer_names.append(display_name)
+
+                # Cas PostGIS
+                elif provider == "postgres":
+                    uri = layer.dataProvider().uri()
+                    schema = uri.schema()  # retourne None si pas de schema
+                    table = layer.name()   # nom complet de la table
+
+                    display_name = f"[PG] {schema}.{table}" if schema else f"[PG] {table}"
+
+                    self.layer_map[display_name] = layer
+                    layer_names.append(display_name)
+
+
+        if not layer_names:
+            QMessageBox.information(
+                self,
+                self.tr("Aucune couche trouvée"),
+                self.tr("Aucune couche GeoPackage (.gpkg) ou PostGIS n’est chargée dans le projet.\n"
+                        "Veuillez en ajouter une pour utiliser ce plugin.")
+            )
+
+        self.layerComboBox.addItems(layer_names)
+
+        # Initialiser self.current_layer avec la première couche sélectionnée
+        if layer_names:
+            self.current_layer = self.layer_map.get(layer_names[0])
+
+        # Infobulle explicative
+        self.layerComboBox.setToolTip(
+            self.tr("Les couches provenant de fichiers GeoPackage (.gpkg) ou de bases PostGIS sont affichées (avec schéma pour PostGIS).")
+        )
 
     def selected_layer(self):
+        """Retourne la couche actuellement sélectionnée dans la comboBox"""
         name = self.layerComboBox.currentText()
-        for layer in QgsProject.instance().mapLayers().values():
-            if layer.name() == name:
-                return layer
-        return None
+        return self.layer_map.get(name)
 
     def update_fields(self):
+        """Met à jour la liste des champs numériques de la couche sélectionnée"""
         self.fieldComboBox.clear()
         layer = self.selected_layer()
         if not layer:
             return
-        numeric_fields = [f.name() for f in layer.fields() if f.type() in (
-            QVariant.Int, QVariant.Double, QVariant.LongLong,
-            QVariant.UInt, QVariant.ULongLong)]
+
+        numeric_fields = [
+            f.name() for f in layer.fields()
+            if f.type() in (
+                QVariant.Int,
+                QVariant.Double,
+                QVariant.LongLong,
+                QVariant.UInt,
+                QVariant.ULongLong,
+            )
+        ]
         self.fieldComboBox.addItems(numeric_fields)
+
+        # 🔹 Sélectionner automatiquement le premier champ si disponible
+        if numeric_fields:
+            self.fieldComboBox.setCurrentIndex(0)
 
     def update_example_parameters(self):
         type_text = self.fuzzyTypeComboBox.currentText()
@@ -169,66 +239,197 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             'fuzzy_type': self.fuzzyTypeComboBox.currentText(),
             'params': params
         }
-    def ensure_metadata_table_exists(self, gpkg_path):
-        # Vérifie si la couche 'metafuzzy' existe déjà
-        uri = f"{gpkg_path}|layername=metafuzzy"
-        existing_layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
+    def ensure_metadata_table_exists(self, layer):
+        """
+        Vérifie (et crée si besoin) la table metafuzzy dans le même GPKG ou schéma PostGIS que la couche donnée.
+        Retourne True si la table existe ou a été créée, False sinon.
+        """
+        try:
+            source = layer.source()
 
-        if existing_layer.isValid():
-            return True  # La table existe déjà
+            # ---------------------------
+            # Cas 1 : GeoPackage
+            # ---------------------------
+            if source.lower().endswith(".gpkg") or "|layername=" in source:
+                gpkg_path = source.split("|")[0]
+                uri = f"{gpkg_path}|layername=metafuzzy"
+                meta_layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
 
-        # Crée un layer mémoire sans géométrie
-        fields = QgsFields()
-        fields.append(QgsField("field", QVariant.String))
-        fields.append(QgsField("function", QVariant.String))
-        fields.append(QgsField("params", QVariant.String))
-        fields.append(QgsField("source1", QVariant.String))
-        fields.append(QgsField("source2", QVariant.String))
-        fields.append(QgsField("date", QVariant.String))
-        fields.append(QgsField("user", QVariant.String))
+                if meta_layer.isValid():
+                    return True  # déjà présent
 
-        mem_layer = QgsVectorLayer("None", "metafuzzy", "memory")
-        mem_layer.dataProvider().addAttributes(fields)
-        mem_layer.updateFields()
+                # Crée un layer mémoire sans géométrie
+                fields = QgsFields()
+                fields.append(QgsField("sourcefield", QVariant.String))
+                fields.append(QgsField("function", QVariant.String))
+                fields.append(QgsField("params", QVariant.String))
+                fields.append(QgsField("source1", QVariant.String))
+                fields.append(QgsField("source2", QVariant.String))
+                fields.append(QgsField("datecreated", QVariant.String))
+                fields.append(QgsField("username", QVariant.String))
 
-        # Enregistre dans le GeoPackage
-        options = QgsVectorFileWriter.SaveVectorOptions()
-        options.driverName = "GPKG"
-        options.layerName = "metafuzzy"
-        options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
-        options.EditionCapabilities = QgsVectorFileWriter.CanAddNewLayer
 
-        err, _ = QgsVectorFileWriter.writeAsVectorFormatV2(
-            layer=mem_layer,
-            fileName=gpkg_path,
-            transformContext=QgsProject.instance().transformContext(),
-            options=options
-        )
+                mem_layer = QgsVectorLayer("None", "metafuzzy", "memory")
+                mem_layer.dataProvider().addAttributes(fields)
+                mem_layer.updateFields()
 
-        return err == QgsVectorFileWriter.NoError
+                # Enregistre dans le GeoPackage
+                options = QgsVectorFileWriter.SaveVectorOptions()
+                options.driverName = "GPKG"
+                options.layerName = "metafuzzy"
+                options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
+                options.EditionCapabilities = QgsVectorFileWriter.CanAddNewLayer
 
-    def append_metadata(self, gpkg_path, field_name, fuzzy_type, params):
-        uri = f"{gpkg_path}|layername=metafuzzy"
-        layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
-        if not layer.isValid():
-            QMessageBox.warning(self, self.tr("Erreur"), self.tr("La table metafuzzy n’a pas pu être chargée."))
+                err, _ = QgsVectorFileWriter.writeAsVectorFormatV2(
+                    layer=mem_layer,
+                    fileName=gpkg_path,
+                    transformContext=QgsProject.instance().transformContext(),
+                    options=options
+                )
+                return err == QgsVectorFileWriter.NoError
+
+            # ---------------------------
+            # Cas 2 : PostGIS
+            # ---------------------------
+            elif "dbname=" in source:
+                from qgis.core import QgsDataSourceUri
+                import psycopg2
+
+                uri = QgsDataSourceUri(source)
+                schema = uri.schema() or "public"
+                database = uri.database()
+                host = uri.host()
+                port = uri.port()
+                user = uri.username()
+                pwd = uri.password()
+
+                conn = psycopg2.connect(
+                    dbname=database, user=user, password=pwd,
+                    host=host, port=port
+                )
+                cur = conn.cursor()
+
+                # Vérifier si la table existe déjà
+                cur.execute("""
+                    SELECT EXISTS (
+                        SELECT FROM information_schema.tables 
+                        WHERE table_schema = %s 
+                        AND table_name = 'metafuzzy'
+                    );
+                """, (schema,))
+                exists = cur.fetchone()[0]
+
+                if not exists:
+                    # Création de la table
+                    cur.execute(f"""
+                        CREATE TABLE {schema}.metafuzzy (
+                            id SERIAL PRIMARY KEY,
+                            sourcefield TEXT,
+                            function TEXT,
+                            params TEXT,
+                            source1 TEXT,
+                            source2 TEXT,
+                            datecreated TIMESTAMP,
+                            username TEXT
+                        );
+                    """)
+                    conn.commit()
+
+                    # Accorder tous les droits à l'utilisateur actuel
+                    cur.execute(f'GRANT ALL PRIVILEGES ON TABLE {schema}.metafuzzy TO {user};')
+                    conn.commit()
+                    # ⚡ Important : forcer QGIS à recharger les couches pour qu'il voie la nouvelle table
+                    QgsProject.instance().reloadAllLayers()
+
+                cur.close()
+                conn.close()
+                QgsApplication.processEvents()
+
+                # Charger la table dans QGIS
+                meta_uri = QgsDataSourceUri()
+                meta_uri.setConnection(host, str(port), database, user, pwd)
+                meta_uri.setDataSource(schema, "metafuzzy", None)  # None = pas de géométrie
+
+                metafuzzy_layer = QgsVectorLayer(meta_uri.uri(), "metafuzzy", "postgres")
+                if not metafuzzy_layer.isValid():
+                    QgsMessageLog.logMessage(
+                        "Impossible de charger la table 'metafuzzy' dans QGIS", "FuzzyPlugin", Qgis.Critical
+                    )
+                    return False
+
+                return True
+
+            else:
+                QMessageBox.warning(
+                    self, self.tr("Erreur"),
+                    self.tr("Format de source non reconnu (ni GPKG ni PostGIS).")
+                )
+                return False
+
+        except Exception as e:
+            QgsMessageLog.logMessage(f"Erreur ensure_metadata_table_exists: {e}", "FuzzyPlugin", Qgis.Critical)
+            return False
+
+
+
+    def append_metadata(self, gpkg_or_layer, field_name, fuzzy_type, params,
+                        source1=None, source2=None, provider="ogr", schema=None):
+        # Assure que la table metafuzzy existe
+        if not self.ensure_metadata_table_exists(gpkg_or_layer):
+            QMessageBox.information(self, self.tr("Info"), self.tr("Impossible de créer ou charger la table 'metafuzzy'."))
             return
-        
-        
+
+        try:
+            date_str = QDateTime.currentDateTime().toString("yyyy-MM-dd HH:mm:ss")
+            user = getpass.getuser()
+
+            # --- Chargement de la table metafuzzy ---
+            if provider == "ogr":
+                # gpkg_or_layer est un chemin GeoPackage
+                gpkg_path = gpkg_or_layer
+                uri = f"{gpkg_path}|layername=metafuzzy"
+                metafuzzy_layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
+                if not metafuzzy_layer.isValid():
+                    raise Exception("Table 'metafuzzy' introuvable dans le GeoPackage.")
+
+            elif provider in ["postgres", "postgis"]:
+                # gpkg_or_layer est un layer PostGIS
+                layer = gpkg_or_layer
+                uri = QgsDataSourceUri(layer.source())
+                schema = schema or uri.schema() or "public"  # <-- récupère le schéma de la couche
+                uri.setDataSource(schema, "metafuzzy", None, "", "")
+                metafuzzy_layer = QgsVectorLayer(uri.uri(), "metafuzzy", "postgres")
+                if not metafuzzy_layer.isValid():
+                    raise Exception(f"Table '{schema}.metafuzzy' introuvable dans PostGIS (URI: {uri.uri()})")
+
+            else:
+                raise Exception(f"Provider non supporté : {provider}")
+
+            # --- Création du nouvel enregistrement ---
+            f = QgsFeature(metafuzzy_layer.fields())
+            f.setAttribute("sourcefield", field_name)
+            f.setAttribute("function", fuzzy_type)
+            f.setAttribute("params", str(params))
+            f.setAttribute("source1", source1 or "")
+            f.setAttribute("source2", source2 or "")
+            f.setAttribute("datecreated", date_str)
+            f.setAttribute("username", user)
+
+            # --- Ajout dépendant du provider ---
+            if provider == "ogr":
+                metafuzzy_layer.startEditing()
+                metafuzzy_layer.addFeature(f)
+                metafuzzy_layer.commitChanges()
+            else:  # postgres
+                metafuzzy_layer.startEditing()
+                metafuzzy_layer.addFeature(f)
+                if not metafuzzy_layer.commitChanges():
+                    raise Exception("Échec commit PostGIS : " + metafuzzy_layer.commitErrors())
+
+
+        except Exception as e:
+            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.Critical)
       
-
-        new_feature = QgsFeature(layer.fields())
-        new_feature.setAttribute("field", field_name)
-        new_feature.setAttribute("function", fuzzy_type)
-        new_feature.setAttribute("params", ", ".join(map(str, params)))
-        new_source = f"{self.layerComboBox.currentText()}/{self.fieldComboBox.currentText()} "
-        new_feature.setAttribute("source1", new_source)
-        new_feature.setAttribute("date", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        new_feature.setAttribute("user", getpass.getuser())
-
-        with edit(layer):
-            layer.addFeature(new_feature)
-    
     def get_layer_path(self, layer):
         """Retourne le chemin du fichier GPKG associé à une couche"""
         source = layer.source()
@@ -240,21 +441,63 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
     
     def show_metadata_table(self):
         layer_name = self.layerComboBox.currentText()
+        
         layer = self.layer_map.get(layer_name)
         if not layer:
             QMessageBox.warning(self, self.tr("Erreur"), self.tr("Aucune couche sélectionnée."))
             return
 
-        gpkg_path = self.get_layer_path(self.current_layer)
-
-        uri = f"{gpkg_path}|layername=metafuzzy"
-        metafuzzy_layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
-
-        if not metafuzzy_layer.isValid():
-            QMessageBox.information(self, self.tr("Info"), self.tr("Aucune table 'metafuzzy' trouvée dans le GeoPackage."))
+        # Assure que la table metafuzzy existe
+        if not self.ensure_metadata_table_exists(layer):
+            QMessageBox.information(self, self.tr("Info"), self.tr("Impossible de créer ou charger la table 'metafuzzy'."))
             return
 
-        # Crée une boîte de dialogue pour afficher les données
+        source = layer.source()
+
+        # ---------------------------
+        # Cas 1 : GeoPackage
+        # ---------------------------
+        if source.lower().endswith(".gpkg") or "|layername=" in source:
+            gpkg_path = source.split("|")[0]
+            uri = f"{gpkg_path}|layername=metafuzzy"
+            metafuzzy_layer = QgsVectorLayer(uri, "metafuzzy", "ogr")
+
+        # ---------------------------
+        # Cas 2 : PostGIS
+        # ---------------------------
+        elif "dbname=" in source:
+            from qgis.core import QgsDataSourceUri
+            uri = QgsDataSourceUri(source)
+            schema = uri.schema() or "public"
+            database = uri.database()
+            host = uri.host()
+            port = uri.port()
+            user = uri.username()
+            pwd = uri.password()
+
+            # Construire URI QGIS pour la table metafuzzy
+            meta_uri = QgsDataSourceUri()
+            meta_uri.setConnection(host, str(port), database, user, pwd)
+            meta_uri.setDataSource(schema, "metafuzzy", None)  # None = pas de géométrie
+
+            metafuzzy_layer = QgsVectorLayer(meta_uri.uri(), "metafuzzy", "postgres")
+
+        else:
+            QMessageBox.warning(self, self.tr("Erreur"),
+                                self.tr("Format de source non reconnu (ni GPKG ni PostGIS)."))
+            return
+
+        # ---------------------------
+        # Vérification de validité
+        # ---------------------------
+        if not metafuzzy_layer.isValid():
+            QMessageBox.information(self, self.tr("Info"),
+                                    self.tr("Aucune table 'metafuzzy' trouvée."))
+            return
+
+        # ---------------------------
+        # Création de la boîte de dialogue
+        # ---------------------------
         dialog = QDialog(self)
         dialog.setWindowTitle(self.tr("Historique des transformations"))
         layout = QVBoxLayout()
@@ -262,20 +505,31 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
         table = QTableWidget()
         fields = metafuzzy_layer.fields()
         features = list(metafuzzy_layer.getFeatures())
-    
+
         table.setColumnCount(len(fields))
         table.setRowCount(len(features))
         table.setHorizontalHeaderLabels([f.name() for f in fields])
 
         for row_idx, feat in enumerate(features):
             for col_idx, field in enumerate(fields):
-                val = str(feat[field.name()])
-                table.setItem(row_idx, col_idx, QTableWidgetItem(val))
+                val = feat.attribute(field.name())
+                
+                # Conversion sécurisée en string
+                if isinstance(val, QDateTime):
+                    val_str = val.toString("yyyy-MM-dd HH:mm:ss")  # chaîne lisible
+                elif hasattr(val, "toPyDateTime"):  
+                    # pour PyQt5.QtCore.QDateTime encapsulé
+                    val_str = val.toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
+                else:
+                    val_str = str(val) if val is not None else ""
+                val_str = val_str.replace("PyQt5.QtCore.QDateTime", "")
+                table.setItem(row_idx, col_idx, QTableWidgetItem(val_str))
 
         layout.addWidget(table)
         dialog.setLayout(layout)
-        dialog.resize(600, 300)
+        dialog.resize(700, 400)
         dialog.exec_()
+
     def on_layer_changed(self):
         layer_name = self.layerComboBox.currentText()
         layers = QgsProject.instance().mapLayers().values()
@@ -289,52 +543,77 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             result_code = dlg.get_selected_values()
             self.functionCodeLabel.setText(result_code)  # à adapter selon votre interface
     
+
+
     def apply_fuzzy_transformation(self):
         config = self.get_parameters()
         if not config:
             return
 
         layer = config['layer']
-        source_path = layer.source().split('|')[0]
-        if not source_path.lower().endswith('.gpkg'):
-            QMessageBox.warning(self, self.tr("Erreur"), self.tr("Les métadonnées ne peuvent être stockées que dans un fichier .gpkg."))
-            return
-
-        if not self.ensure_metadata_table_exists(source_path):
-            QMessageBox.warning(self, self.tr("Erreur"), self.tr("Impossible de créer la table metafuzzy dans le GeoPackage."))
-            return
-
         field_name = config['field_name']
-        fuzzy_type = config['fuzzy_type']
+        fuzzy_code = self.fuzzyTypeComboBox.currentData()  # 🔹 Code interne, pas label
         params = config['params']
 
-        new_field_name = f"{field_name}_fuzzy"
-        if not layer.dataProvider().addAttributes([QgsField(new_field_name, QVariant.Double)]):
-            QMessageBox.warning(self, self.tr("Erreur"),self.tr( "Impossible d'ajouter le champ."))
+        # Validation des paramètres
+        valid, msg = self.validate_fuzzy_params(fuzzy_code, params)
+        if not valid:
+            QMessageBox.warning(self, self.tr("Paramètres invalides"), self.tr(msg))
             return
 
+        new_field_name = f"{field_name}_fuzzy"
+        provider = layer.dataProvider()
+        existing_index = layer.fields().indexFromName(new_field_name)
+
+        # Vérifier si le champ existe déjà
+        if existing_index != -1:
+            reply = QMessageBox.question(
+                self,
+                self.tr("Champ existant"),
+                self.tr(f"Le champ '{new_field_name}' existe déjà. Voulez-vous le remplacer ?"),
+                QMessageBox.Yes | QMessageBox.No
+            )
+            if reply == QMessageBox.No:
+                return
+            else:
+                if not provider.deleteAttributes([existing_index]):
+                    QMessageBox.warning(self, self.tr("Erreur"), self.tr("Impossible de supprimer le champ existant."))
+                    return
+                layer.updateFields()
+
+        # Ajouter le champ
+        new_field = QgsField(new_field_name, QVariant.Double)
+        if provider.name().lower() in ["postgres", "postgis"]:
+            new_field.setTypeName("DOUBLE PRECISION")
+        else:
+            new_field.setTypeName("REAL")
+
+        if not provider.addAttributes([new_field]):
+            QMessageBox.warning(self, self.tr("Erreur"), self.tr("Impossible d'ajouter le champ."))
+            return
         layer.updateFields()
+
         fuzzy_index = layer.fields().indexFromName(new_field_name)
         field_index = layer.fields().indexFromName(field_name)
         if fuzzy_index == -1 or field_index == -1:
             QMessageBox.warning(self, self.tr("Erreur"), self.tr("Problème avec les champs."))
             return
 
+        # Calcul des valeurs floues
         with edit(layer):
             for f in layer.getFeatures():
                 x = f[field_index]
                 if x is None:
                     f[fuzzy_index] = None
                     continue
-
                 try:
-                    if fuzzy_type == "linéaire croissante":
+                    if fuzzy_code == "linear_inc":
                         a, b = params
                         val = (x - a) / (b - a)
-                    elif fuzzy_type == "linéaire décroissante":
+                    elif fuzzy_code == "linear_dec":
                         a, b = params
                         val = (b - x) / (b - a)
-                    elif fuzzy_type == "triangulaire":
+                    elif fuzzy_code == "triangular":
                         a, b, c = params
                         if x <= a or x >= c:
                             val = 0
@@ -342,7 +621,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                             val = (x - a) / (b - a)
                         elif b <= x < c:
                             val = (c - x) / (c - b)
-                    elif fuzzy_type == "trapézoïdale":
+                    elif fuzzy_code == "trapezoidal":
                         a, b, c, d = params
                         if x <= a or x >= d:
                             val = 0
@@ -352,13 +631,13 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                             val = 1
                         elif c < x < d:
                             val = (d - x) / (d - c)
-                    elif fuzzy_type == "sigmoïde croissante (S)":
+                    elif fuzzy_code == "sigmoid_inc":
                         a, b = params
                         val = 1 / (1 + math.exp(-a * (x - b)))
-                    elif fuzzy_type == "sigmoïde décroissante (Z)":
+                    elif fuzzy_code == "sigmoid_dec":
                         a, b = params
                         val = 1 - (1 / (1 + math.exp(-a * (x - b))))
-                    elif fuzzy_type == "gaussienne":
+                    elif fuzzy_code == "gaussian":
                         c, sigma = params
                         val = math.exp(-((x - c) ** 2) / (2 * sigma ** 2))
                     else:
@@ -366,25 +645,51 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
 
                     f[fuzzy_index] = max(0, min(1, val)) if val is not None else None
                     layer.updateFeature(f)
-
-                except Exception as e:
+                except Exception:
                     f[fuzzy_index] = None
-        self.append_metadata(source_path, field_name, fuzzy_type, params)
 
-        QMessageBox.information(self, self.tr("Succès"), self.tr("Transformation floue ajoutée dans '{}'").format(new_field_name))
+         # Ajouter les métadonnées
+        if provider.name().lower() in ["postgres", "postgis"]:
+            table_name = layer.name()  # nom de la table PostGIS
+            self.append_metadata(
+                layer,
+                field_name,
+                fuzzy_code,
+                params,
+                source1=table_name,
+                provider="postgres"
+            )
+        else:
+            gpkg_path = layer.source().split('|')[0]
+            table_name = layer.name()  # nom de la couche dans le GeoPackage
+            self.append_metadata(
+                gpkg_path,
+                field_name,
+                fuzzy_code,
+                params,
+                source1=table_name,
+                provider="ogr"
+            )
+
+        QMessageBox.information(
+            self,
+            self.tr("Succès"),
+            self.tr("Transformation floue ajoutée dans '{}'").format(new_field_name)
+        )
+
     def show_field_statistics(self):
         layer_name = self.layerComboBox.currentText()
         field_name = self.fieldComboBox.currentText()
-    
-        # Récupère la couche depuis le nom
-        layer = None
-        for lyr in QgsProject.instance().mapLayers().values():
-            if lyr.name() == layer_name:
-                layer = lyr
-                break
+
+        # Récupère la couche depuis le dictionnaire self.layer_map
+        layer = self.layer_map.get(layer_name)
 
         if not layer:
-            QMessageBox.warning(self, self.tr("Erreur"), self.tr("Impossible de trouver la couche '{}'").format(layer_name))
+            QMessageBox.warning(
+                self, 
+                self.tr("Erreur"), 
+                self.tr("Impossible de trouver la couche '{}'").format(layer_name)
+            )
             return
 
         if not field_name:
@@ -397,14 +702,18 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             return
 
         # Récupère les valeurs numériques valides
-        values = []
-        for feat in layer.getFeatures():
-            val = feat[field_name]
-            if isinstance(val, (int, float)):
-                values.append(val)
+        values = [
+            feat[field_name] 
+            for feat in layer.getFeatures() 
+            if isinstance(feat[field_name], (int, float))
+        ]
 
         if not values:
-            QMessageBox.information(self, self.tr("Aucune donnée"), self.tr("Aucune valeur numérique disponible pour ce champ."))
+            QMessageBox.information(
+                self, 
+                self.tr("Aucune donnée"), 
+                self.tr("Aucune valeur numérique disponible pour ce champ.")
+            )
             return
 
         # Calcule les stats
@@ -431,6 +740,44 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
         )
 
         QMessageBox.information(self, self.tr("Statistiques du champ"), msg)
+
+    def validate_fuzzy_params(self, fuzzy_code, params):
+        """
+        Vérifie que les paramètres de la fonction floue sont corrects selon le type.
+        Utilise les codes internes des fonctions floues.
+        Retourne : (bool_valid, message)
+        """
+        try:
+            if fuzzy_code in ["linear_inc", "linear_dec", "sigmoid_inc", "sigmoid_dec"]:
+                if len(params) != 2:
+                    return False, self.tr("Cette fonction nécessite exactement 2 paramètres.")
+                a, b = params
+                if a == b:
+                    return False, self.tr("Les deux paramètres ne doivent pas être égaux.")
+            elif fuzzy_code == "triangular":
+                if len(params) != 3:
+                    return False, self.tr("La fonction triangulaire nécessite exactement 3 paramètres.")
+                a, b, c = params
+                if not (a < b < c):
+                    return False, self.tr("Les paramètres doivent être dans l'ordre a < b < c.")
+            elif fuzzy_code == "trapezoidal":
+                if len(params) != 4:
+                    return False, self.tr("La fonction trapézoïdale nécessite exactement 4 paramètres.")
+                a, b, c, d = params
+                if not (a < b <= c < d):
+                    return False, self.tr("Les paramètres doivent être dans l'ordre a < b <= c < d.")
+            elif fuzzy_code == "gaussian":
+                if len(params) != 2:
+                    return False, self.tr("La fonction gaussienne nécessite exactement 2 paramètres (c, sigma).")
+                c, sigma = params
+                if sigma <= 0:
+                    return False, self.tr("Le paramètre sigma doit être strictement positif.")
+            else:
+                return False, self.tr("Type de fonction floue inconnu.")
+            return True, ""
+        except Exception as e:
+            return False, self.tr("Erreur lors de la validation des paramètres : ") + str(e)
+
     def load_translator(self):
         from qgis.PyQt.QtCore import QTranslator, QLocale, QCoreApplication
         from qgis.core import QgsApplication
@@ -476,5 +823,32 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             pix = QPixmap()  # vide
 
         self.labelFunctionPreview.setPixmap(pix)
+    def populate_field_combo(self, layer):
+        """
+        Remplit la comboBox des champs en fonction de la couche sélectionnée.
+        Compatible GeoPackage et PostGIS.
+        """
+        self.fieldComboBox.clear()
+
+        if not isinstance(layer, QgsVectorLayer):
+            return
+
+        # Récupération des champs
+        for field in layer.fields():
+            # On filtre éventuellement par type si nécessaire (ex: seulement numériques)
+            if field.typeName().lower() in ["integer", "real", "double precision", "numeric", "float"]:
+                self.fieldComboBox.addItem(field.name())
+            else:
+                # Si tu veux tout afficher, commente ce if/else
+                pass
+
+        # Infobulle explicative selon le provider
+        provider = layer.dataProvider().name()
+        if provider == "ogr":
+            self.fieldComboBox.setToolTip(self.tr("Champs de la couche GeoPackage sélectionnée"))
+        elif provider == "postgres":
+            self.fieldComboBox.setToolTip(self.tr("Champs de la couche PostGIS sélectionnée"))
+        else:
+            self.fieldComboBox.setToolTip(self.tr("Champs de la couche vectorielle sélectionnée"))
 
 

@@ -124,17 +124,23 @@ class FuzzyAttributes:
     def initGui(self):
         icon = QIcon(os.path.join(self.plugin_dir, "icon.png"))
 
-        # Nom du menu principal (traduit)
+        # Nom du menu principal
         menu_name = self.tr("Fuzzy Plugin")
-        # Action principale du plugin
+
+        # Action principale : FuzzyAttributes
         self.main_action = QAction(icon, "FuzzyAttributes", self.iface.mainWindow())
         self.main_action.triggered.connect(self.run)
         self.iface.addPluginToMenu(menu_name, self.main_action)
 
-        # Action pour l'agrégation floue
+        # Action : Agrégation floue
         self.aggregate_action = QAction(icon, self.tr("Agrégation floue"), self.iface.mainWindow())
         self.aggregate_action.triggered.connect(self.run_fuzzy_aggregate)
         self.iface.addPluginToMenu(menu_name, self.aggregate_action)
+
+        # ➕ Nouvelle action : Fuzzy Text
+        self.text_action = QAction(icon, self.tr("Texte → Flou"), self.iface.mainWindow())
+        self.text_action.triggered.connect(self.run_fuzzy_text)
+        self.iface.addPluginToMenu(menu_name, self.text_action)
 
 
 
@@ -142,11 +148,15 @@ class FuzzyAttributes:
 
     def unload(self):
         menu_name = self.tr("Fuzzy Plugin")
+        
         if hasattr(self, 'main_action'):
             self.iface.removePluginMenu(menu_name, self.main_action)
 
         if hasattr(self, 'aggregate_action'):
             self.iface.removePluginMenu(menu_name, self.aggregate_action)
+
+        if hasattr(self, 'text_action'):   # ➕ suppression de l'action Texte→Flou
+            self.iface.removePluginMenu(menu_name, self.text_action)
 
 
     def run(self):
@@ -196,4 +206,13 @@ class FuzzyAttributes:
 
     def _(text):
         return QCoreApplication.translate("FuzzyAttributes", text)
+    def run_fuzzy_text(self):
+        from .fuzzytext_dialog import FuzzyTextDialog
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée", level=3)
+            return
+
+        dlg = FuzzyTextDialog(self.iface, layer)
+        dlg.exec_()
 

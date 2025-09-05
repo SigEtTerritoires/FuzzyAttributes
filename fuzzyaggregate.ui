@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>461</width>
-    <height>361</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -99,6 +99,39 @@
     <widget class="QLineEdit" name="outputLayerName"/>
    </item>
    <item>
+    <widget class="QGroupBox" name="groupSymbology">
+     <property name="title">
+      <string>Symbologie de la couche résultante</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutSymbology">
+      <item>
+       <widget class="QRadioButton" name="radioGraduated">
+        <property name="text">
+         <string>Symbole gradué</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioRamp">
+        <property name="text">
+         <string>Rampe de couleur (moyenne ± écart-type)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkDefaultStyle">
+        <property name="text">
+         <string>Sauvegarder comme symbologie par défaut</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="btnShowMetadata">
      <property name="text">
       <string>Voir l'historique des transformations</string>
@@ -122,7 +155,7 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Close|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>

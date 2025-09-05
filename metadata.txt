@@ -1,7 +1,7 @@
 [general]
 name=FuzzyAttributes
 description=FR: Convertit des champs numériques ou catégoriels en valeurs floues avec plusieurs fonctions d’appartenance. EN: Converts numeric or categorical fields into fuzzy values using various membership functions.
-version=1.0.2
+version=1.0.4
 qgisMinimumVersion=3.28
 qgisMaximumVersion=3.99
 author=Atilio FRANCOIS
@@ -17,6 +17,22 @@ deprecated=false
 license=GPL-3.0
 translate=true
 changelog=
+    [1.3.0] - 2025-09-04
+    - deux symbologies possibles pour la couche résultante: symbole gradué ou rampe de couleur
+	- ajout d'une rampe above and below
+    - option de définir une des symbologies comme symbologie par défaut (geopackage ou postgis). 
+	[1.2.0] - 2025-08-31
+	- transformation floue des attributs texte codé. 
+	- Divers correctifs mineurs dans les dialogues.  
+    [1.1.0] - 2025-08-26
+	- gestion des données Postgis comme fichiers source. 
+	- validation des paramètres numériques des fonctions de transformation floue.  
+	- affichage de la couche résultat avec une symbologie graduée.  
+	- dialogues: bouton Annuler modifié en Fermer 
+	- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
+	- Divers correctifs mineurs dans les dialogues.  
+    [1.0.4] - 2025-08-24
+	- Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
     [1.0.2] - 2025-08-18
     - Ajout du contrôle de cohérence logique pour certaines fonctions d’agrégation floue.
     - Nouveaux messages d’avertissement interactifs avec demande de confirmation.
@@ -24,7 +40,7 @@ changelog=
     - Correction du bug sur is_aggregation_code_consistent (self manquant).
     - Correction du bug dans updateFunctionPreview().
 
-    [1.9.1] - 2025-08-13
+    [1.0.1] - 2025-08-13
     - Ajout d’exemples dynamiques dans l’interface selon la fonction floue choisie.
     - Support multilingue initial des images(fr, en, es,pt).
 

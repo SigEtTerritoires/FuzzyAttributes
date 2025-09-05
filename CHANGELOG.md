@@ -4,10 +4,46 @@ Toutes les modifications notables du plugin **FuzzyAttributes** seront document�
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)  
 et ce projet suit approximativement le versionnage sémantique (SemVer).  
 ## [Unreleased]
-- Support du format postgis pour les données
 
 ---
+## [1.3.0] - 2025-09-04
 
+### Ajouté
+- deux symbologies possibles pour la couche résultante: symbole gradué ou rampe de couleur
+- ajout d'une rampe above and below
+- option de définir une des symbologies comme symbologie par défaut (geopackage ou postgis). 
+
+
+## [1.2.0] - 2025-08-31
+
+### Ajouté
+- transformation floue des attributs texte codé. 
+
+
+### Modifié
+- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
+
+### Corrigé
+- Divers correctifs mineurs dans les dialogues.  
+
+
+---
+## [1.1.0] - 2025-08-26
+
+### Ajouté
+- gestion des données Postgis comme fichiers source. 
+- validation des paramètres numériques des fonctions de transformation floue.  
+- affichage de la couche résultat avec une symbologie graduée.  
+
+### Modifié
+- dialogues: bouton Annuler modifié en Fermer 
+- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
+
+### Corrigé
+- Divers correctifs mineurs dans les dialogues.  
+## [1.0.4] - 2025-08-19
+### Corrigé
+- Bug : Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
 ## [1.0.2] - 2025-08-19
 ### Ajouté
 - Vérification de cohérence des fonctions d’agrégation :  
