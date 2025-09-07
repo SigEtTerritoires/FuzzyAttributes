@@ -11,14 +11,11 @@ import processing
 from qgis.core import QgsProcessingOutputLayerDefinition, QgsMessageLog,QgsProcessing,QgsVectorFileWriter
 import sys
 import re
-from qgis.core import QgsMessageLog,QgsProcessing
-from qgis.core import Qgis
 from qgis.PyQt.QtCore import QFileInfo
 import math
 from datetime import datetime
 from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
 import getpass
-<<<<<<< HEAD
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale ,NULL,QDateTime
 import psycopg2
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
@@ -26,33 +23,12 @@ from qgis.PyQt.QtGui import QColor
 from qgis.core import QgsProperty, QgsSymbolLayer, QgsSingleSymbolRenderer
 from qgis.core import (
     QgsRendererRange,
-    QgsFillSymbol, QgsMapLayerStyle)
+    QgsFillSymbol, QgsMapLayerStyle,QgsGeometry,QgsPointXY,QgsRendererCategory,QgsCategorizedSymbolRenderer)
 from PyQt5.QtCore import QVariant
 import tempfile
 from qgis.core import QgsStyle
 
             
-=======
-from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
-from qgis.PyQt.QtCore import NULL
-from PyQt5 import QtWidgets
-from qgis.core import (
-    QgsVectorLayer,
-    QgsField,
-    QgsSymbol,
-    QgsRendererRange,
-    QgsGraduatedSymbolRenderer,
-    QgsProject
-)
-
-from qgis.PyQt.QtCore import QVariant
-from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtWidgets import QMessageBox
-
-# Si tu veux rafraîchir via l’interface QGIS :
-from qgis.utils import iface
-
->>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
 _translator = None
 def load_translator():
     global _translator
@@ -1115,19 +1091,52 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     geom_type = real_layer.geometryType()
                     if geom_type == QgsWkbTypes.PolygonGeometry:
                         layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
+                        # Contour en gris transparent
+                        layer0.setStrokeColor(QColor(0, 0, 0, 50))
                     elif geom_type == QgsWkbTypes.LineGeometry:
                         layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyStrokeColor, QgsProperty.fromExpression(expr))
                     elif geom_type == QgsWkbTypes.PointGeometry:
                         layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
 
-                    # Contour en gris transparent pour polygones
-                    if geom_type == QgsWkbTypes.PolygonGeometry:
-                        layer0.setStrokeColor(QColor(0, 0, 0, 50))
-
                     real_layer.setRenderer(QgsSingleSymbolRenderer(symbol))
-                # Rafraîchir la couche
-                real_layer.triggerRepaint()
-                QgsProject.instance().addMapLayer(real_layer)
+
+                    # Rafraîchir la couche
+                    real_layer.triggerRepaint()
+                    QgsProject.instance().addMapLayer(real_layer)
+                    legend_name = self.tr("Légende Above/Below")
+                    existing = any(lyr.name() == legend_name for lyr in QgsProject.instance().mapLayers().values())
+                    if not existing:
+                        legend_layer = QgsVectorLayer("Polygon?crs=EPSG:4326", legend_name, "memory")
+                        # ---- Créer une couche mémoire pour la légende ----
+                        prov = legend_layer.dataProvider()
+                        prov.addAttributes([QgsField("cat", QVariant.String)])
+                        legend_layer.updateFields()
+
+                        feats = []
+                        for i, cat in enumerate(["Faible", "Moyen", "Élevé"]):
+                            f = QgsFeature(legend_layer.fields())
+                            f.setAttribute("cat", cat)
+                            f.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(i, 0)))  # points fictifs
+                            feats.append(f)
+                        prov.addFeatures(feats)
+                        legend_layer.updateExtents()
+
+                        # Définir des couleurs fixes pour la légende
+                        colors = {
+                            "m̄ + σ": QColor(230,30,180),   # bleu
+                            "m̄ ": QColor(220,235,205),   # gris clair
+                            "m̄ - σ": QColor(70,145,20)      # rouge
+                        }
+                        cats = []
+                        for cat, color in colors.items():
+                            s = QgsSymbol.defaultSymbol(legend_layer.geometryType())
+                            s.setColor(color)
+                            cats.append(QgsRendererCategory(cat, s, cat))
+
+                        legend_renderer = QgsCategorizedSymbolRenderer("cat", cats)
+                        legend_layer.setRenderer(legend_renderer)
+
+                        QgsProject.instance().addMapLayer(legend_layer)
 
                 # Sauvegarder comme style par défaut si demandé
                 if self.checkDefaultStyle.isChecked():
@@ -1153,7 +1162,6 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 except Exception as e:
                     raise Exception(f"Erreur lors de l'opération PostGIS ({operation}) : {e}")
 
-<<<<<<< HEAD
                 # --- Ajout champ d’agrégation et calcul ---
                 all_fields = [f.name() for f in real_layer.fields()]
                 field1="a_"+ field1
@@ -1227,22 +1235,8 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
 
         real_layer.commitChanges()
         
-=======
-            # Fin de l’édition
-            real_layer.commitChanges()
-            real_layer.updateFields()
->>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
 
-            # Définir les classes (valeur min, valeur max, couleur, étiquette)
-            classes = [
-                (0.0, 0.125, "#ff0000", self.tr("0 – 0.125 (mauvais)")),          # rouge
-                (0.125, 0.375, "#ff7f00", self.tr("0.125 – 0.375 (médiocre)")),   # orange
-                (0.375, 0.625, "#ffff00", self.tr("0.375 – 0.625 (moyen)")),    # jaune
-                (0.625, 0.875, "#7fff00", self.tr("0.625 – 0.875 (bon)")), # vert clair
-                (0.875, 1.0, "#006400", self.tr("0.875 – 1.0 (très bon)"))    # vert foncé
-            ]
 
-<<<<<<< HEAD
 # --- Appliquer la symbologie ---
         if self.radioGraduated.isChecked():
             # Symbole gradué
@@ -1253,15 +1247,12 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 (0.625, 0.875, "#7fff00", self.tr("0.625 – 0.875 (bon)")),
                 (0.875, 1.0, "#006400", self.tr("0.875 – 1.0 (très bon)"))
             ]
-=======
->>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
             ranges = []
             for min_val, max_val, color, label in classes:
                 symbol = QgsSymbol.defaultSymbol(real_layer.geometryType())
                 symbol.setColor(QColor(color))
                 rng = QgsRendererRange(min_val, max_val, symbol, label)
                 ranges.append(rng)
-<<<<<<< HEAD
             renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
             renderer.setMode(QgsGraduatedSymbolRenderer.Custom)
             real_layer.setRenderer(renderer)
@@ -1270,29 +1261,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             # Vérifie si la rampe 'AboveAndBelow' existe dans le style QGIS
             style = QgsStyle.defaultStyle()
             ramp = style.colorRamp('AboveAndBelow')
-=======
-
-            # Créer un renderer gradué basé sur les plages définies
-            renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
-
-            # Inutile d’appeler setMode() → les ranges sont déjà explicites
-            real_layer.setRenderer(renderer)
-            real_layer.triggerRepaint()
-
-            # Ajouter la couche au projet
-            QgsProject.instance().addMapLayer(real_layer)
-
-        
-            # Message de succès
-            QMessageBox.information(self, self.tr("Succès"), f"Couche '{output_name}' créée avec succès.")
-
-            self.ensure_metadata_table_exists(gpkg_path)
->>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
-
-            if ramp is None:
-                ramp_name = 'Spectral'   # fallback si AboveAndBelow n’existe pas
-            else:
-                ramp_name = 'AboveAndBelow'
+            ramp_name = 'AboveAndBelow' if ramp else 'Spectral'
 
             # ---- Symbole avec rampe de couleur ----
             expr = f"""
@@ -1313,17 +1282,51 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
 
             if geom_type == QgsWkbTypes.PolygonGeometry:
                 layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
-                layer0.setStrokeColor(QColor(0,0,0,50))
+                layer0.setStrokeColor(QColor(0, 0, 0, 50))
             elif geom_type == QgsWkbTypes.LineGeometry:
                 layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyStrokeColor, QgsProperty.fromExpression(expr))
             elif geom_type == QgsWkbTypes.PointGeometry:
                 layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
 
             real_layer.setRenderer(QgsSingleSymbolRenderer(symbol))
+            real_layer.triggerRepaint()
+            QgsProject.instance().addMapLayer(real_layer)
 
-        # Rafraîchir
-        real_layer.triggerRepaint()
-        QgsProject.instance().addMapLayer(real_layer)
+            # ---- Créer la légende mémoire uniquement si elle n'existe pas ----
+            legend_name = self.tr("Légende Above/Below")
+            existing = any(lyr.name() == legend_name for lyr in QgsProject.instance().mapLayers().values())
+            if not existing:
+                legend_layer = QgsVectorLayer("Polygon?crs=EPSG:4326", legend_name, "memory")
+                prov = legend_layer.dataProvider()
+                prov.addAttributes([QgsField("cat", QVariant.String)])
+                legend_layer.updateFields()
+
+                feats = []
+                for i, cat in enumerate(["m̄ - σ", "m̄", "m̄ + σ"]):
+                    f = QgsFeature(legend_layer.fields())
+                    f.setAttribute("cat", cat)
+                    f.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(i, 0)))
+                    feats.append(f)
+                prov.addFeatures(feats)
+                legend_layer.updateExtents()
+
+                colors = {
+                        "m̄ + σ": QColor(230,30,180),   # bleu
+                        "m̄ ": QColor(220,235,205),   # gris clair
+                        "m̄ - σ": QColor(70,145,20)      # rouge
+                }
+
+                cats = []
+                for cat, color in colors.items():
+                    s = QgsSymbol.defaultSymbol(legend_layer.geometryType())
+                    s.setColor(color)
+                    cats.append(QgsRendererCategory(cat, s, cat))
+
+                legend_renderer = QgsCategorizedSymbolRenderer("cat", cats)
+                legend_layer.setRenderer(legend_renderer)
+
+                QgsProject.instance().addMapLayer(legend_layer)
+
          
         if self.checkDefaultStyle.isChecked():
             if not save_postgis_default_style_from_layer(real_layer, schema='plugin', style_name='default'):
@@ -1375,7 +1378,6 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 )
 
         except Exception as e:
-<<<<<<< HEAD
             QMessageBox.critical(self, "Erreur", f"Erreur pendant l'ajout des métadonnées :\n{e}")
 
 
@@ -1524,9 +1526,6 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
         Pour PostGIS : crée la table si nécessaire et insère directement en SQL
         """
         try:
-=======
-            return
->>>>>>> f93ff5c3c6a725f6fa769008855947ab15e79cc7
             
 
             date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

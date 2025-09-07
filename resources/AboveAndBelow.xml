@@ -2,9 +2,9 @@
 <qgis_style version="2">
   <symbols/>
   <colorramps>
-    <colorramp type="gradient" name="AboveAndBelow" tags="Colorful">
+    <colorramp type="gradient" name="AboveAndBelow" tags="Colorful,AboveAndBelow">
       <Option type="Map">
-        <Option value="99,224,22,255,hsv:0.26974999999999999,0.90328831921873809,0.87977416647592888,1" type="QString" name="color1"/>
+        <Option value="69,146,21,255,hsv:0.26974999999999999,0.85304036011291673,0.57334248874647131,1" type="QString" name="color1"/>
         <Option value="248,247,207,255,hsv:0.16225000000000001,0.16768139162279697,0.9739070725566491,1" type="QString" name="color2"/>
         <Option value="ccw" type="QString" name="direction"/>
         <Option value="0" type="QString" name="discrete"/>

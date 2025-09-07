@@ -7,7 +7,7 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 
 ---
 
-## [1.3.0] - 2025-09-04
+## [1.3.1] - 2025-09-04
 
 ### Ajouté
 - deux symbologies possibles pour la couche résultante: symbole gradué ou rampe de couleur
