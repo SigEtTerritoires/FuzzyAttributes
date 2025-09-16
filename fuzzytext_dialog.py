@@ -15,12 +15,12 @@ from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QPushButton, 
 from qgis.PyQt.QtWidgets import QTableWidgetItem
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt import uic
-from PyQt5.QtCore import QTranslator, QCoreApplication, QLocale
+from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale
 import os
 import getpass
 import json
 from qgis.PyQt.QtWidgets import QFileDialog
-from PyQt5.QtWidgets import QToolButton, QMenu, QAction, QFileDialog, QMessageBox
+from qgis.PyQt.QtWidgets import QToolButton, QMenu, QAction, QFileDialog, QMessageBox
 from qgis.core import QgsVectorLayer, QgsProject
 from qgis.PyQt.QtSql import QSqlDatabase, QSqlQuery
 import psycopg2
@@ -292,7 +292,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
         self.tableMapping.setRowCount(len(mapping))
         for i, (txt, flou) in enumerate(mapping):
             item_text = QTableWidgetItem(txt)
-            item_text.setFlags(item_text.flags() & ~Qt.ItemIsEditable)
+            item_text.setFlags(item_text.flags() & ~Qt.ItemFlag.ItemIsEditable)
             self.tableMapping.setItem(i, 0, item_text)
 
             editor = QLineEdit()
@@ -451,7 +451,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
         """Configure le bouton Enregistrer avec menu déroulant"""
         self.btnSave = QToolButton(self)
         self.btnSave.setText(self.tr("Enregistrer la table"))
-        self.btnSave.setPopupMode(QToolButton.MenuButtonPopup)
+        self.btnSave.setPopupMode(QToolButton.ToolButtonPopupMode.MenuButtonPopup)
 
         menu = QMenu(self)
 
@@ -472,7 +472,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
         """Configure le bouton Charger avec menu déroulant"""
         self.btnLoad = QToolButton(self)
         self.btnLoad.setText(self.tr("Charger la table"))
-        self.btnLoad.setPopupMode(QToolButton.MenuButtonPopup)
+        self.btnLoad.setPopupMode(QToolButton.ToolButtonPopupMode.MenuButtonPopup)
 
         menu = QMenu(self)
 
@@ -795,7 +795,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                 fuzzy_val = ""
 
             item_fuzzy = QTableWidgetItem(fuzzy_val)
-            item_fuzzy.setFlags(item_fuzzy.flags() | Qt.ItemIsEditable)
+            item_fuzzy.setFlags(item_fuzzy.flags() | Qt.ItemFlag.ItemIsEditable)
             self.tableWidget.setItem(row, 1, item_fuzzy)
 
     def ensure_metadata_table_exists(self, layer):
@@ -836,8 +836,8 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                 options = QgsVectorFileWriter.SaveVectorOptions()
                 options.driverName = "GPKG"
                 options.layerName = "metafuzzy"
-                options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
-                options.EditionCapabilities = QgsVectorFileWriter.CanAddNewLayer
+                options.actionOnExistingFile = QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer
+                options.EditionCapabilities = QgsVectorFileWriter.EditionCapability.CanAddNewLayer
 
                 err, _ = QgsVectorFileWriter.writeAsVectorFormatV2(
                     layer=mem_layer,
@@ -845,7 +845,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                     transformContext=QgsProject.instance().transformContext(),
                     options=options
                 )
-                return err == QgsVectorFileWriter.NoError
+                return err == QgsVectorFileWriter.WriterError.NoError
 
             # ---------------------------
             # Cas 2 : PostGIS
@@ -912,13 +912,13 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                 QgsMessageLog.logMessage(
                     f"[DEBUG fuzzytext] Tentative de chargement URI={meta_uri.uri()}",
                     "FuzzyPlugin",
-                    Qgis.Info
+                    Qgis.MessageLevel.Info
                 )
 
                 metafuzzy_layer = QgsVectorLayer(meta_uri.uri(), "metafuzzy", "postgres")
                 if not metafuzzy_layer.isValid():
                     QgsMessageLog.logMessage(
-                        "Impossible de charger la table 'metafuzzy' dans QGIS", "FuzzyPlugin", Qgis.Critical
+                        "Impossible de charger la table 'metafuzzy' dans QGIS", "FuzzyPlugin", Qgis.MessageLevel.Critical
                     )
                     return False
 
@@ -932,7 +932,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                 return False
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"Erreur ensure_metadata_table_exists: {e}", "FuzzyPlugin", Qgis.Critical)
+            QgsMessageLog.logMessage(f"Erreur ensure_metadata_table_exists: {e}", "FuzzyPlugin", Qgis.MessageLevel.Critical)
             return False
 
 
@@ -993,7 +993,7 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
 
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.Critical)
+            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.MessageLevel.Critical)
     def show_metadata_table(self):
         layer_name = self.layerComboBox.currentText()
         
@@ -1073,15 +1073,15 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
                 if isinstance(val, QDateTime):
                     val_str = val.toString("yyyy-MM-dd HH:mm:ss")  # chaîne lisible
                 elif hasattr(val, "toPyDateTime"):  
-                    # pour PyQt5.QtCore.QDateTime encapsulé
+                    # pour PyQt6.QtCore.QDateTime encapsulé
                     val_str = val.toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
                 else:
                     val_str = str(val) if val is not None else ""
-                val_str = val_str.replace("PyQt5.QtCore.QDateTime", "")
+                val_str = val_str.replace("PyQt6.QtCore.QDateTime", "")
                 table.setItem(row_idx, col_idx, QTableWidgetItem(val_str))
 
         layout.addWidget(table)
         dialog.setLayout(layout)
         dialog.resize(700, 400)
-        dialog.exec_()
+        dialog.exec()
 

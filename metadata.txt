@@ -1,12 +1,14 @@
 [general]
 name=FuzzyAttributes
 description=FR: Convertit des champs numériques ou catégoriels en valeurs floues avec plusieurs fonctions d’appartenance. EN: Converts numeric or categorical fields into fuzzy values using various membership functions.
-version=1.3.1
+version=1.4.0
 qgisMinimumVersion=3.28
 qgisMaximumVersion=3.99
+requires_qt=5,6
+supportsQt6=True
 author=Atilio FRANCOIS
 email=f2lmyvhnh@mozmail.com
-about=FR: FuzzyAttributes est un plugin QGIS permettant de convertir des attributs numériques ou catégoriels en valeurs floues (degrés d’appartenance entre 0 et 1) selon plusieurs types de fonctions d’appartenance : linéaire croissante/décroissante, trapézoïdale, triangulaire, sigmoïde (S et Z) et gaussienne. L’interface graphique facilite la configuration des paramètres pour chaque fonction, affiche un exemple visuel de la transformation, et propose une aide intégrée pour comprendre chaque type de fonction floue. Le plugin permet également l’agrégation souple (fuzzy aggregation) de plusieurs critères à l’aide de méthodes paramétrées, avec vérification de cohérence et messages d’avertissement en cas de configurations contradictoires. EN: FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into fuzzy values (membership degrees between 0 and 1) using various membership functions: increasing/decreasing linear, trapezoidal, triangular, sigmoid (S and Z), and Gaussian. The graphical interface makes it easy to configure parameters for each function, displays a visual example of the transformation, and provides built-in help to explain each fuzzy function type. The plugin also supports flexible (fuzzy) aggregation of multiple criteria using parameterized methods, with logical consistency checks and warning messages in case of contradictory configurations.
+about=FR: FuzzyAttributes est un plugin QGIS permettant de convertir des attributs numériques ou catégoriels en valeurs floues (degrés d’appartenance entre 0 et 1) selon plusieurs types de fonctions d’appartenance : linéaire croissante/décroissante, trapézoïdale, triangulaire, sigmoïde (S et Z) et gaussienne. L’interface graphique facilite la configuration des paramètres pour chaque fonction, affiche un exemple visuel de la transformation, et propose une aide intégrée pour comprendre chaque type de fonction floue. EN: FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into fuzzy values (membership degrees between 0 and 1) using various membership functions: increasing/decreasing linear, trapezoidal, triangular, sigmoid (S and Z), and Gaussian. The graphical interface makes it easy to configure parameters for each function, displays a visual example of the transformation, and provides built-in help to explain each fuzzy function type. The plugin also supports flexible (fuzzy) aggregation of multiple criteria using parameterized methods, with logical consistency checks and warning messages in case of contradictory configurations.
 category=Analysis
 repository=https://github.com/SigEtTerritoires/FuzzyAttributes
 homepage=https://github.com/SigEtTerritoires/FuzzyAttributes
@@ -16,14 +18,24 @@ icon=fuzzyattributes_icon.png
 deprecated=false
 license=GPL-3.0
 translate=true
+experimental=False
 changelog=
+    [1.4.0] - 2025-09-16
+    - Compatibilité avec Qt6 et PyQt6
+    - Mise à jour des imports PyQt pour Qt6
+    - Ajustements dans le code pour l’API Qt6 (widgets, signaux/slots)
+    - Interface utilisateur adaptée aux nouvelles conventions Qt6
+    - Ajustements mineurs pour éviter les avertissements de dépréciation
+	
     [1.3.0] - 2025-09-04
     - deux symbologies possibles pour la couche résultante: symbole gradué ou rampe de couleur
 	- ajout d'une rampe above and below
     - option de définir une des symbologies comme symbologie par défaut (geopackage ou postgis). 
+	
 	[1.2.0] - 2025-08-31
 	- transformation floue des attributs texte codé. 
 	- Divers correctifs mineurs dans les dialogues.  
+	
     [1.1.0] - 2025-08-26
 	- gestion des données Postgis comme fichiers source. 
 	- validation des paramètres numériques des fonctions de transformation floue.  
@@ -31,10 +43,13 @@ changelog=
 	- dialogues: bouton Annuler modifié en Fermer 
 	- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
 	- Divers correctifs mineurs dans les dialogues.  
+	
     [1.0.5] - 2025-08-27 
     - ajout d'une symbologie graduée par défaut de la couche résultante 
+	
     [1.0.4] - 2025-08-24
 	- Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
+	
     [1.0.2] - 2025-08-18
     - Ajout du contrôle de cohérence logique pour certaines fonctions d’agrégation floue.
     - Nouveaux messages d’avertissement interactifs avec demande de confirmation.

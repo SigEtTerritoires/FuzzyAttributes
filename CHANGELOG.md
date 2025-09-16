@@ -7,6 +7,19 @@ et ce projet suit approximativement le versionnage sémantique (SemVer).
 
 ---
 
+## [1.4.0] - 2025-09-16
+### Ajouté
+- Compatibilité avec Qt6 et PyQt6
+- Mise à jour des imports PyQt pour Qt6
+- Ajustements dans le code pour l’API Qt6 (widgets, signaux/slots)
+
+### Modifié
+- Interface utilisateur adaptée aux nouvelles conventions Qt6
+
+### Corrigé
+- Ajustements mineurs pour éviter les avertissements de dépréciation
+
+
 ## [1.3.1] - 2025-09-04
 
 ### Ajouté

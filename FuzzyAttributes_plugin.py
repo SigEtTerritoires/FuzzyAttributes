@@ -6,15 +6,17 @@ from qgis.core import (
 )
 
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale
-from PyQt5.QtWidgets import QDialog, QMessageBox, QToolTip
+from qgis.PyQt.QtWidgets import QDialog, QMessageBox, QToolTip
 from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
-from PyQt5.QtWidgets import QAction, QDialog
-from PyQt5.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction, QDialog
+from qgis.PyQt.QtGui import QIcon
 from .fuzzyattributes_dialog import FuzzyAttributesDialog
 from .fuzzyaggregate_dialog import FuzzyAggregateDialog
 import os
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
-
+from qgis.PyQt import QtCore
+import qgis.PyQt
+print(">>> FuzzyAttributes détecté avec Qt", QtCore.QT_VERSION_STR)
 _translator = None
 def load_translator():
     global _translator
@@ -190,7 +192,7 @@ class FuzzyAttributes:
         locale_name = QgsApplication.instance().locale()
         locale = QLocale(locale_name).name()[0:2]  # 'fr', 'en', etc.
         from qgis.core import QgsMessageLog, Qgis
-        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.Info)
+        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.MessageLevel.Info)
 
 
 
@@ -214,5 +216,5 @@ class FuzzyAttributes:
             return
 
         dlg = FuzzyTextDialog(self.iface, layer)
-        dlg.exec_()
+        dlg.exec()
 

@@ -1,8 +1,8 @@
-from PyQt5.QtWidgets import QDialog
+from qgis.PyQt.QtWidgets import QDialog
 from .aggregation_function_dialog_ui import Ui_AggregationFunctionDialog
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import Qt
+from qgis.PyQt.QtWidgets import QMessageBox
+from qgis.PyQt.QtCore import Qt
 
 _translator = None
 def load_translator():
@@ -24,7 +24,7 @@ class AggregationFunctionDialog(QDialog, Ui_AggregationFunctionDialog):
 
  
     def toggle_symmetry_section(self, state):
-        visible = state == Qt.Checked  # Qt.Checked = 2
+        visible = state == Qt.CheckState.Checked  # Qt.CheckState.Checked = 2
         self.group4.setVisible(visible)
         self.line.setVisible(visible)
         self.label_symmetry_test.setVisible(visible)
@@ -103,7 +103,7 @@ class AggregationFunctionDialog(QDialog, Ui_AggregationFunctionDialog):
         locale_name = QgsApplication.instance().locale()
         locale = QLocale(locale_name).name()[0:2]  # 'fr', 'en', etc.
         from qgis.core import QgsMessageLog, Qgis
-        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.Info)
+        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.MessageLevel.Info)
 
 
 

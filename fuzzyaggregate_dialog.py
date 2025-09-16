@@ -1,11 +1,11 @@
-from PyQt5 import uic
-from PyQt5.QtWidgets import QDialog,QMessageBox
+from qgis.PyQt import uic
+from qgis.PyQt.QtWidgets import QDialog,QMessageBox
 from qgis.core import QgsProject,QgsVectorLayer, QgsProcessingFeedback,   QgsProcessingFeatureSourceDefinition
 from qgis.core import QgsField,QgsFields,QgsWkbTypes,QgsFeature,edit
 from qgis.core import QgsDataSourceUri, QgsProviderRegistry, Qgis,QgsApplication
 from qgis.core import QgsVectorLayerExporter, QgsCoordinateTransformContext
 from qgis.core import QgsGraduatedSymbolRenderer, QgsSymbol
-from PyQt5.QtCore import QVariant
+from qgis.PyQt.QtCore import QVariant
 import os
 import processing
 from qgis.core import QgsProcessingOutputLayerDefinition, QgsMessageLog,QgsProcessing,QgsVectorFileWriter
@@ -18,13 +18,13 @@ from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
 import getpass
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale ,NULL,QDateTime
 import psycopg2
-from PyQt5.QtSql import QSqlDatabase, QSqlQuery
+from qgis.PyQt.QtSql import QSqlDatabase, QSqlQuery
 from qgis.PyQt.QtGui import QColor
 from qgis.core import QgsProperty, QgsSymbolLayer, QgsSingleSymbolRenderer
 from qgis.core import (
     QgsRendererRange,
     QgsFillSymbol, QgsMapLayerStyle,QgsGeometry,QgsPointXY,QgsRendererCategory,QgsCategorizedSymbolRenderer)
-from PyQt5.QtCore import QVariant
+from qgis.PyQt.QtCore import QVariant
 import tempfile
 from qgis.core import QgsStyle
 
@@ -720,7 +720,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 dlg.label_symmetry_test.hide()
 
         # ➕ Lancement du dialogue
-        if dlg.exec_():
+        if dlg.exec():
             result = dlg.get_selected_values()
             self.aggregation_function_code = result
             self.functionLabel.setText(f"Code sélectionné : {result}")
@@ -792,7 +792,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 options.layerName = layer_name
                 options.fileEncoding = "UTF-8"
                 options.actionOnExistingFile = (
-                    QgsVectorFileWriter.CreateOrOverwriteLayer if overwrite
+                    QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer if overwrite
                     else QgsVectorFileWriter.CreateOrSkip
                 )
 
@@ -803,12 +803,12 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     options
                 )[0]
 
-                if error != QgsVectorFileWriter.NoError:
+                if error != QgsVectorFileWriter.WriterError.NoError:
                     raise Exception(f"Erreur d'écriture dans le GeoPackage : code {error}")
 
                 QgsMessageLog.logMessage(
                     f"✅ Résultat sauvegardé dans {output_path} (couche : {layer_name})",
-                    level=Qgis.Success,
+                    level=Qgis.MessageLevel.Success,
                     tag=log_tag
                 )
 
@@ -822,7 +822,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 raise Exception(self.tr("Type de sortie non supporté (uniquement GPKG ou PostGIS)"))
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"❌ Erreur : {str(e)}", level=Qgis.Critical, tag=log_tag)
+            QgsMessageLog.logMessage(f"❌ Erreur : {str(e)}", level=Qgis.MessageLevel.Critical, tag=log_tag)
             raise
 
     def run_aggregation(self):
@@ -921,10 +921,10 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 self,
                 self.tr("Vérification de la combinaison"),
                 self.tr("La combinaison semble incohérente :\n\n{0}\n\nVoulez-vous procéder quand même ?").format(details),
-                QMessageBox.Yes | QMessageBox.No,
-                QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.No:
+            if reply == QMessageBox.StandardButton.No:
                 return  # annuler le traitement
 
         
@@ -1059,7 +1059,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                         ranges.append(rng)
 
                     renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
-                    renderer.setMode(QgsGraduatedSymbolRenderer.Custom)
+                    renderer.setMode(QgsGraduatedSymbolRenderer.Mode.Custom)
                     real_layer.setRenderer(renderer)
 
                 elif self.radioRamp.isChecked():
@@ -1089,14 +1089,14 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     layer0 = symbol.symbolLayer(0)
 
                     geom_type = real_layer.geometryType()
-                    if geom_type == QgsWkbTypes.PolygonGeometry:
-                        layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
+                    if geom_type == QgsWkbTypes.GeometryType.PolygonGeometry:
+                        layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyFillColor, QgsProperty.fromExpression(expr))
                         # Contour en gris transparent
                         layer0.setStrokeColor(QColor(0, 0, 0, 50))
-                    elif geom_type == QgsWkbTypes.LineGeometry:
-                        layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyStrokeColor, QgsProperty.fromExpression(expr))
-                    elif geom_type == QgsWkbTypes.PointGeometry:
-                        layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
+                    elif geom_type == QgsWkbTypes.GeometryType.LineGeometry:
+                        layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyStrokeColor, QgsProperty.fromExpression(expr))
+                    elif geom_type == QgsWkbTypes.GeometryType.PointGeometry:
+                        layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyFillColor, QgsProperty.fromExpression(expr))
 
                     real_layer.setRenderer(QgsSingleSymbolRenderer(symbol))
 
@@ -1122,11 +1122,18 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                         legend_layer.updateExtents()
 
                         # Définir des couleurs fixes pour la légende
-                        colors = {
-                            "m̄ + σ": QColor(230,30,180),   # bleu
-                            "m̄ ": QColor(220,235,205),   # gris clair
-                            "m̄ - σ": QColor(70,145,20)      # rouge
-                        }
+                        if ramp_name == 'AboveAndBelow':
+                            colors = {
+                                    "m̄ + σ": QColor(230,30,180),   # bleu
+                                    "m̄ ": QColor(220,235,205),   # gris clair
+                                    "m̄ - σ": QColor(70,145,20)      # rouge
+                            }
+                        else:
+                            colors = {
+                                    "m̄ + σ": QColor(50,130,190),   # bleu
+                                    "m̄ ": QColor(255,255,190),   # gris clair
+                                    "m̄ - σ": QColor(215,30,30)      # rouge
+                            }                
                         cats = []
                         for cat, color in colors.items():
                             s = QgsSymbol.defaultSymbol(legend_layer.geometryType())
@@ -1145,7 +1152,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                         QgsMessageLog.logMessage(
                             f"Erreur en sauvegardant le style : {errMsg}",
                             "FuzzyAggregate",
-                            Qgis.Warning
+                            Qgis.MessageLevel.Warning
                         )
 
             # --- Cas PostGIS ---
@@ -1174,7 +1181,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     return
         except Exception as e:
             raise Exception(f"Erreur lors de l'opération spatiale")
-        QgsMessageLog.logMessage(f"Début de l’agrégation sur la couche '{output_name}'", tag="FuzzyAggregation", level=Qgis.Info)
+        QgsMessageLog.logMessage(f"Début de l’agrégation sur la couche '{output_name}'", tag="FuzzyAggregation", level=Qgis.MessageLevel.Info)
 
         real_layer.startEditing()
         
@@ -1193,7 +1200,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             if res != [True]:
                 raise Exception(f"Erreur PostGIS lors de l'ajout du champ '{safe_name}'")
         else:
-            QgsMessageLog.logMessage(f"Le champ '{safe_name}' existe déjà.", "FuzzyAggregation", Qgis.Info)
+            QgsMessageLog.logMessage(f"Le champ '{safe_name}' existe déjà.", "FuzzyAggregation", Qgis.MessageLevel.Info)
 
         # --- Récupérer l'index du champ pour l’agrégation ---
         idx = real_layer.fields().indexFromName(safe_name)
@@ -1226,7 +1233,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 QgsMessageLog.logMessage(
                     f"Erreur lors de l’agrégation (fid={f.id()}) : {e}",
                     tag="FuzzyAggregation",
-                    level=Qgis.Warning
+                    level=Qgis.MessageLevel.Warning
                 )
 
         # Appliquer toutes les modifs d’un coup
@@ -1254,7 +1261,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 rng = QgsRendererRange(min_val, max_val, symbol, label)
                 ranges.append(rng)
             renderer = QgsGraduatedSymbolRenderer(agg_field_name, ranges)
-            renderer.setMode(QgsGraduatedSymbolRenderer.Custom)
+            renderer.setMode(QgsGraduatedSymbolRenderer.Mode.Custom)
             real_layer.setRenderer(renderer)
 
         elif self.radioRamp.isChecked():
@@ -1280,13 +1287,13 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
             layer0 = symbol.symbolLayer(0)
             geom_type = real_layer.geometryType()
 
-            if geom_type == QgsWkbTypes.PolygonGeometry:
-                layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
+            if geom_type == QgsWkbTypes.GeometryType.PolygonGeometry:
+                layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyFillColor, QgsProperty.fromExpression(expr))
                 layer0.setStrokeColor(QColor(0, 0, 0, 50))
-            elif geom_type == QgsWkbTypes.LineGeometry:
-                layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyStrokeColor, QgsProperty.fromExpression(expr))
-            elif geom_type == QgsWkbTypes.PointGeometry:
-                layer0.setDataDefinedProperty(QgsSymbolLayer.PropertyFillColor, QgsProperty.fromExpression(expr))
+            elif geom_type == QgsWkbTypes.GeometryType.LineGeometry:
+                layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyStrokeColor, QgsProperty.fromExpression(expr))
+            elif geom_type == QgsWkbTypes.GeometryType.PointGeometry:
+                layer0.setDataDefinedProperty(QgsSymbolLayer.Property.PropertyFillColor, QgsProperty.fromExpression(expr))
 
             real_layer.setRenderer(QgsSingleSymbolRenderer(symbol))
             real_layer.triggerRepaint()
@@ -1309,13 +1316,18 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     feats.append(f)
                 prov.addFeatures(feats)
                 legend_layer.updateExtents()
-
-                colors = {
-                        "m̄ + σ": QColor(230,30,180),   # bleu
-                        "m̄ ": QColor(220,235,205),   # gris clair
-                        "m̄ - σ": QColor(70,145,20)      # rouge
-                }
-
+                if ramp_name == 'AboveAndBelow':
+                    colors = {
+                            "m̄ + σ": QColor(230,30,180),   # bleu
+                            "m̄ ": QColor(220,235,205),   # gris clair
+                            "m̄ - σ": QColor(70,145,20)      # rouge
+                    }
+                else:
+                    colors = {
+                            "m̄ + σ": QColor(50,130,190),   # bleu
+                            "m̄ ": QColor(255,255,190),   # gris clair
+                            "m̄ - σ": QColor(215,30,30)      # rouge
+                    }                
                 cats = []
                 for cat, color in colors.items():
                     s = QgsSymbol.defaultSymbol(legend_layer.geometryType())
@@ -1333,13 +1345,13 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 QgsMessageLog.logMessage(
                     "Erreur lors de la sauvegarde du style par défaut PostGIS",
                     "FuzzyAggregate",
-                    Qgis.Warning
+                    Qgis.MessageLevel.Warning
                 )
         
         
         QgsProject.instance().addMapLayer(real_layer)
 
-        QgsMessageLog.logMessage(f"Agrégation terminée pour la couche '{output_name}'", tag="FuzzyAggregation", level=Qgis.Info)
+        QgsMessageLog.logMessage(f"Agrégation terminée pour la couche '{output_name}'", tag="FuzzyAggregation", level=Qgis.MessageLevel.Info)
         QMessageBox.information(self, self.tr("Succès"), self.tr(f"Couche '{output_name}' créée avec succès."))
 
         # --- Métadonnées ---
@@ -1422,7 +1434,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 options = QgsVectorFileWriter.SaveVectorOptions()
                 options.driverName = "GPKG"
                 options.layerName = "metafuzzy"
-                options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
+                options.actionOnExistingFile = QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer
 
                 err, _ = QgsVectorFileWriter.writeAsVectorFormatV2(
                     layer=mem_layer,
@@ -1431,7 +1443,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                     options=options
                 )
                 
-                return err == QgsVectorFileWriter.NoError
+                return err == QgsVectorFileWriter.WriterError.NoError
 
             # ---------------------------
             # Cas 2 : PostGIS
@@ -1599,7 +1611,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 raise Exception(f"Provider non supporté : {provider}")
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.Critical)
+            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.MessageLevel.Critical)
 
     def get_layer_path(self, layer: QgsVectorLayer) -> str:
         """
@@ -1744,16 +1756,16 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
                 if isinstance(val, QDateTime):
                     val_str = val.toString("yyyy-MM-dd HH:mm:ss")  # chaîne lisible
                 elif hasattr(val, "toPyDateTime"):  
-                    # pour PyQt5.QtCore.QDateTime encapsulé
+                    # pour PyQt6.QtCore.QDateTime encapsulé
                     val_str = val.toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
                 else:
                     val_str = str(val) if val is not None else ""
-                val_str = val_str.replace("PyQt5.QtCore.QDateTime", "")
+                val_str = val_str.replace("PyQt6.QtCore.QDateTime", "")
                 table.setItem(row_idx, col_idx, QTableWidgetItem(val_str))
         layout.addWidget(table)
         dialog.setLayout(layout)
         dialog.resize(700, 400)
-        dialog.exec_()
+        dialog.exec()
           
     def load_translator(self):
         from qgis.PyQt.QtCore import QTranslator, QLocale, QCoreApplication
@@ -1764,7 +1776,7 @@ class FuzzyAggregateDialog(QDialog, FORM_CLASS):
         locale_name = QgsApplication.instance().locale()
         locale = QLocale(locale_name).name()[0:2]  # 'fr', 'en', etc.
         from qgis.core import QgsMessageLog, Qgis
-        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.Info)
+        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.MessageLevel.Info)
 
 
 
@@ -1946,7 +1958,7 @@ def generate_asymmetric_function(code):
 import re
 from qgis.core import QgsVectorLayer, QgsProject
 import psycopg2
-from PyQt5.QtCore import QCoreApplication
+from qgis.PyQt.QtCore import QCoreApplication
 _ = QCoreApplication.translate
 def overlay_postgis(layer1, layer2, output_table, operation="intersection"):
     """
@@ -1959,7 +1971,7 @@ def overlay_postgis(layer1, layer2, output_table, operation="intersection"):
     :param operation: "intersection" ou "union"
     """
     from qgis.core import QgsVectorLayer, QgsProject, QgsDataSourceUri, QgsField
-    from PyQt5.QtCore import QVariant
+    from qgis.PyQt.QtCore import QVariant
     import psycopg2
 
     if layer1.providerType() not in ["postgres", "postgis"] or layer2.providerType() not in ["postgres", "postgis"]:
@@ -2082,7 +2094,7 @@ def overlay_postgis(layer1, layer2, output_table, operation="intersection"):
         ranges.append(rng)
 
     renderer = QgsGraduatedSymbolRenderer(agg_field, ranges)
-    renderer.setMode(QgsGraduatedSymbolRenderer.Custom)
+    renderer.setMode(QgsGraduatedSymbolRenderer.Mode.Custom)
 
     new_layer.setRenderer(renderer)
     new_layer.triggerRepaint()
@@ -2198,7 +2210,7 @@ def save_postgis_default_style_from_layer(layer, schema=None, style_name="defaul
     """
     try:
         if layer.providerType().lower() not in ("postgres", "postgis"):
-            QgsMessageLog.logMessage("La couche n'est pas PostGIS.", "FuzzyAggregate", Qgis.Warning)
+            QgsMessageLog.logMessage("La couche n'est pas PostGIS.", "FuzzyAggregate", Qgis.MessageLevel.Warning)
             return False
 
         # --- Connexion / infos table ---
@@ -2232,7 +2244,7 @@ def save_postgis_default_style_from_layer(layer, schema=None, style_name="defaul
                     qml_str = f.read()
                 os.unlink(tmp.name)
             except Exception as ex:
-                QgsMessageLog.logMessage(f"Impossible d'exporter le style QML (fallback) : {ex}", "FuzzyAggregate", Qgis.Warning)
+                QgsMessageLog.logMessage(f"Impossible d'exporter le style QML (fallback) : {ex}", "FuzzyAggregate", Qgis.MessageLevel.Warning)
                 qml_str = ""
 
         # --- Normaliser le type géométrique en valeurs canoniques ---
@@ -2308,10 +2320,10 @@ def save_postgis_default_style_from_layer(layer, schema=None, style_name="defaul
         cur.close()
         conn.close()
 
-        QgsMessageLog.logMessage(f"Style par défaut enregistré pour {tbl_schema}.{tbl_name} (type={geom_type_txt})", "FuzzyAggregate", Qgis.Info)
+        QgsMessageLog.logMessage(f"Style par défaut enregistré pour {tbl_schema}.{tbl_name} (type={geom_type_txt})", "FuzzyAggregate", Qgis.MessageLevel.Info)
         return True
 
     except Exception as e:
-        QgsMessageLog.logMessage(f"Erreur lors de la sauvegarde du style PostGIS : {e}", "FuzzyAggregate", Qgis.Warning)
+        QgsMessageLog.logMessage(f"Erreur lors de la sauvegarde du style PostGIS : {e}", "FuzzyAggregate", Qgis.MessageLevel.Warning)
         return False
 

@@ -5,9 +5,9 @@ from qgis.core import (
 )
 
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale
-from PyQt5.QtWidgets import QDialog, QMessageBox, QToolTip
+from qgis.PyQt.QtWidgets import QDialog, QMessageBox, QToolTip
 from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
-from PyQt5.QtCore import QVariant
+from qgis.PyQt.QtCore import QVariant
 from .fuzzyattributes_dialog_base import Ui_FuzzyAttributesDialog
 import math
 import os
@@ -20,6 +20,9 @@ from qgis.core import QgsMessageLog, Qgis
 from qgis.PyQt.QtCore import QDateTime
 from qgis.core import QgsVectorLayer, QgsFeature, QgsDataSourceUri
 
+from qgis.PyQt import QtCore
+import qgis.PyQt
+print(">>> FuzzyAttributes détecté avec Qt", QtCore.QT_VERSION_STR)
 
 
 _translator = None
@@ -277,8 +280,8 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 options = QgsVectorFileWriter.SaveVectorOptions()
                 options.driverName = "GPKG"
                 options.layerName = "metafuzzy"
-                options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
-                options.EditionCapabilities = QgsVectorFileWriter.CanAddNewLayer
+                options.actionOnExistingFile = QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer
+                options.EditionCapabilities = QgsVectorFileWriter.EditionCapability.CanAddNewLayer
 
                 err, _ = QgsVectorFileWriter.writeAsVectorFormatV2(
                     layer=mem_layer,
@@ -286,7 +289,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                     transformContext=QgsProject.instance().transformContext(),
                     options=options
                 )
-                return err == QgsVectorFileWriter.NoError
+                return err == QgsVectorFileWriter.WriterError.NoError
 
             # ---------------------------
             # Cas 2 : PostGIS
@@ -353,7 +356,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 metafuzzy_layer = QgsVectorLayer(meta_uri.uri(), "metafuzzy", "postgres")
                 if not metafuzzy_layer.isValid():
                     QgsMessageLog.logMessage(
-                        "Impossible de charger la table 'metafuzzy' dans QGIS", "FuzzyPlugin", Qgis.Critical
+                        "Impossible de charger la table 'metafuzzy' dans QGIS", "FuzzyPlugin", Qgis.MessageLevel.Critical
                     )
                     return False
 
@@ -367,7 +370,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 return False
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"Erreur ensure_metadata_table_exists: {e}", "FuzzyPlugin", Qgis.Critical)
+            QgsMessageLog.logMessage(f"Erreur ensure_metadata_table_exists: {e}", "FuzzyPlugin", Qgis.MessageLevel.Critical)
             return False
 
 
@@ -428,7 +431,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
 
 
         except Exception as e:
-            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.Critical)
+            QgsMessageLog.logMessage(f"Erreur append_metadata: {e}", "FuzzyPlugin", Qgis.MessageLevel.Critical)
       
     def get_layer_path(self, layer):
         """Retourne le chemin du fichier GPKG associé à une couche"""
@@ -518,17 +521,17 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 if isinstance(val, QDateTime):
                     val_str = val.toString("yyyy-MM-dd HH:mm:ss")  # chaîne lisible
                 elif hasattr(val, "toPyDateTime"):  
-                    # pour PyQt5.QtCore.QDateTime encapsulé
+                    # pour PyQt6.QtCore.QDateTime encapsulé
                     val_str = val.toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
                 else:
                     val_str = str(val) if val is not None else ""
-                val_str = val_str.replace("PyQt5.QtCore.QDateTime", "")
+                val_str = val_str.replace("PyQt6.QtCore.QDateTime", "")
                 table.setItem(row_idx, col_idx, QTableWidgetItem(val_str))
 
         layout.addWidget(table)
         dialog.setLayout(layout)
         dialog.resize(700, 400)
-        dialog.exec_()
+        dialog.exec()
 
     def on_layer_changed(self):
         layer_name = self.layerComboBox.currentText()
@@ -539,7 +542,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 break
     def open_aggregation_function_dialog(self):
         dlg = AggregationFunctionDialog()
-        if dlg.exec_():
+        if dlg.exec():
             result_code = dlg.get_selected_values()
             self.functionCodeLabel.setText(result_code)  # à adapter selon votre interface
     
@@ -571,9 +574,9 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
                 self,
                 self.tr("Champ existant"),
                 self.tr(f"Le champ '{new_field_name}' existe déjà. Voulez-vous le remplacer ?"),
-                QMessageBox.Yes | QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.No:
+            if reply == QMessageBox.StandardButton.No:
                 return
             else:
                 if not provider.deleteAttributes([existing_index]):
@@ -787,7 +790,7 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
         locale_name = QgsApplication.instance().locale()
         locale = QLocale(locale_name).name()[0:2]  # 'fr', 'en', etc.
         from qgis.core import QgsMessageLog, Qgis
-        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.Info)
+        QgsMessageLog.logMessage(f"Langue QGIS détectée : {locale}", "FuzzyAttributes", Qgis.MessageLevel.Info)
 
 
 
