@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FuzzyClassDialog</class>
+ <widget class="QDialog" name="FuzzyClassDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>274</width>
+    <height>385</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Fuzzy Classes Mapping</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QComboBox" name="layerComboBox"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutValues">
+     <item>
+      <widget class="QPushButton" name="btnLoadValues">
+       <property name="text">
+        <string>Charger valeurs uniques</string>
+       </property>
+      </widget>
+     </item>
+	 <item>
+	 <widget class="QPushButton" name="btnAssignFuzzy">
+	  <property name="text">
+	   <string>Affecter valeur fuzzy aux lignes sélectionnées</string>
+	  </property>
+	 </widget>
+	</item>
+
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableMapping"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutBottom">
+     <item>
+      <widget class="QPushButton" name="btnApply">
+       <property name="text">
+        <string>Reclasser le raster</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnClose">
+       <property name="text">
+        <string>Fermer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="helpLabel">
+     <property name="styleSheet">
+      <string>color: gray; font-style: italic;</string>
+     </property>
+     <property name="text">
+      <string>Astuce : associez chaque valeur texte du champ sélectionné à une valeur floue comprise entre 0 et 1.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

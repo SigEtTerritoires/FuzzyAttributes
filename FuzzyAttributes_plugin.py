@@ -5,6 +5,7 @@ from qgis.core import (
     QgsVectorFileWriter, QgsApplication
 )
 
+
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale
 from qgis.PyQt.QtWidgets import QDialog, QMessageBox, QToolTip
 from qgis.PyQt.QtWidgets import QVBoxLayout, QTableWidget, QTableWidgetItem
@@ -12,9 +13,14 @@ from qgis.PyQt.QtWidgets import QAction, QDialog
 from qgis.PyQt.QtGui import QIcon
 from .fuzzyattributes_dialog import FuzzyAttributesDialog
 from .fuzzyaggregate_dialog import FuzzyAggregateDialog
+from .fuzzyraster_dialog import FuzzyRasterDialog
+from qgis.PyQt.QtWidgets import QDialog
+from qgis.core import QgsRasterLayer, QgsRasterBandStats
+
 import os
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
 from qgis.PyQt import QtCore
+
 import qgis.PyQt
 print(">>> FuzzyAttributes détecté avec Qt", QtCore.QT_VERSION_STR)
 _translator = None
@@ -144,7 +150,65 @@ class FuzzyAttributes:
         self.text_action.triggered.connect(self.run_fuzzy_text)
         self.iface.addPluginToMenu(menu_name, self.text_action)
 
+        # --- Ajout d’un séparateur ---
+        self.sep_action = QAction(self.iface.mainWindow())
+        self.sep_action.setSeparator(True)
+        self.iface.addPluginToMenu(menu_name, self.sep_action)
 
+        # Action : FuzzyRaster
+        self.raster_action = QAction(icon, self.tr("FuzzyRaster"), self.iface.mainWindow())
+        self.raster_action.triggered.connect(self.run_fuzzy_raster)
+        self.iface.addPluginToMenu(menu_name, self.raster_action)
+
+        # Action : Agrégation Raster
+        self.raster_aggregate_action = QAction(icon, self.tr("Agrégation Raster"), self.iface.mainWindow())
+        self.raster_aggregate_action.triggered.connect(self.run_raster_aggregate)
+        self.iface.addPluginToMenu(menu_name, self.raster_aggregate_action)
+        
+        # ➕ Nouvelle action : Fuzzy Classe
+        self.classe_action = QAction(icon, self.tr("Classes → Flou"), self.iface.mainWindow())
+        self.classe_action.triggered.connect(self.run_fuzzy_classe)
+        self.iface.addPluginToMenu(menu_name, self.classe_action)
+
+    def run_fuzzy_raster(self):
+        if not hasattr(self, 'fuzzy_raster_dialog') or self.fuzzy_raster_dialog is None:
+            self.fuzzy_raster_dialog = FuzzyRasterDialog()
+            self.fuzzy_raster_dialog.finished.connect(self.clear_fuzzy_raster_dialog)
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
+            return
+        self.fuzzy_raster_dialog.show()
+        self.fuzzy_raster_dialog.raise_()
+        self.fuzzy_raster_dialog.activateWindow()
+
+
+    def run_raster_aggregate(self):
+        from .fuzzyaggregation_raster_dialog import RasterAggregationDialog
+        from . import raster_processing
+
+        dlg = RasterAggregationDialog(self.iface.mainWindow())
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
+            return
+        # Remplir les combos
+        for layer in QgsProject.instance().mapLayers().values():
+            if isinstance(layer, QgsRasterLayer):
+                dlg.comboRaster1.addItem(layer.name(), layer.id())
+                dlg.comboRaster2.addItem(layer.name(), layer.id())
+
+        if dlg.exec():
+            config = dlg.get_config()
+            try:
+                output_layer = raster_processing.run_raster_aggregation(config)
+                if output_layer:
+                    QgsProject.instance().addMapLayer(output_layer)
+            except Exception as e:
+                self.iface.messageBar().pushWarning("Erreur agrégation raster", str(e))
+
+    def clear_fuzzy_raster_dialog(self):
+        self.fuzzy_raster_dialog = None
 
         
 
@@ -159,13 +223,20 @@ class FuzzyAttributes:
 
         if hasattr(self, 'text_action'):   # ➕ suppression de l'action Texte→Flou
             self.iface.removePluginMenu(menu_name, self.text_action)
-
-
+        if hasattr(self, 'raster_action'):   # ➕ suppression de l'action raster
+            self.iface.removePluginMenu(menu_name, self.raster_action)
+        if hasattr(self, 'raster_aggregate_action'):   # ➕ suppression de l'action raster
+            self.iface.removePluginMenu(menu_name, self.raster_aggregate_action)
+        if hasattr(self, 'classe_action'):   # ➕ suppression de l'action Classes→Flou
+            self.iface.removePluginMenu(menu_name, self.classe_action)
     def run(self):
         if self.fuzzy_attributes_dialog is None:
             self.fuzzy_attributes_dialog = FuzzyAttributesDialog()
             self.fuzzy_attributes_dialog.finished.connect(self.clear_fuzzy_attributes_dialog)
-
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
+            return
         self.fuzzy_attributes_dialog.show()
         self.fuzzy_attributes_dialog.raise_()
         self.fuzzy_attributes_dialog.activateWindow()
@@ -174,7 +245,10 @@ class FuzzyAttributes:
         if self.fuzzy_aggregate_dialog is None:
             self.fuzzy_aggregate_dialog = FuzzyAggregateDialog()
             self.fuzzy_aggregate_dialog.finished.connect(self.clear_fuzzy_aggregate_dialog)
-
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
+            return
         self.fuzzy_aggregate_dialog.show()
         self.fuzzy_aggregate_dialog.raise_()
         self.fuzzy_aggregate_dialog.activateWindow()
@@ -212,9 +286,19 @@ class FuzzyAttributes:
         from .fuzzytext_dialog import FuzzyTextDialog
         layer = self.iface.activeLayer()
         if not layer:
-            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée", level=3)
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
             return
 
         dlg = FuzzyTextDialog(self.iface, layer)
         dlg.exec()
+    def run_fuzzy_classe(self):
+        from .fuzzyclass_dialog import FuzzyClassDialog
+        layer = self.iface.activeLayer()
+        if not layer:
+            self.iface.messageBar().pushMessage("Erreur", "Aucune couche active sélectionnée",Qgis.MessageLevel.Critical)
+            return
+
+        dlg = FuzzyClassDialog(self.iface, layer)
+        dlg.exec()
+
 

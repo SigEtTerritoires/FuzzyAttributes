@@ -1,67 +1,73 @@
 [general]
 name=FuzzyAttributes
-description=FR: Convertit des champs numériques ou catégoriels en valeurs floues avec plusieurs fonctions d’appartenance. EN: Converts numeric or categorical fields into fuzzy values using various membership functions.
-version=1.4.1
+description=FR: Convertit des champs ou des rasters en valeurs floues avec plusieurs fonctions d’appartenance et options d’agrégation. EN: Converts vector attributes or raster values into fuzzy numbers using various membership functions and aggregation options.
+version=2.1.0
 qgisMinimumVersion=3.28
 qgisMaximumVersion=3.99
 requires_qt=5,6
 supportsQt6=True
 author=Atilio FRANCOIS
 email=f2lmyvhnh@mozmail.com
-about=FR: FuzzyAttributes est un plugin QGIS permettant de convertir des attributs numériques ou catégoriels en valeurs floues (degrés d’appartenance entre 0 et 1) selon plusieurs types de fonctions d’appartenance : linéaire croissante/décroissante, trapézoïdale, triangulaire, sigmoïde (S et Z) et gaussienne. L’interface graphique facilite la configuration des paramètres pour chaque fonction, affiche un exemple visuel de la transformation, et propose une aide intégrée pour comprendre chaque type de fonction floue. EN: FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into fuzzy values (membership degrees between 0 and 1) using various membership functions: increasing/decreasing linear, trapezoidal, triangular, sigmoid (S and Z), and Gaussian. The graphical interface makes it easy to configure parameters for each function, displays a visual example of the transformation, and provides built-in help to explain each fuzzy function type. The plugin also supports flexible (fuzzy) aggregation of multiple criteria using parameterized methods, with logical consistency checks and warning messages in case of contradictory configurations.
+about=FR: **FuzzyAttributes** est un plugin QGIS permettant d’appliquer des transformations floues aussi bien sur des données vecteur que raster.  
+- Les **attributs numériques ou textuels** peuvent être convertis en degrés d’appartenance selon plusieurs fonctions floues : linéaire croissante/décroissante, trapézoïdale, triangulaire, sigmoïde (S et Z), ou gaussienne.
+- Le module **Fuzzy Aggregation** réalise l’agrégation floue de deux attributs flous selon une fonction subjective d’agrégation définie.  
+- Le module **FuzzyRaster** permet d’appliquer directement une transformation floue sur les valeurs d’un raster.  
+- Le module **Raster Aggregation** réalise l’agrégation floue de deux rasters selon une fonction subjective d’agrégation définie.  
+- Le module **Classes → Fuzzy** permet de reclasser un raster de classes discrètes en valeurs floues selon une table de correspondance.  
+L’interface graphique facilite la configuration, affiche des exemples visuels et propose une aide intégrée.  
+EN: **FuzzyAttributes** is a QGIS plugin to apply fuzzy transformations to both vector and raster data.  
+- Numeric or categorical attributes can be converted into fuzzy membership degrees using several membership functions.  
+- The **Fuzzy Aggregation** module performs fuzzy aggregation of two fuzzy attributes according to a defined subjective aggregation function.  
+- The **FuzzyRaster** module applies fuzzy functions to raster pixel values.  
+- The **Raster Aggregation** module combines two rasters using a subjective fuzzy aggregation function.  
+- The **Classes → Fuzzy** module allows reclassification of raster classes into fuzzy values using a mapping table.  
+The plugin includes multilingual support (FR, EN, ES, PT), visual previews, contextual help, and metadata logging.
 category=Analysis
 repository=https://github.com/SigEtTerritoires/FuzzyAttributes
 homepage=https://github.com/SigEtTerritoires/FuzzyAttributes
 tracker=https://github.com/SigEtTerritoires/FuzzyAttributes/issues
-tags=fuzzy,attributes,aggregation,geopackage,QGIS,flou,décision,membership,functions
+tags=fuzzy,attributes,aggregation,geopackage,QGIS,flou,décision,membership,functions,raster,reclassification
 icon=fuzzyattributes_icon.png
 deprecated=false
 license=GPL-3.0
 translate=true
 experimental=False
-changelog=
-    [1.4.0] - 2025-09-16
-    - Compatibilité avec Qt6 et PyQt6
-    - Mise à jour des imports PyQt pour Qt6
-    - Ajustements dans le code pour l’API Qt6 (widgets, signaux/slots)
-    - Interface utilisateur adaptée aux nouvelles conventions Qt6
-    - Ajustements mineurs pour éviter les avertissements de dépréciation
-	
-    [1.3.0] - 2025-09-04
-    - deux symbologies possibles pour la couche résultante: symbole gradué ou rampe de couleur
-	- ajout d'une rampe above and below
-    - option de définir une des symbologies comme symbologie par défaut (geopackage ou postgis). 
-	
-	[1.2.0] - 2025-08-31
-	- transformation floue des attributs texte codé. 
-	- Divers correctifs mineurs dans les dialogues.  
-	
-    [1.1.0] - 2025-08-26
-	- gestion des données Postgis comme fichiers source. 
-	- validation des paramètres numériques des fonctions de transformation floue.  
-	- affichage de la couche résultat avec une symbologie graduée.  
-	- dialogues: bouton Annuler modifié en Fermer 
-	- Mise à jour des traductions en **français**, **anglais**, **espagnol**, **portugais**.  
-	- Divers correctifs mineurs dans les dialogues.  
-	
-    [1.0.5] - 2025-08-27 
-    - ajout d'une symbologie graduée par défaut de la couche résultante 
-	
-    [1.0.4] - 2025-08-24
-	- Suppression du message QMessageBox pour éviter l'erreur UnboundLocalError
-	
-    [1.0.2] - 2025-08-18
-    - Ajout du contrôle de cohérence logique pour certaines fonctions d’agrégation floue.
-    - Nouveaux messages d’avertissement interactifs avec demande de confirmation.
-    - Mise à jour des traductions (fr, en, es, pt).
-    - Correction du bug sur is_aggregation_code_consistent (self manquant).
-    - Correction du bug dans updateFunctionPreview().
 
-    [1.0.1] - 2025-08-13
-    - Ajout d’exemples dynamiques dans l’interface selon la fonction floue choisie.
-    - Support multilingue initial des images(fr, en, es,pt).
+changelog=
+    [2.1.0] - 2025-10-04
+    - Ajout de trois nouveaux modules :
+        * **FuzzyRaster** : transformation floue des rasters monobande.
+        * **Raster Aggregation** : agrégation floue de deux rasters.
+        * **Classes → Fuzzy** : reclassification floue de rasters catégoriels selon un mapping CSV.
+    - Sauvegarde des métadonnées (.fzy) pour les rasters créés.
+    - Gestion des fichiers existants (écrasement ou renommage automatique).
+    - Compatibilité complète avec Qt6 / PyQt6 et QGIS ≥ 3.38.
+    - Simplification des menus et unification du système de traduction.
+    - Mises à jour majeures des dialogues utilisateurs et de la logique interne.
+
+    [2.0.0] - 2025-09-16
+    - Compatibilité avec Qt6 et PyQt6.
+    - Mise à jour des imports PyQt pour Qt6.
+    - Ajustements pour l’API Qt6 (widgets, signaux/slots).
+    - Interface adaptée aux nouvelles conventions Qt6.
+    - Ajustements mineurs pour éviter les avertissements de dépréciation.
+
+    [1.4.0] - 2025-09-04
+    - Deux symbologies possibles pour la couche résultante : symbole gradué ou rampe de couleur.
+    - Ajout d'une rampe "above and below".
+    - Option pour définir une symbologie par défaut (GeoPackage ou PostGIS).
+
+    [1.3.0] - 2025-08-31
+    - Transformation floue des attributs texte codés.
+    - Divers correctifs mineurs dans les dialogues.
+
+    [1.2.0] - 2025-08-26
+    - Gestion des données PostGIS comme fichiers source.
+    - Validation des paramètres des fonctions floues.
+    - Affichage de la couche résultat avec symbologie graduée.
+    - Traductions en FR, EN, ES, PT.
+    - Divers correctifs d’interface.
 
     [1.0.0] - 2025-08-10
-    - Première version publique de FuzzyAttributes.
-    - Conversion d’attributs numériques en nombres flous.
-    - Fonctions d’appartenance de base (linéaires, trapézoïdales, gaussiennes).
+    - Première version publique : conversion d’attributs numériques en valeurs floues.
+    - Fonctions d’appartenance linéaires, trapézoïdales, gaussiennes.

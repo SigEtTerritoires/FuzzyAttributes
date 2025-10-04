@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FuzzyAttributesDialog</class>
+ <widget class="QDialog" name="FuzzyAttributesDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>285</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Transformation floue d'un raster</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QComboBox" name="layerComboBox"/>
+   </item>
+   <!-- Suppression du fieldComboBox -->
+   <item>
+    <widget class="QPushButton" name="btnShowStats">
+     <property name="text">
+      <string>Statistiques</string>
+     </property>
+     <property name="toolTip">
+      <string>Afficher les statistiques du raster sélectionné</string>
+     </property>
+    </widget>
+   </item>
+
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutFunction">
+     <item>
+      <widget class="QComboBox" name="fuzzyTypeComboBox"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelFunctionPreview">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <item>
+    <layout class="QHBoxLayout" name="paramLayout">
+     <item>
+      <widget class="QLineEdit" name="paramLineEdit">
+       <property name="placeholderText">
+        <string>Paramètres séparés par des virgules</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="helpButton">
+       <property name="toolTip">
+        <string>Afficher l’aide sur les fonctions floues</string>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="paramExampleLabel">
+     <property name="styleSheet">
+      <string notr="true">color: gray;</string>
+     </property>
+     <property name="text">
+      <string>Exemple : </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnShowMetadata">
+     <property name="text">
+      <string>Voir l'historique des transformations</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
