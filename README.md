@@ -1,188 +1,212 @@
+# FuzzyAttributes V2 QGIS Plugin
 
-# FuzzyAttributes QGIS Plugin
-
-![version](https://img.shields.io/badge/version-1.0.0-blue)
-![QGIS](https://img.shields.io/badge/QGIS-3.28%2B-green)
-![license](https://img.shields.io/badge/license-GPL--3.0-blue)
+![version](https://img.shields.io/badge/version-2.1.0-blue)  
+![QGIS](https://img.shields.io/badge/QGIS-3.38%2B-green)  
+![Qt](https://img.shields.io/badge/Qt-6.x-lightgrey)  
+![license](https://img.shields.io/badge/license-GPL--3.0-blue)  
 ![status](https://img.shields.io/badge/status-active-brightgreen)
+
+---
+
+## 📑 Table of Contents
+
+- [Description](#description)  
+- [Features](#-features)  
+- [Installation](#-installation)  
+- [Usage Overview](#️-usage-overview)  
+  - [1️⃣ Fuzzy Transformation (Vector)](#1️⃣-fuzzy-transformation-vector)  
+  - [2️⃣ Text → Fuzzy Mapping](#2️⃣-text--fuzzy-mapping)  
+  - [3️⃣ Vector Aggregation](#3️⃣-vector-aggregation)  
+  - [4️⃣ Raster Fuzzification (New)](#4️⃣-raster-fuzzification-new)  
+  - [5️⃣ Raster Aggregation (New)](#5️⃣-raster-aggregation-new)  
+  - [6️⃣ Classes → Fuzzy (New)](#6️⃣-classes--fuzzy-new)  
+- [About Fuzzy Aggregation Functions](#-about-fuzzy-aggregation-functions)  
+- [File Outputs](#-file-outputs)  
+- [Translations](#-translations)  
+- [Development Notes](#-development-notes)  
+- [License](#-license)  
+- [Contributing](#-contributing)
+
+---
 
 ## Description
 
 **FR :**  
-FuzzyAttributes est un plugin QGIS qui permet de convertir des attributs numériques ou catégoriels en **valeurs floues** (degrés d’appartenance entre 0 et 1) à l’aide de fonctions d’appartenance courantes (linéaire croissante/décroissante, triangulaire, trapézoïdale, sigmoïde S et Z, gaussienne).  
-Il offre également la possibilité :
-- d’agréger plusieurs critères flous avec des fonctions personnalisables,  
-- de transformer des **valeurs textuelles en valeurs floues** grâce à un mapping interactif,  
-- le tout avec une interface graphique conviviale, des exemples visuels et une aide intégrée multilingue.
+FuzzyAttributes est un plugin QGIS qui permet de convertir des **attributs ou rasters** en **valeurs floues** (degrés d’appartenance entre 0 et 1) à l’aide de fonctions d’appartenance classiques : linéaire croissante/décroissante, triangulaire, trapézoïdale, sigmoïde S et Z, gaussienne.
+FuzzyAttributes  ajoute des outils orientés raster pour la fuzzification, l'agrégation et la reclassification des classes.
+Nouveaux modules raster :
+- 🔹 **Fuzzy Raster** : transformation floue d’un raster numérique monobande.  
+- 🔸 **Raster Aggregation** : agrégation floue de deux rasters avec fonctions paramétrables.  
+- 🔶 **Classes → Fuzzy Raster** : reclassification d’un raster catégoriel depuis un CSV (mapping classe→valeur floue).
 
 **Mode d’emploi complet** : [Guide utilisateur FuzzyAttributes](https://www.sigterritoires.fr/index.php/fuzzyattributes/)
 
 ---
-
 **EN :**  
-FuzzyAttributes is a QGIS plugin that converts numeric or categorical attributes into **fuzzy values** (membership degrees between 0 and 1) using common membership functions (increasing/decreasing linear, triangular, trapezoidal, sigmoid S and Z, Gaussian).  
 
-It also allows:
-- aggregation of multiple fuzzy criteria with customizable functions,  
-- conversion of **text values into fuzzy values** through an interactive mapping table,  
-- with a user-friendly interface, visual examples, and built-in multilingual help.
+FuzzyAttributes is a QGIS plugin that converts **attributes or rasters** into **fuzzy values** (membership degrees between 0 and 1) using classic membership functions: linear increasing/decreasing, triangular, trapezoidal, sigmoid S and Z, Gaussian.
+FuzzyAttributesV2 adds raster-oriented tools for fuzzification, aggregation and class reclassification.
+New raster modules:
+- 🔹 **Fuzzy Raster**: fuzzy transformation of a single-band digital raster.
+- 🔸 **Raster Aggregation**: fuzzy aggregation of two rasters with configurable functions.  
+- 🔶 **Classes → Fuzzy Raster**: reclassification of a categorical raster from a CSV (class→fuzzy value mapping).
 
 **Complete user guide**: [FuzzyAttributes User Guide](https://www.sigterritoires.fr/index.php/en/fuzzyattributesen/)
 
 ---
+** ES **
 
-**ES:**  
-FuzzyAttributes es un complemento de QGIS que permite convertir atributos numéricos o categóricos en **valores difusos** (grados de pertenencia entre 0 y 1) utilizando funciones de pertenencia comunes (lineal ascendente/descendente, triangular, trapezoidal, sigmoide S y Z, gaussiana).  
+FuzzyAttributesV2 es un complemento de QGIS que permite convertir **atributos o rásteres** en **valores difusos** (grados de pertenencia entre 0 y 1) utilizando funciones de pertenencia clásicas: lineal creciente/decreciente, triangular, trapezoidal, sigmoide S y Z, gaussiana.
+FuzzyAttributesV2 añade herramientas orientadas al ráster para la difuminación, la agregación y la reclasificación de clases.
 
-También permite:  
-- agregar varios criterios difusos con funciones personalizables,  
-- transformar **valores de texto en valores difusos** mediante una tabla de correspondencia interactiva,  
-- con una interfaz fácil de usar, ejemplos visuales y ayuda integrada en varios idiomas.
+Nuevos módulos ráster:
+- 🔹 **Fuzzy Raster**: transformación difusa de un ráster digital monobanda.
+- 🔸 **Raster Aggregation**: agregación difusa de dos rásteres con funciones configurables.  
+- 🔶 **Classes → Fuzzy Raster**: reclasificación de un ráster categórico a partir de un CSV (mapeo clase→valor difuso).
 
 **Instrucciones completas**: [Guía del usuario de FuzzyAttributes](https://www.sigterritoires.fr/index.php/es/fuzzyattributeses/)
 
 ---
+** PT **
 
-**PT:**  
-O FuzzyAttributes é um plugin do QGIS que permite converter atributos numéricos ou categóricos em **valores difusos** (graus de pertencimento entre 0 e 1) utilizando funções de pertencimento comuns (linear crescente/decrescente, triangular, trapezoidal, sigmoide S e Z, gaussiana).  
-
-Ele também permite:  
-- agregar vários critérios difusos com funções personalizáveis,  
-- converter **valores de texto em valores difusos** por meio de uma tabela de correspondência interativa,  
-- além de integrar uma interface gráfica amigável, exemplos visuais e ajuda multilíngue.
+O FuzzyAttributes é um plugin do QGIS que permite converter atributos ou rasters em valores difusos (graus de pertencimento entre 0 e 1) utilizando funções de pertencimento clássicas: linear crescente/decrescente, triangular, trapezoidal, sigmoide S e Z, gaussiana.
+O FuzzyAttributes adiciona ferramentas orientadas para raster para a difusão, agregação e reclassificação de classes.
+Novos módulos raster:
+- 🔹 **Fuzzy Raster**: transformação difusa de um raster digital monobanda.
+- 🔸 **Raster Aggregation**: agregação difusa de dois rasters com funções configuráveis.  
+- 🔶 **Classes → Fuzzy Raster**: reclassificação de um raster categórico a partir de um CSV (mapeamento classe→valor difuso).
 
 **Manual de instruções completo**: [Guia do usuário FuzzyAttributes](https://www.sigterritoires.fr/index.php/pt/fuzzyattributespt/)
 
+## 🧩 Features
+
+- **Vector**
+  - Numeric field fuzzification (lin/tri/trap/sigmoid/gaussian).
+  - Text → fuzzy mapping table.
+  - Fuzzy aggregation of multiple criteria (vector).
+
+- **Raster**
+  - Fuzzy transformation of single-band rasters.
+  - Raster aggregation (two rasters) with reprojection/resampling/extent handling.
+  - Classes → fuzzy: reclassify categorical raster using CSV.
+
+- **General**
+  - Visual function preview, help tooltips.
+  - Automatic metadata `.fzy` generation.
+  - Output symbology (graduated or color ramp).
+  - Multilingual: FR / EN / ES / PT.
+  - Compatible Qt5 & Qt6, QGIS ≥ 3.38.
+
 ---
 
-## Features
+## ⚙️ Installation
 
-- **Attribute Fuzzification** – Transform numerical fields into fuzzy membership values using common functions.
-- **Text → Fuzzy Mapping** – Convert text or categorical values into fuzzy numbers (0–1) via an editable mapping table.
-- **Visual Guidance** – See example graphs for each membership function type.
-- **Spatial Aggregation** – Combine fuzzy layers using intersection or union.
-- **Decision-Based Aggregation** – Build or select a custom fuzzy aggregation function through a guided process.
-- **Metadata Logging** – Record transformation parameters, sources, and user info in a GeoPackage table.
-- **Multilingual Support** – English, French, Spanish, Portuguese (extensible).
-
----
-
-## Installation
-
-1. **Download or Clone** this repository:
-   
-   
-   git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git
-
+1. Clone or download:
+```bash
+git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git
+```
 
 2. Copy the plugin folder to your QGIS plugin directory:
+- **Windows:** `%APPDATA%/QGIS/QGIS3/profiles/default/python/plugins/`  
+- **Linux/macOS:** `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/`
 
-   * **Windows**: `%APPDATA%/QGIS/QGIS3/profiles/default/python/plugins/`
-   * **Linux/macOS**: `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/`
-3. Restart QGIS.
-4. Enable the plugin in the **Plugin Manager**.
+3. Restart QGIS and enable *FuzzyAttributesV2* in **Plugins → Manage and Install Plugins**.
 
 ---
 
-## Usage
+## 🖱️ Usage Overview
 
-1. **Fuzzy Transformation (Numeric Fields)**
-   Menu: **FuzzyAttributes > Transformation floue**
-
-   * Select a layer and a numeric field.
-   * Choose a fuzzy function type.
-   * Enter parameters and apply.
+### 1️⃣ Fuzzy Transformation (Vector)
+Menu: `FuzzyAttributes > Transformation floue`  
+Sélection d’une couche vectorielle et d’un champ numérique → régler la fonction → appliquer.
      ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
 
----
-
-2. **Text → Fuzzy Mapping**
-   Menu: **FuzzyAttributes > Texte vers flou** (Version >=1.2)
-
-   * Select a layer and a **text field**.
-   * Click **"Charger valeurs uniques"** to display distinct categories.
-   * In the mapping table, assign a fuzzy value between `0` and `1` for each text label.
-     Example:
-
-     * `"faible"` → `0.1`
-     * `"moyen"` → `0.5`
-     * `"élevé"` → `0.9`
-   * Click **"Créer attribut flou"** to generate the new fuzzy attribute.
+### 2️⃣ Text → Fuzzy Mapping
+Menu: `FuzzyAttributes > Texte vers flou`  
+Charger valeurs uniques d’un champ texte, définir mapping `texte → [0..1]`, créer attribut flou.
      ![Fuzzy text mapping dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/text_fuzzy.jpg)
 
----
 
-3. **Fuzzy Aggregation**
-   Menu: **FuzzyAttributes > Agrégation floue**
-
-   * Select two fuzzy layers.
-   * Choose intersection or union.
-   * Define or select an aggregation function.
+### 3️⃣ Vector Aggregation
+Menu: `FuzzyAttributes > Agrégation floue`  
+Choisir deux critères, définir la fonction d’agrégation, lancer l’agrégation.
      ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
      ![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
 
-   * select a style for output layer: graduated or  color ramp.
-   * select to apply or not as default style  for the database
-   * The resulting layer is displayed with graduated symbology based on the aggregation attribute.
+   * Sélectionnez un style pour la couche de sortie : dégradé ou  rampe de couleurs.
+   * Sélectionnez pour appliquer ou non comme style par défaut  pour la base de données
+   * La couche résultante s'affiche avec une symbologie dégradée basée sur l'attribut d'agrégation.
     ![Fuzzy aggregation layer](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/resultat.jpg)
-	
+
+### 4️⃣ Raster Fuzzification (New)
+Menu: `FuzzyRaster`  
+Sélection d’un raster monobande → appliquer une fonction floue → créer un raster `fzy_<nom>.tif`.
+
+### 5️⃣ Raster Aggregation (New)
+Menu: `Raster Aggregation`  
+Sélection de deux rasters → choisir CRS cible / résolution / étendue / méthode de rééchantillonnage → définir la fonction d’agrégation → produire raster de sortie.
+
+### 6️⃣ Classes → Fuzzy (New)
+Menu: `Classes vers flou`  
+Charger mapping CSV `classe;fuzzy` → reclasser raster catégoriel → produire raster flou.
 
 ---
 
-### About Fuzzy Aggregation Functions
+## 🧮 About Fuzzy Aggregation Functions
 
-The plugin includes **50 predefined aggregation functions** covering balanced and symmetrical cases.
-For complex situations (criteria with **unequal weights** or **asymmetric judgments**), a generalized function can be generated using projection/interpolation methods to ensure both logical and mathematical consistency.
-
----
-
-## Plugin Menu Structure
-
-* **FuzzyAttributes** – Fuzzy transformation dialog (numeric fields).
-* **Texte vers flou** – Mapping text values to fuzzy numbers.
-* **Agrégation floue** – Spatial aggregation with fuzzy logic.
+Le plugin inclut de nombreuses fonctions prédéfinies (symétriques et asymétriques) et un générateur pour créer une fonction à partir d’un code (ex. `221`, `4412`, ...). Les fonctions générées sont documentées dans `fuzzy_functions.py`.
 
 ---
 
-## Configuration
+## 📂 File Outputs
 
-* Input layers should be from a **GeoPackage** (version 1.0 or higher) or **Postgis** (version 1.1 or higher) to enable metadata direct writing.
-* Translations are stored in `i18n/` (compiled `.qm` files).
+- Fichiers GeoTIFF (`.tif`) pour rasters de sortie.
+- Fichiers métadonnées `.fzy` (format CSV/text) accompagnant les rasters générés.
+- Si le fichier de sortie existe : dialogue pour écraser ou renommer automatiquement (`_1`, `_2`, ...).
 
 ---
 
-## Development
+## 🈳 Translations
 
-UI files (`.ui`) are compiled with:
+Les sources de traduction (`.ts`) et les fichiers compilés (`.qm`) sont dans le dossier `i18n/`.
 
+Mise à jour des fichiers `.ts` (pile Qt6 recommandée) :
 ```bash
-pyuic5 -o ui_fuzzyattributes_dialog.py fuzzyattributes_dialog.ui
-pyuic5 -o ui_aggregation_function_dialog.py aggregation_function_dialog.ui
-pyuic5 -o ui_fuzzytext_dialog.py fuzzytext_dialog.ui
+pylupdate6 *.py *.ui -ts i18n/FuzzyAttributes_fr.ts i18n/FuzzyAttributes_en.ts i18n/FuzzyAttributes_es.ts i18n/FuzzyAttributes_pt.ts
+```
+
+Compiler les `.ts` en `.qm` :
+```bash
+lrelease i18n/FuzzyAttributes_fr.ts -qm i18n/FuzzyAttributes_fr.qm
+# répéter pour les autres langues
 ```
 
 ---
 
-## Metadata Table
+## 🧑‍💻 Development Notes
 
-All transformations and aggregations are logged in the `metafuzzy` table of the target GeoPackage, including:
+### UI → Python (Qt6)
+```bash
+pyuic6 -o ui_fuzzyattributes_dialog.py fuzzyattributes_dialog.ui
+pyuic6 -o ui_fuzzytext_dialog.py fuzzytext_dialog.ui
+pyuic6 -o ui_aggregation_function_dialog.py aggregation_function_dialog.ui
+```
 
-* Field name
-* Function code & parameters
-* Source layers and fields
-* Timestamp and user
+### Bonnes pratiques internes
+- Centraliser fonctions d’agrégation dans `fuzzy_functions.py`.
+- Mettre la gestion raster (reprojection / alignement / lecture-écriture) dans `raster_processing.py`.
+- Tester les reprojections avant calcul d’emprise commune (convertir extent de chaque raster dans le CRS cible).
 
 ---
 
-## License
+## 🪪 License
 
-This plugin is released under the [GNU GPL-3.0 License](LICENSE).
+Ce plugin est sous **GNU GPL v3.0** — voir le fichier `LICENSE`.
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Issues and pull requests are welcome:
-[https://github.com/SigEtTerritoires/FuzzyAttributes](https://github.com/SigEtTerritoires/FuzzyAttributes)
-
+Signaler issues / PRs :  
+https://github.com/SigEtTerritoires/FuzzyAttributes/issues
