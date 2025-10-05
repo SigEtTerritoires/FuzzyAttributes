@@ -133,11 +133,14 @@ Menu: `FuzzyAttributes > Agrégation floue`
 Choisir deux critères, définir la fonction d’agrégation, lancer l’agrégation.
 ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
+Définition de la fonction d'agrégation
+
 ![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
 
-   * Sélectionnez un style pour la couche de sortie : dégradé ou  rampe de couleurs.
-   * Sélectionnez pour appliquer ou non comme style par défaut  pour la base de données
-   * La couche résultante s'affiche avec une symbologie dégradée basée sur l'attribut d'agrégation.
+* Sélectionnez un style pour la couche de sortie : dégradé ou  rampe de couleurs.
+* Sélectionnez pour appliquer ou non comme style par défaut  pour la base de données
+* La couche résultante s'affiche avec une symbologie dégradée basée sur l'attribut d'agrégation.
+
 ![Fuzzy aggregation layer](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/resultat.jpg)
 
 ### 4️⃣ Raster Fuzzification (New)
