@@ -499,7 +499,7 @@ Do you want to proceed anyway?</translation>
     </message>
     <message>
         <location filename="../FuzzyAttributes_plugin.py" line="138"/>
-        <location filename="../FuzzyAttributes_plugin.py" line="211"/>
+        <location filename="../FuzzyAttributes_plugin.py" line="217"/>
         <source>Fuzzy Plugin</source>
         <translation>Fuzzy Plugin</translation>
     </message>
@@ -1101,85 +1101,85 @@ Median : {median_val:.2f}</translation>
 <context>
     <name>FuzzyRasterDialog</name>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="120"/>
+        <location filename="../fuzzyraster_dialog.py" line="121"/>
         <source>Statistiques du raster</source>
         <translation>Raster statistics</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="166"/>
+        <location filename="../fuzzyraster_dialog.py" line="167"/>
         <source>&lt;b&gt;Types de fonctions floues :&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;• Linéaire croissante :&lt;/b&gt; augmente de 0 à 1 entre a et b&lt;br&gt;&lt;b&gt;• Linéaire décroissante :&lt;/b&gt; diminue de 1 à 0 entre a et b&lt;br&gt;&lt;b&gt;• Triangulaire :&lt;/b&gt; forme un pic à b entre a et c&lt;br&gt;&lt;b&gt;• Trapézoïdale :&lt;/b&gt; forme un plateau entre b et c&lt;br&gt;&lt;b&gt;• Sigmoïde (S) :&lt;/b&gt; transition douce croissante centrée en b&lt;br&gt;&lt;b&gt;• Sigmoïde (Z) :&lt;/b&gt; transition douce décroissante centrée en b&lt;br&gt;&lt;b&gt;• Gaussienne :&lt;/b&gt; courbe en cloche centrée en c avec largeur sigma&lt;br&gt;</source>
         <translation>&lt;b&gt;Types of fuzzy functions :&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;• Linear increasing :&lt;/b&gt; increases from 0 to 1 between a and b&lt;br&gt;&lt;b&gt;• Linear decreasing : &lt;/b&gt; decreases from 1 to 0 between a and b&lt;br&gt;&lt;b&gt;• Triangular :&lt;/b&gt; forms a peak at b between a and c&lt;br&gt;&lt;b&gt;• Trapezoidal :&lt;/b&gt; orms a plateau between b and c&lt;br&gt;&lt;b&gt;• Sigmoid (S) :&lt;/b&gt; smooth increasing transition centered at b&lt;br&gt;&lt;b&gt;• Sigmoid (Z) :&lt;/b&gt; smooth decreasing transition centered at b&lt;br&gt;&lt;b&gt;• Gaussian :&lt;/b&gt; bell curve centered at c with sigma width&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="167"/>
+        <location filename="../fuzzyraster_dialog.py" line="168"/>
         <source>Aide sur les fonctions floues</source>
         <translation>Help with fuzzy functions</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="104"/>
-        <location filename="../fuzzyraster_dialog.py" line="109"/>
-        <location filename="../fuzzyraster_dialog.py" line="114"/>
-        <location filename="../fuzzyraster_dialog.py" line="174"/>
-        <location filename="../fuzzyraster_dialog.py" line="222"/>
-        <location filename="../fuzzyraster_dialog.py" line="244"/>
-        <location filename="../fuzzyraster_dialog.py" line="251"/>
-        <location filename="../fuzzyraster_dialog.py" line="291"/>
-        <location filename="../fuzzyraster_dialog.py" line="336"/>
-        <location filename="../fuzzyraster_dialog.py" line="435"/>
-        <location filename="../fuzzyraster_dialog.py" line="537"/>
-        <location filename="../fuzzyraster_dialog.py" line="542"/>
+        <location filename="../fuzzyraster_dialog.py" line="105"/>
+        <location filename="../fuzzyraster_dialog.py" line="110"/>
+        <location filename="../fuzzyraster_dialog.py" line="115"/>
+        <location filename="../fuzzyraster_dialog.py" line="175"/>
+        <location filename="../fuzzyraster_dialog.py" line="223"/>
+        <location filename="../fuzzyraster_dialog.py" line="245"/>
+        <location filename="../fuzzyraster_dialog.py" line="252"/>
+        <location filename="../fuzzyraster_dialog.py" line="292"/>
+        <location filename="../fuzzyraster_dialog.py" line="337"/>
+        <location filename="../fuzzyraster_dialog.py" line="436"/>
+        <location filename="../fuzzyraster_dialog.py" line="538"/>
+        <location filename="../fuzzyraster_dialog.py" line="543"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="72"/>
+        <location filename="../fuzzyraster_dialog.py" line="73"/>
         <source>linéaire croissante</source>
         <translation>increasing linear</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="73"/>
+        <location filename="../fuzzyraster_dialog.py" line="74"/>
         <source>linéaire décroissante</source>
         <translation>linear decreasing</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="74"/>
+        <location filename="../fuzzyraster_dialog.py" line="75"/>
         <source>triangulaire</source>
         <translation>triangular</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="75"/>
+        <location filename="../fuzzyraster_dialog.py" line="76"/>
         <source>trapézoïdale</source>
         <translation>trapezoidal</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="76"/>
+        <location filename="../fuzzyraster_dialog.py" line="77"/>
         <source>sigmoïde croissante (S)</source>
         <translation>increasing sigmoid (S)</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="77"/>
+        <location filename="../fuzzyraster_dialog.py" line="78"/>
         <source>sigmoïde décroissante (Z)</source>
         <translation>decreasing sigmoid (Z)</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="78"/>
+        <location filename="../fuzzyraster_dialog.py" line="79"/>
         <source>gaussienne</source>
         <translation>Gaussian</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="104"/>
-        <location filename="../fuzzyraster_dialog.py" line="537"/>
+        <location filename="../fuzzyraster_dialog.py" line="105"/>
+        <location filename="../fuzzyraster_dialog.py" line="538"/>
         <source>Aucune couche sélectionnée</source>
         <translation>No layer selected</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="109"/>
-        <location filename="../fuzzyraster_dialog.py" line="542"/>
+        <location filename="../fuzzyraster_dialog.py" line="110"/>
+        <location filename="../fuzzyraster_dialog.py" line="543"/>
         <source>Impossible de trouver la couche {name}</source>
         <translation>Unable to find {name} layer</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="114"/>
+        <location filename="../fuzzyraster_dialog.py" line="115"/>
         <source>La couche {name} n’est pas un raster</source>
         <translation>The {name} layer is not a raster</translation>
     </message>
@@ -1201,129 +1201,151 @@ Median : {median_val:.2f}</translation>
         </translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="174"/>
-        <location filename="../fuzzyraster_dialog.py" line="435"/>
+        <location filename="../fuzzyraster_dialog.py" line="175"/>
+        <location filename="../fuzzyraster_dialog.py" line="436"/>
         <source>Paramètres invalides. Utilisez des nombres séparés par des virgules.</source>
         <translation>Invalid parameters. Use numbers separated by commas.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="222"/>
+        <location filename="../fuzzyraster_dialog.py" line="223"/>
         <source>Aucun raster sélectionné</source>
         <translation>No raster selected</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="236"/>
-        <location filename="../fuzzyraster_dialog.py" line="251"/>
+        <location filename="../fuzzyraster_dialog.py" line="237"/>
+        <location filename="../fuzzyraster_dialog.py" line="252"/>
         <source>Paramètres invalides</source>
         <translation>Invalid settings</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="244"/>
+        <location filename="../fuzzyraster_dialog.py" line="245"/>
         <source>La couche sélectionnée n’est pas un raster</source>
         <translation>The selected layer is not a raster</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="265"/>
         <source>Fichier existant</source>
         <comment>Le fichier {out_path} existe déjà.
 
 Voulez-vous l’écraser ?</comment>
         <translatorcomment>The file {out_path} already exists. Do you want to overwrite it?</translatorcomment>
+        <translation type="vanished">Existing file</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyraster_dialog.py" line="265"/>
+        <source>Fichier existant</source>
         <translation>Existing file</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="273"/>
+        <location filename="../fuzzyraster_dialog.py" line="266"/>
+        <source>Le fichier {out_path} existe déjà.
+
+Voulez-vous l’écraser ?</source>
+        <translation>The file {out_path} already exists.
+
+Do you want to overwrite it?</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyraster_dialog.py" line="274"/>
         <source>Choisir un nom de fichier</source>
         <translation>Choosing a file name</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="278"/>
+        <location filename="../fuzzyraster_dialog.py" line="279"/>
         <source>Annulé</source>
         <translation>Cancelled</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="278"/>
+        <location filename="../fuzzyraster_dialog.py" line="279"/>
         <source>Opération annulée par l’utilisateur.</source>
         <translation>Operation canceled by the user.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="293"/>
+        <location filename="../fuzzyraster_dialog.py" line="294"/>
         <source>Impossible d’écraser {out_path}
 {e}</source>
         <translation>Unable to overwrite {out_path}
 {e}</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="336"/>
+        <location filename="../fuzzyraster_dialog.py" line="337"/>
         <source>Impossible de charger le raster : {out_path}</source>
         <translation>Unable to load raster: {out_path}</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="340"/>
+        <location filename="../fuzzyraster_dialog.py" line="341"/>
         <source>Succès</source>
         <translation>Success</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="341"/>
+        <location filename="../fuzzyraster_dialog.py" line="342"/>
         <source>Transformation floue créée dans fzy_&apos;{}&apos;</source>
         <translation>Fuzzy transformation created in fzy_&apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="453"/>
+        <location filename="../fuzzyraster_dialog.py" line="454"/>
         <source>Cette fonction nécessite exactement 2 paramètres.</source>
         <translation>This function requires exactly 2 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="456"/>
+        <location filename="../fuzzyraster_dialog.py" line="457"/>
         <source>Les deux paramètres ne doivent pas être égaux.</source>
         <translation>The two parameters must not be equal.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="459"/>
+        <location filename="../fuzzyraster_dialog.py" line="460"/>
         <source>La fonction triangulaire nécessite exactement 3 paramètres.</source>
         <translation>The triangular function requires exactly 3 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="462"/>
+        <location filename="../fuzzyraster_dialog.py" line="463"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt; c.</source>
         <translation>The parameters must be in the order a &lt; b &lt; c.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="465"/>
+        <location filename="../fuzzyraster_dialog.py" line="466"/>
         <source>La fonction trapézoïdale nécessite exactement 4 paramètres.</source>
         <translation>The trapezoidal function requires exactly 4 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="468"/>
+        <location filename="../fuzzyraster_dialog.py" line="469"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt;= c &lt; d.</source>
         <translation>The parameters must be in the order a &lt; b &lt;= c &lt; d.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="471"/>
+        <location filename="../fuzzyraster_dialog.py" line="472"/>
         <source>La fonction gaussienne nécessite exactement 2 paramètres (c, sigma).</source>
         <translation>The Gaussian function requires exactly 2 parameters (c, sigma).</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="474"/>
+        <location filename="../fuzzyraster_dialog.py" line="475"/>
         <source>Le paramètre sigma doit être strictement positif.</source>
         <translation>The sigma parameter must be strictly positive.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="476"/>
+        <location filename="../fuzzyraster_dialog.py" line="477"/>
         <source>Type de fonction floue inconnu.</source>
         <translation>Unknown fuzzy function type.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="478"/>
+        <location filename="../fuzzyraster_dialog.py" line="479"/>
         <source>Erreur lors de la validation des paramètres : </source>
         <translation>Error validating parameters: </translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="552"/>
+        <location filename="../fuzzyraster_dialog.py" line="553"/>
+        <source>Info</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyraster_dialog.py" line="553"/>
+        <source>Aucun fichier de métadonnées trouvé pour {base}</source>
+        <translation>No metadata file found for {base}</translation>
+    </message>
+    <message>
         <source>Info</source>
         <comment>Aucun fichier de métadonnées trouvé pour {base}</comment>
         <translatorcomment>No metadata file found for {base}</translatorcomment>
-        <translation>Info</translation>
+        <translation type="vanished">Info</translation>
     </message>
 </context>
 <context>
@@ -1605,39 +1627,78 @@ The result is a GeoTIFF raster saved in the selected folder.</translation>
         <translation>Select output folder</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="190"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="188"/>
         <source>Fonction manquante</source>
-        <comment>Veuillez définir une fonction d’agrégation avant de continuer.</comment>
         <translation>Missing function</translation>
     </message>
     <message>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="189"/>
+        <source>Veuillez définir une fonction d’agrégation avant de continuer.</source>
+        <translation>Please define an aggregate function before continuing.</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="198"/>
+        <source>Vérification de la combinaison</source>
+        <translation>Verification of the combination</translation>
+    </message>
+    <message>
         <location filename="../fuzzyaggregation_raster_dialog.py" line="199"/>
+        <source>La combinaison semble incohérente :
+
+{details}
+
+Voulez-vous continuer ?</source>
+        <translation>The combination seems inconsistent:
+
+{details}
+
+Do you want to continue?</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="213"/>
+        <source>Erreur</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="214"/>
+        <source>Impossible de construire la fonction d’agrégation.
+
+{e}</source>
+        <translation>Unable to build the aggregate function.
+
+{e}</translation>
+    </message>
+    <message>
+        <source>Fonction manquante</source>
+        <comment>Veuillez définir une fonction d’agrégation avant de continuer.</comment>
+        <translation type="vanished">Missing function</translation>
+    </message>
+    <message>
         <source>Vérification de la combinaison</source>
         <comment>La combinaison semble incohérente :
 
 {details}
 
 Voulez-vous continuer ?</comment>
-        <translation>Verification of the combination</translation>
+        <translation type="vanished">Verification of the combination</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="215"/>
         <source>Erreur</source>
         <comment>Impossible de construire la fonction d’agrégation.
 
 {e}</comment>
-        <translation>Error</translation>
+        <translation type="vanished">Error</translation>
     </message>
 </context>
 <context>
     <name>RasterMetadataDialog</name>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="570"/>
+        <location filename="../fuzzyraster_dialog.py" line="571"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="570"/>
+        <location filename="../fuzzyraster_dialog.py" line="571"/>
         <source>Fichier métadonnées non trouvé :
 {fzy_path}</source>
         <translation>Metadata file not found:

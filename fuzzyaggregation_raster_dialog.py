@@ -160,8 +160,10 @@ class RasterAggregationDialog(QDialog):
         dlg.set_criteria_labels(nom_couche_1, nom_couche_2)
 
         # si tu as déjà une fonction définie
-        if hasatself.tr(self, "aggregation_function_code") and self.aggregation_function_code:
+        # Si tu as déjà une fonction définie
+        if hasattr(self, "aggregation_function_code") and self.aggregation_function_code:
             dlg.set_selected_values(self.aggregation_function_code)
+
 
             if self.aggregation_function_code[0] == self.aggregation_function_code[3]:
                 dlg.checkSymmetry.setChecked(True)
@@ -185,8 +187,8 @@ class RasterAggregationDialog(QDialog):
         if not self.aggregation_function_code:
             QMessageBox.warning(
                 self,self.tr(
-                "Fonction manquante",
-                "Veuillez définir une fonction d’agrégation avant de continuer.")
+                "Fonction manquante"),
+                self.tr("Veuillez définir une fonction d’agrégation avant de continuer.")
             )
             return
 
@@ -195,8 +197,8 @@ class RasterAggregationDialog(QDialog):
             details = self.explain_inconsistency(self.aggregation_function_code)
             reply = QMessageBox.question(
                 self,self.tr(
-                "Vérification de la combinaison",
-                f"La combinaison semble incohérente :\n\n{details}\n\nVoulez-vous continuer ?"),
+                "Vérification de la combinaison"),
+                self.tr(f"La combinaison semble incohérente :\n\n{details}\n\nVoulez-vous continuer ?"),
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No
             )
@@ -210,8 +212,8 @@ class RasterAggregationDialog(QDialog):
         except Exception as e:
             QMessageBox.critical(
                 self,self.tr(
-                "Erreur",
-                f"Impossible de construire la fonction d’agrégation.\n\n{e}")
+                "Erreur"),
+                self.tr(f"Impossible de construire la fonction d’agrégation.\n\n{e}")
             )
             return
 

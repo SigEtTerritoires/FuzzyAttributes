@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from qgis.core import (
     Qgis,QgsProject, QgsVectorLayer, QgsField, edit, QgsFeature,
     QgsFields, QgsWkbTypes, QgsCoordinateReferenceSystem,
@@ -261,8 +262,8 @@ class FuzzyRasterDialog(QDialog, Ui_FuzzyRasterDialog):
         if os.path.exists(out_path):
             reply = QMessageBox.question(
                 self,
-                self.tr("Fichier existant",
-                f"Le fichier {out_path} existe déjà.\n\nVoulez-vous l’écraser ?"),
+                self.tr("Fichier existant"),
+                self.tr(f"Le fichier {out_path} existe déjà.\n\nVoulez-vous l’écraser ?"),
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No
             )
@@ -549,7 +550,7 @@ class FuzzyRasterDialog(QDialog, Ui_FuzzyRasterDialog):
         fzy_path = os.path.join(folder, f"fzy_{base}.fzy")
 
         if not os.path.exists(fzy_path):
-            QMessageBox.information(self, self.tr("Info", f"Aucun fichier de métadonnées trouvé pour {base}"))
+            QMessageBox.information(self, self.tr("Info"), self.tr(f"Aucun fichier de métadonnées trouvé pour {base}"))
             return
 
         dlg = RasterMetadataDialog(fzy_path, self)
