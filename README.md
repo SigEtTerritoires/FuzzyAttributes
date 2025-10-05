@@ -119,44 +119,44 @@ git clone https://github.com/SigEtTerritoires/FuzzyAttributes.git
 ### 1️⃣ Fuzzy Transformation (Vector)
 Menu: `FuzzyAttributes > Transformation floue`  
 Sélection d’une couche vectorielle et d’un champ numérique → régler la fonction → appliquer.
-     ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
+![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
 
 
 ### 2️⃣ Text → Fuzzy Mapping
 Menu: `FuzzyAttributes > Texte vers flou`  
 Charger valeurs uniques d’un champ texte, définir mapping `texte → [0..1]`, créer attribut flou.
-     ![Fuzzy text mapping dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/text_fuzzy.jpg)
+![Fuzzy text mapping dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/text_fuzzy.jpg)
 
 
 ### 3️⃣ Vector Aggregation
 Menu: `FuzzyAttributes > Agrégation floue`  
 Choisir deux critères, définir la fonction d’agrégation, lancer l’agrégation.
-     ![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
+![Fuzzy aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/aggregation.jpg)
 
-     ![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
+![Fuzzy aggregation function dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/fzyaggr_fonction.jpg)
 
    * Sélectionnez un style pour la couche de sortie : dégradé ou  rampe de couleurs.
    * Sélectionnez pour appliquer ou non comme style par défaut  pour la base de données
    * La couche résultante s'affiche avec une symbologie dégradée basée sur l'attribut d'agrégation.
-    ![Fuzzy aggregation layer](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/resultat.jpg)
+![Fuzzy aggregation layer](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/resultat.jpg)
 
 ### 4️⃣ Raster Fuzzification (New)
 Menu: `FuzzyRaster`  
 Sélection d’un raster monobande → appliquer une fonction floue → créer un raster `fzy_<nom>.tif`.
 
-    ![Raster -> fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_fuzzy.jpg)
+![Raster -> fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_fuzzy.jpg)
 
 ### 5️⃣ Raster Aggregation (New)
 Menu: `Raster Aggregation`  
 Sélection de deux rasters → choisir CRS cible / résolution / étendue / méthode de rééchantillonnage → définir la fonction d’agrégation → produire raster de sortie.
 
-      ![Raster aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_aggregation.jpg)
+![Raster aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_aggregation.jpg)
 
 ### 6️⃣ Classes → Fuzzy (New)
 Menu: `Classes vers flou`  
 Charger mapping CSV `classe;fuzzy` → reclasser raster catégoriel → produire raster flou.
 
-     ![Classes -> Fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/class_fuzzy.jpg)
+![Classes -> Fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/class_fuzzy.jpg)
 
 ---
 
