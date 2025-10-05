@@ -121,6 +121,7 @@ Menu: `FuzzyAttributes > Transformation floue`
 Sélection d’une couche vectorielle et d’un champ numérique → régler la fonction → appliquer.
      ![Fuzzy transformation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/attributs.jpg)
 
+
 ### 2️⃣ Text → Fuzzy Mapping
 Menu: `FuzzyAttributes > Texte vers flou`  
 Charger valeurs uniques d’un champ texte, définir mapping `texte → [0..1]`, créer attribut flou.
@@ -143,20 +144,20 @@ Choisir deux critères, définir la fonction d’agrégation, lancer l’agréga
 Menu: `FuzzyRaster`  
 Sélection d’un raster monobande → appliquer une fonction floue → créer un raster `fzy_<nom>.tif`.
 
-     ![Raster -> fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_fuzzy.jpg)
-	 
+    ![Raster -> fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_fuzzy.jpg)
+
 ### 5️⃣ Raster Aggregation (New)
 Menu: `Raster Aggregation`  
 Sélection de deux rasters → choisir CRS cible / résolution / étendue / méthode de rééchantillonnage → définir la fonction d’agrégation → produire raster de sortie.
 
-     ![Raster aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_aggregation.jpg)
-	 
+      ![Raster aggregation dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/raster_aggregation.jpg)
+
 ### 6️⃣ Classes → Fuzzy (New)
 Menu: `Classes vers flou`  
 Charger mapping CSV `classe;fuzzy` → reclasser raster catégoriel → produire raster flou.
 
      ![Classes -> Fuzzy dialog](https://raw.githubusercontent.com/SigEtTerritoires/FuzzyAttributes/main/resources/images/class_fuzzy.jpg)
-	 
+
 ---
 
 ## 🧮 About Fuzzy Aggregation Functions
