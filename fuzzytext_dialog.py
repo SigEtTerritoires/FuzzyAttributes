@@ -26,6 +26,13 @@ from qgis.PyQt.QtSql import QSqlDatabase, QSqlQuery
 import psycopg2
 from qgis.core import QgsMessageLog, Qgis
 from qgis.core import QgsVectorLayer, QgsFeature, QgsDataSourceUri
+from qgis.core import (QgsFields,QgsVectorFileWriter)
+from qgis.core import  QgsMapLayerType
+from qgis.PyQt.QtWidgets import QInputDialog
+
+
+
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'fuzzytext_dialog.ui'
 ))
@@ -87,13 +94,19 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
 
         self.btnLoad.setMenu(menu_load)
         self.horizontalLayoutBottom.addWidget(self.btnLoad)
+        self.btnAssignFuzzy.clicked.connect(self.assign_fuzzy_to_selection)
+        self.btnAssignFuzzy.clicked.connect(self.assign_fuzzy_to_selection)
 
         # -----------------------------
         # Boutons classiques
         # -----------------------------
         self.btnApply.clicked.connect(self.apply_mapping)
         self.btnClose.clicked.connect(self.close)
-        self.btnLoadValues.clicked.connect(self.load_unique_values)
+        self.btnLoadValues.clicked.connect(self.load_unique_text_values)
+
+
+        self.tableMapping.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.tableMapping.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)
 
         # -----------------------------
         # Remplissage de la combo layer
@@ -277,6 +290,103 @@ class FuzzyTextDialog(QDialog, FORM_CLASS):
 
         QMessageBox.information(self, "Enregistré", f"Table sauvegardée dans {path}")
 
+    def load_unique_text_values(self):
+        """Remplit tableMapping avec les valeurs uniques d'un champ texte (toutes sources confondues)"""
+        layer_idx = self.layerComboBox.currentIndex()
+        field_idx = self.comboBoxTextField.currentIndex()
+
+        if layer_idx < 0 or field_idx < 0:
+            QMessageBox.warning(self, self.tr("Erreur"), self.tr("Veuillez sélectionner une couche et un champ texte."))
+            return
+
+        # Récupération de la couche
+        layer_name = self.layerComboBox.currentText()
+        layer = self.layer_map.get(layer_name)
+
+
+        if not layer or not layer.isValid() or layer.type() != QgsMapLayerType.VectorLayer:
+            QMessageBox.warning(self, self.tr("Erreur"), self.tr("La couche sélectionnée n'est pas une couche vectorielle valide."))
+            return
+
+        field_name = self.comboBoxTextField.currentText()
+        unique_values = set()
+
+        # --- Détection du type de source ---
+        provider = layer.dataProvider().name().lower()
+
+        try:
+            if "postgres" in provider:
+                # --- Cas PostGIS ---
+                from qgis.core import QgsDataSourceUri
+                import psycopg2
+
+                uri = QgsDataSourceUri(layer.source())
+                schema = uri.schema()
+                table = uri.table()
+                conninfo = uri.connectionInfo(True)  # Inclut le mot de passe
+
+                conn = psycopg2.connect(conninfo)
+                cur = conn.cursor()
+                sql = f'SELECT DISTINCT "{field_name}" FROM "{schema}"."{table}" WHERE "{field_name}" IS NOT NULL'
+                cur.execute(sql)
+                for row in cur.fetchall():
+                    if row[0] is not None:
+                        unique_values.add(str(row[0]))
+                cur.close()
+                conn.close()
+
+            else:
+                # --- Cas GeoPackage, Shapefile, etc. ---
+                for feat in layer.getFeatures():
+                    val = feat[field_name]
+                    if val not in (None, ""):
+                        unique_values.add(str(val))
+
+        except Exception as e:
+            QMessageBox.critical(self, self.tr("Erreur"), self.tr(f"Impossible de récupérer les valeurs uniques : {e}"))
+            return
+
+        # --- Remplir la table ---
+        self.tableMapping.setColumnCount(2)
+        self.tableMapping.setHorizontalHeaderLabels([field_name, "Fuzzy"])
+        self.tableMapping.setRowCount(0)
+
+        for val in sorted(unique_values):
+            row = self.tableMapping.rowCount()
+            self.tableMapping.insertRow(row)
+            self.tableMapping.setItem(row, 0, QTableWidgetItem(str(val)))
+            self.tableMapping.setItem(row, 1, QTableWidgetItem(""))
+
+        self.btnApply.setEnabled(len(unique_values) > 0)
+        print(self.tr(f"{len(unique_values)} valeurs uniques ajoutées depuis {layer.name()} ({field_name})."))
+
+    def assign_fuzzy_to_selection(self):
+        """Assigne une valeur fuzzy à toutes les lignes sélectionnées"""
+        selected_ranges = self.tableMapping.selectedRanges()
+        if not selected_ranges:
+            QMessageBox.warning(self, self.tr("Sélection vide"), self.tr("Sélectionnez au moins une ligne dans la table."))
+            return
+
+        # Demander la valeur fuzzy
+        value, ok = QInputDialog.getDouble(
+            self,
+            self.tr("Valeur fuzzy"),
+            self.tr("Entrez une valeur fuzzy entre 0 et 1 :"),
+            decimals=3,
+            min=0.0,
+            max=1.0
+        )
+        if not ok:
+            return
+
+        # Affecter à toutes les lignes sélectionnées
+        total_rows = 0
+        for sel in selected_ranges:
+            for row in range(sel.topRow(), sel.bottomRow() + 1):
+                self.tableMapping.setItem(row, 1, QTableWidgetItem(str(value)))
+                total_rows += 1
+
+        print(self.tr(f"Valeur fuzzy {value} appliquée à {total_rows} lignes."))
     def load_table_from_file(self):
         """Charge un mapping texte/flou depuis un CSV"""
         path, _ = QFileDialog.getOpenFileName(self, "Charger une table", "", "CSV (*.csv)")

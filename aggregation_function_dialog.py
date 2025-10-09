@@ -3,6 +3,8 @@ from .aggregation_function_dialog_ui import Ui_AggregationFunctionDialog
 from qgis.PyQt.QtCore import QTranslator, QCoreApplication, QLocale 
 from qgis.PyQt.QtWidgets import QMessageBox
 from qgis.PyQt.QtCore import Qt
+import os
+from qgis.core import QgsApplication
 
 _translator = None
 def load_translator():

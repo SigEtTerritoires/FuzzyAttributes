@@ -9,6 +9,7 @@ from functools import partial
 from qgis.core import QgsProject
 from qgis.PyQt.QtWidgets import QDialogButtonBox, QMessageBox
 from qgis.PyQt.QtCore import QCoreApplication
+from qgis.PyQt.QtWidgets import QFileDialog
 
 
 
@@ -144,8 +145,8 @@ class RasterAggregationDialog(QDialog):
             "output_dir" : self.outputDirEdit.text(),
             "extent": "intersection" if self.extIntersection.isChecked() else "union",
             "resampling": self.resamplingCombo.currentText(),
-            "function_code": getatself.tr(self, "aggregation_function_code", None),
-            "function": getatself.tr(self, "aggregation_function", None),
+            "function_code": getattr(self, "aggregation_function_code", None),
+            "function": getattr(self, "aggregation_function", None),
         }
         return config
 

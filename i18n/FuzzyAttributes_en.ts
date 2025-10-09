@@ -149,22 +149,22 @@ Voulez-vous continuer ?</comment>
         <translation type="vanished">Criterion 3</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="86"/>
+        <location filename="../aggregation_function_dialog.py" line="88"/>
         <source>Critère 1 : si le critère &apos;{0}&apos; est Très mauvais et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</source>
         <translation>Criterion 1: if criterion ‘{0}’ is Very Bad and criterion ‘{1}’ is Very Good, the result must be :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="89"/>
+        <location filename="../aggregation_function_dialog.py" line="91"/>
         <source>Critère 2 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Moyen, le résultat doit être :</source>
         <translation>Criterion 2: if criterion ‘{0}’ is Medium and criterion ‘{1}’ is Medium, the result must be :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="92"/>
+        <location filename="../aggregation_function_dialog.py" line="94"/>
         <source>Critère 3 : si le critère &apos;{0}&apos; est Moyen et le critère &apos;{1}&apos; est Très bon, le résultat doit être :</source>
         <translation>Criterion 3: if criterion ‘{0}’ is Average and criterion ‘{1}’ is Very good, the result must be :</translation>
     </message>
     <message>
-        <location filename="../aggregation_function_dialog.py" line="95"/>
+        <location filename="../aggregation_function_dialog.py" line="97"/>
         <source>Critère 4 : si le critère &apos;{0}&apos; est Très bon et le critère &apos;{1}&apos; est Très mauvais, le résultat doit être :</source>
         <translation>Criterion 4: if criterion ‘{0}’ is Very Good and criterion ‘{1}’ is Very Bad, the result must be :</translation>
     </message>
@@ -672,12 +672,12 @@ Please add one to use this plugin.</translation>
         <location filename="../fuzzyattributes_dialog.py" line="367"/>
         <location filename="../fuzzyattributes_dialog.py" line="450"/>
         <location filename="../fuzzyattributes_dialog.py" line="489"/>
-        <location filename="../fuzzyattributes_dialog.py" line="583"/>
+        <location filename="../fuzzyattributes_dialog.py" line="576"/>
+        <location filename="../fuzzyattributes_dialog.py" line="588"/>
         <location filename="../fuzzyattributes_dialog.py" line="595"/>
-        <location filename="../fuzzyattributes_dialog.py" line="602"/>
-        <location filename="../fuzzyattributes_dialog.py" line="693"/>
-        <location filename="../fuzzyattributes_dialog.py" line="699"/>
-        <location filename="../fuzzyattributes_dialog.py" line="704"/>
+        <location filename="../fuzzyattributes_dialog.py" line="686"/>
+        <location filename="../fuzzyattributes_dialog.py" line="692"/>
+        <location filename="../fuzzyattributes_dialog.py" line="697"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
@@ -704,87 +704,87 @@ Please add one to use this plugin.</translation>
         <translation>No ‘metafuzzy’ table found.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="564"/>
+        <location filename="../fuzzyattributes_dialog.py" line="557"/>
         <source>Paramètres invalides</source>
         <translation>Invalid settings</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="575"/>
+        <location filename="../fuzzyattributes_dialog.py" line="568"/>
         <source>Champ existant</source>
         <translation>Existing field</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="576"/>
+        <location filename="../fuzzyattributes_dialog.py" line="569"/>
         <source>Le champ &apos;{new_field_name}&apos; existe déjà. Voulez-vous le remplacer ?</source>
         <translation>The field ‘{new_field_name}’ already exists. Do you want to replace it?</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="583"/>
+        <location filename="../fuzzyattributes_dialog.py" line="576"/>
         <source>Impossible de supprimer le champ existant.</source>
         <translation>Unable to delete the existing field.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="757"/>
+        <location filename="../fuzzyattributes_dialog.py" line="750"/>
         <source>Cette fonction nécessite exactement 2 paramètres.</source>
         <translation>This function requires exactly 2 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="760"/>
+        <location filename="../fuzzyattributes_dialog.py" line="753"/>
         <source>Les deux paramètres ne doivent pas être égaux.</source>
         <translation>The two parameters must not be equal.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="763"/>
+        <location filename="../fuzzyattributes_dialog.py" line="756"/>
         <source>La fonction triangulaire nécessite exactement 3 paramètres.</source>
         <translation>The triangular function requires exactly 3 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="766"/>
+        <location filename="../fuzzyattributes_dialog.py" line="759"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt; c.</source>
         <translation>The parameters must be in the order a &lt; b &lt; c.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="769"/>
+        <location filename="../fuzzyattributes_dialog.py" line="762"/>
         <source>La fonction trapézoïdale nécessite exactement 4 paramètres.</source>
         <translation>The trapezoidal function requires exactly 4 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="772"/>
+        <location filename="../fuzzyattributes_dialog.py" line="765"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt;= c &lt; d.</source>
         <translation>The parameters must be in the order a &lt; b &lt;= c &lt; d.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="775"/>
+        <location filename="../fuzzyattributes_dialog.py" line="768"/>
         <source>La fonction gaussienne nécessite exactement 2 paramètres (c, sigma).</source>
         <translation>The Gaussian function requires exactly 2 parameters (c, sigma).</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="778"/>
+        <location filename="../fuzzyattributes_dialog.py" line="771"/>
         <source>Le paramètre sigma doit être strictement positif.</source>
         <translation>The sigma parameter must be strictly positive.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="780"/>
+        <location filename="../fuzzyattributes_dialog.py" line="773"/>
         <source>Type de fonction floue inconnu.</source>
         <translation>Unknown fuzzy function type.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="782"/>
+        <location filename="../fuzzyattributes_dialog.py" line="775"/>
         <source>Erreur lors de la validation des paramètres : </source>
         <translation>Error validating parameters: </translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="851"/>
+        <location filename="../fuzzyattributes_dialog.py" line="844"/>
         <source>Champs de la couche GeoPackage sélectionnée</source>
         <translation>Fields of the selected GeoPackage layer</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="853"/>
+        <location filename="../fuzzyattributes_dialog.py" line="846"/>
         <source>Champs de la couche PostGIS sélectionnée</source>
         <translation>Fields of the selected PostGIS layer</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="855"/>
+        <location filename="../fuzzyattributes_dialog.py" line="848"/>
         <source>Champs de la couche vectorielle sélectionnée</source>
         <translation>Fields of the selected vector layer</translation>
     </message>
@@ -822,47 +822,47 @@ Please add one to use this plugin.</translation>
         <translation type="vanished">Unable to create metafuzzy table in GeoPackage.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="595"/>
+        <location filename="../fuzzyattributes_dialog.py" line="588"/>
         <source>Impossible d&apos;ajouter le champ.</source>
         <translation>Unable to add field.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="602"/>
+        <location filename="../fuzzyattributes_dialog.py" line="595"/>
         <source>Problème avec les champs.</source>
         <translation>Problem with the fields.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="679"/>
+        <location filename="../fuzzyattributes_dialog.py" line="672"/>
         <source>Succès</source>
         <translation>Success</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="694"/>
+        <location filename="../fuzzyattributes_dialog.py" line="687"/>
         <source>Impossible de trouver la couche &apos;{}&apos;</source>
         <translation>Unable to find ‘{}’ layer</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="699"/>
+        <location filename="../fuzzyattributes_dialog.py" line="692"/>
         <source>Aucun champ sélectionné.</source>
         <translation>No fields selected.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="704"/>
+        <location filename="../fuzzyattributes_dialog.py" line="697"/>
         <source>Le champ est introuvable.</source>
         <translation>The field cannot be found.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="717"/>
+        <location filename="../fuzzyattributes_dialog.py" line="710"/>
         <source>Aucune donnée</source>
         <translation>No data available</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="719"/>
+        <location filename="../fuzzyattributes_dialog.py" line="712"/>
         <source>Aucune valeur numérique disponible pour ce champ.</source>
         <translation>No numeric value available for this field.</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="736"/>
+        <location filename="../fuzzyattributes_dialog.py" line="729"/>
         <source>Statistiques pour le champ &apos;{field_name}&apos; :
 
 Nombre de valeurs : {count}
@@ -879,12 +879,12 @@ Mean : {mean_val:.2f}
 Median : {median_val:.2f}</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="745"/>
+        <location filename="../fuzzyattributes_dialog.py" line="738"/>
         <source>Statistiques du champ</source>
         <translation>Field statistics</translation>
     </message>
     <message>
-        <location filename="../fuzzyattributes_dialog.py" line="680"/>
+        <location filename="../fuzzyattributes_dialog.py" line="673"/>
         <source>Transformation floue ajoutée dans &apos;{}&apos;</source>
         <translation>Fuzzy transformation added in ‘{}’</translation>
     </message>
@@ -1120,14 +1120,14 @@ Median : {median_val:.2f}</translation>
         <location filename="../fuzzyraster_dialog.py" line="110"/>
         <location filename="../fuzzyraster_dialog.py" line="115"/>
         <location filename="../fuzzyraster_dialog.py" line="175"/>
-        <location filename="../fuzzyraster_dialog.py" line="223"/>
+        <location filename="../fuzzyraster_dialog.py" line="216"/>
+        <location filename="../fuzzyraster_dialog.py" line="238"/>
         <location filename="../fuzzyraster_dialog.py" line="245"/>
-        <location filename="../fuzzyraster_dialog.py" line="252"/>
-        <location filename="../fuzzyraster_dialog.py" line="292"/>
-        <location filename="../fuzzyraster_dialog.py" line="337"/>
-        <location filename="../fuzzyraster_dialog.py" line="436"/>
-        <location filename="../fuzzyraster_dialog.py" line="538"/>
-        <location filename="../fuzzyraster_dialog.py" line="543"/>
+        <location filename="../fuzzyraster_dialog.py" line="285"/>
+        <location filename="../fuzzyraster_dialog.py" line="330"/>
+        <location filename="../fuzzyraster_dialog.py" line="429"/>
+        <location filename="../fuzzyraster_dialog.py" line="531"/>
+        <location filename="../fuzzyraster_dialog.py" line="536"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
@@ -1168,13 +1168,13 @@ Median : {median_val:.2f}</translation>
     </message>
     <message>
         <location filename="../fuzzyraster_dialog.py" line="105"/>
-        <location filename="../fuzzyraster_dialog.py" line="538"/>
+        <location filename="../fuzzyraster_dialog.py" line="531"/>
         <source>Aucune couche sélectionnée</source>
         <translation>No layer selected</translation>
     </message>
     <message>
         <location filename="../fuzzyraster_dialog.py" line="110"/>
-        <location filename="../fuzzyraster_dialog.py" line="543"/>
+        <location filename="../fuzzyraster_dialog.py" line="536"/>
         <source>Impossible de trouver la couche {name}</source>
         <translation>Unable to find {name} layer</translation>
     </message>
@@ -1202,23 +1202,23 @@ Median : {median_val:.2f}</translation>
     </message>
     <message>
         <location filename="../fuzzyraster_dialog.py" line="175"/>
-        <location filename="../fuzzyraster_dialog.py" line="436"/>
+        <location filename="../fuzzyraster_dialog.py" line="429"/>
         <source>Paramètres invalides. Utilisez des nombres séparés par des virgules.</source>
         <translation>Invalid parameters. Use numbers separated by commas.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="223"/>
+        <location filename="../fuzzyraster_dialog.py" line="216"/>
         <source>Aucun raster sélectionné</source>
         <translation>No raster selected</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="237"/>
-        <location filename="../fuzzyraster_dialog.py" line="252"/>
+        <location filename="../fuzzyraster_dialog.py" line="230"/>
+        <location filename="../fuzzyraster_dialog.py" line="245"/>
         <source>Paramètres invalides</source>
         <translation>Invalid settings</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="245"/>
+        <location filename="../fuzzyraster_dialog.py" line="238"/>
         <source>La couche sélectionnée n’est pas un raster</source>
         <translation>The selected layer is not a raster</translation>
     </message>
@@ -1231,12 +1231,12 @@ Voulez-vous l’écraser ?</comment>
         <translation type="vanished">Existing file</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="265"/>
+        <location filename="../fuzzyraster_dialog.py" line="258"/>
         <source>Fichier existant</source>
         <translation>Existing file</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="266"/>
+        <location filename="../fuzzyraster_dialog.py" line="259"/>
         <source>Le fichier {out_path} existe déjà.
 
 Voulez-vous l’écraser ?</source>
@@ -1245,99 +1245,99 @@ Voulez-vous l’écraser ?</source>
 Do you want to overwrite it?</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="274"/>
+        <location filename="../fuzzyraster_dialog.py" line="267"/>
         <source>Choisir un nom de fichier</source>
         <translation>Choosing a file name</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="279"/>
+        <location filename="../fuzzyraster_dialog.py" line="272"/>
         <source>Annulé</source>
         <translation>Cancelled</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="279"/>
+        <location filename="../fuzzyraster_dialog.py" line="272"/>
         <source>Opération annulée par l’utilisateur.</source>
         <translation>Operation canceled by the user.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="294"/>
+        <location filename="../fuzzyraster_dialog.py" line="287"/>
         <source>Impossible d’écraser {out_path}
 {e}</source>
         <translation>Unable to overwrite {out_path}
 {e}</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="337"/>
+        <location filename="../fuzzyraster_dialog.py" line="330"/>
         <source>Impossible de charger le raster : {out_path}</source>
         <translation>Unable to load raster: {out_path}</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="341"/>
+        <location filename="../fuzzyraster_dialog.py" line="334"/>
         <source>Succès</source>
         <translation>Success</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="342"/>
+        <location filename="../fuzzyraster_dialog.py" line="335"/>
         <source>Transformation floue créée dans fzy_&apos;{}&apos;</source>
         <translation>Fuzzy transformation created in fzy_&apos;{}&apos;</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="454"/>
+        <location filename="../fuzzyraster_dialog.py" line="447"/>
         <source>Cette fonction nécessite exactement 2 paramètres.</source>
         <translation>This function requires exactly 2 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="457"/>
+        <location filename="../fuzzyraster_dialog.py" line="450"/>
         <source>Les deux paramètres ne doivent pas être égaux.</source>
         <translation>The two parameters must not be equal.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="460"/>
+        <location filename="../fuzzyraster_dialog.py" line="453"/>
         <source>La fonction triangulaire nécessite exactement 3 paramètres.</source>
         <translation>The triangular function requires exactly 3 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="463"/>
+        <location filename="../fuzzyraster_dialog.py" line="456"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt; c.</source>
         <translation>The parameters must be in the order a &lt; b &lt; c.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="466"/>
+        <location filename="../fuzzyraster_dialog.py" line="459"/>
         <source>La fonction trapézoïdale nécessite exactement 4 paramètres.</source>
         <translation>The trapezoidal function requires exactly 4 parameters.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="469"/>
+        <location filename="../fuzzyraster_dialog.py" line="462"/>
         <source>Les paramètres doivent être dans l&apos;ordre a &lt; b &lt;= c &lt; d.</source>
         <translation>The parameters must be in the order a &lt; b &lt;= c &lt; d.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="472"/>
+        <location filename="../fuzzyraster_dialog.py" line="465"/>
         <source>La fonction gaussienne nécessite exactement 2 paramètres (c, sigma).</source>
         <translation>The Gaussian function requires exactly 2 parameters (c, sigma).</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="475"/>
+        <location filename="../fuzzyraster_dialog.py" line="468"/>
         <source>Le paramètre sigma doit être strictement positif.</source>
         <translation>The sigma parameter must be strictly positive.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="477"/>
+        <location filename="../fuzzyraster_dialog.py" line="470"/>
         <source>Type de fonction floue inconnu.</source>
         <translation>Unknown fuzzy function type.</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="479"/>
+        <location filename="../fuzzyraster_dialog.py" line="472"/>
         <source>Erreur lors de la validation des paramètres : </source>
         <translation>Error validating parameters: </translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="553"/>
+        <location filename="../fuzzyraster_dialog.py" line="546"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="553"/>
+        <location filename="../fuzzyraster_dialog.py" line="546"/>
         <source>Aucun fichier de métadonnées trouvé pour {base}</source>
         <translation>No metadata file found for {base}</translation>
     </message>
@@ -1351,72 +1351,117 @@ Do you want to overwrite it?</translation>
 <context>
     <name>FuzzyTextDialog</name>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="60"/>
-        <location filename="../fuzzytext_dialog.py" line="453"/>
+        <location filename="../fuzzytext_dialog.py" line="67"/>
+        <location filename="../fuzzytext_dialog.py" line="563"/>
         <source>Enregistrer la table</source>
         <translation>Save the table</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="63"/>
+        <location filename="../fuzzytext_dialog.py" line="70"/>
         <source>Enregistrer en CSV</source>
         <translation>Save as CSV</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="67"/>
+        <location filename="../fuzzytext_dialog.py" line="74"/>
         <source>Enregistrer dans la base de données</source>
         <translation>Save to database</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="77"/>
+        <location filename="../fuzzytext_dialog.py" line="84"/>
         <source>Charger une table</source>
         <translation>Load a table</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="80"/>
-        <location filename="../fuzzytext_dialog.py" line="479"/>
+        <location filename="../fuzzytext_dialog.py" line="87"/>
+        <location filename="../fuzzytext_dialog.py" line="589"/>
         <source>Charger depuis CSV</source>
         <translation>Load from CSV</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="84"/>
-        <location filename="../fuzzytext_dialog.py" line="483"/>
+        <location filename="../fuzzytext_dialog.py" line="91"/>
+        <location filename="../fuzzytext_dialog.py" line="593"/>
         <source>Charger depuis la base de données</source>
         <translation>Load from database</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="168"/>
+        <location filename="../fuzzytext_dialog.py" line="181"/>
         <source>Aucune couche trouvée</source>
         <translation>No layer found</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="171"/>
+        <location filename="../fuzzytext_dialog.py" line="184"/>
         <source>Aucune couche GeoPackage (.gpkg) ou PostGIS n’est chargée dans le projet.
 Veuillez en ajouter une pour utiliser ce plugin.</source>
         <translation>No vector layer from a .gpkg file is loaded in the project.
 Please add one to use this plugin.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="409"/>
+        <location filename="../fuzzytext_dialog.py" line="299"/>
+        <source>Veuillez sélectionner une couche et un champ texte.</source>
+        <translation>Please select a layer and a text field.</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="308"/>
+        <source>La couche sélectionnée n&apos;est pas une couche vectorielle valide.</source>
+        <translation>The selected layer is not a valid vector layer.</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="346"/>
+        <source>Impossible de récupérer les valeurs uniques : {e}</source>
+        <translation>Unable to retrieve unique values: {e}</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="361"/>
+        <source>{len(unique_values)} valeurs uniques ajoutées depuis {layer.name()} ({field_name}).</source>
+        <translation>{len(unique_values)} unique values added since {layer.name()} ({field_name}).</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="367"/>
+        <source>Sélection vide</source>
+        <translation>Empty selection</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="367"/>
+        <source>Sélectionnez au moins une ligne dans la table.</source>
+        <translation>Select at least one row in the table.</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="373"/>
+        <source>Valeur fuzzy</source>
+        <translation>Fuzzy value</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="374"/>
+        <source>Entrez une valeur fuzzy entre 0 et 1 :</source>
+        <translation>Enter a fuzzy value between 0 and 1:</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="389"/>
+        <source>Valeur fuzzy {value} appliquée à {total_rows} lignes.</source>
+        <translation>Fuzzy value {value} applied to {total_rows} rows.</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.py" line="519"/>
         <source>Charger table de correspondance</source>
         <translation>Load correspondence table</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="422"/>
+        <location filename="../fuzzytext_dialog.py" line="532"/>
         <source>Erreur de lecture</source>
         <translation>Reading error</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="424"/>
+        <location filename="../fuzzytext_dialog.py" line="534"/>
         <source>Impossible de lire le fichier : {e}</source>
         <translation>Unable to read the file: {e}</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="432"/>
+        <location filename="../fuzzytext_dialog.py" line="542"/>
         <source>Incohérence détectée</source>
         <translation>Inconsistency detected</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="436"/>
+        <location filename="../fuzzytext_dialog.py" line="546"/>
         <source>Le fichier correspond au champ &apos;{data.get(&apos;field&apos;)}&apos;, mais vous avez sélectionné &apos;{field_name}&apos;.
 
 Veuillez sélectionner le bon champ ou un autre fichier.</source>
@@ -1425,58 +1470,61 @@ Veuillez sélectionner le bon champ ou un autre fichier.</source>
 Please select the correct field or another file.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="458"/>
+        <location filename="../fuzzytext_dialog.py" line="568"/>
         <source>Sauvegarder en CSV</source>
         <translation>Save as CSV</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="462"/>
+        <location filename="../fuzzytext_dialog.py" line="572"/>
         <source>Sauvegarder dans la base de données</source>
         <translation>Save to database</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="474"/>
+        <location filename="../fuzzytext_dialog.py" line="584"/>
         <source>Charger la table</source>
         <translation>Load the table</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="929"/>
-        <location filename="../fuzzytext_dialog.py" line="1002"/>
-        <location filename="../fuzzytext_dialog.py" line="1041"/>
+        <location filename="../fuzzytext_dialog.py" line="299"/>
+        <location filename="../fuzzytext_dialog.py" line="308"/>
+        <location filename="../fuzzytext_dialog.py" line="346"/>
+        <location filename="../fuzzytext_dialog.py" line="1039"/>
+        <location filename="../fuzzytext_dialog.py" line="1112"/>
+        <location filename="../fuzzytext_dialog.py" line="1151"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="931"/>
-        <location filename="../fuzzytext_dialog.py" line="1042"/>
+        <location filename="../fuzzytext_dialog.py" line="1041"/>
+        <location filename="../fuzzytext_dialog.py" line="1152"/>
         <source>Format de source non reconnu (ni GPKG ni PostGIS).</source>
         <translation>Unrecognized source format (neither GPKG nor PostGIS).</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="944"/>
-        <location filename="../fuzzytext_dialog.py" line="1007"/>
-        <location filename="../fuzzytext_dialog.py" line="1049"/>
+        <location filename="../fuzzytext_dialog.py" line="1054"/>
+        <location filename="../fuzzytext_dialog.py" line="1117"/>
+        <location filename="../fuzzytext_dialog.py" line="1159"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="944"/>
-        <location filename="../fuzzytext_dialog.py" line="1007"/>
+        <location filename="../fuzzytext_dialog.py" line="1054"/>
+        <location filename="../fuzzytext_dialog.py" line="1117"/>
         <source>Impossible de créer ou charger la table &apos;metafuzzy&apos;.</source>
         <translation>Unable to create or load the ‘metafuzzy’ table.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="1002"/>
+        <location filename="../fuzzytext_dialog.py" line="1112"/>
         <source>Aucune couche sélectionnée.</source>
         <translation>No layer selected.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="1050"/>
+        <location filename="../fuzzytext_dialog.py" line="1160"/>
         <source>Aucune table &apos;metafuzzy&apos; trouvée.</source>
         <translation>No ‘metafuzzy’ table found.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.py" line="1057"/>
+        <location filename="../fuzzytext_dialog.py" line="1167"/>
         <source>Historique des transformations</source>
         <translation>Transformation history</translation>
     </message>
@@ -1491,27 +1539,32 @@ Please select the correct field or another file.</translation>
         <translation>Load unique values</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.ui" line="40"/>
+        <location filename="../fuzzytext_dialog.ui" line="35"/>
+        <source>Affecter valeur fuzzy aux lignes sélectionnées</source>
+        <translation>Assign fuzzy value to selected rows</translation>
+    </message>
+    <message>
+        <location filename="../fuzzytext_dialog.ui" line="46"/>
         <source>Voir l&apos;historique des transformations</source>
         <translation>View transformation history</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.ui" line="50"/>
+        <location filename="../fuzzytext_dialog.ui" line="56"/>
         <source>Créer attribut flou</source>
         <translation>Create fuzzy attribute</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.ui" line="57"/>
+        <location filename="../fuzzytext_dialog.ui" line="63"/>
         <source>Fermer</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.ui" line="68"/>
+        <location filename="../fuzzytext_dialog.ui" line="74"/>
         <source>Astuce : associez chaque valeur texte du champ sélectionné à une valeur floue comprise entre 0 et 1.</source>
         <translation>Associate each text value in the selected field with a fuzzy value between 0 and 1.</translation>
     </message>
     <message>
-        <location filename="../fuzzytext_dialog.ui" line="71"/>
+        <location filename="../fuzzytext_dialog.ui" line="77"/>
         <source>color: gray; font-style: italic;</source>
         <translation>color: gray; font-style: italic;</translation>
     </message>
@@ -1527,77 +1580,77 @@ Please select the correct field or another file.</translation>
         <translation type="vanished">Rule 2 violated : R3 (A=0,5 ; B=1)  must be  &gt;= 0,5.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="19"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="20"/>
         <source>Préparation Agrégation Raster</source>
         <translation>Raster Aggregation Preparation</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="33"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="34"/>
         <source>Nom raster de sortie :</source>
         <translation>Output raster name:</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="35"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="36"/>
         <source>Aggregation_Result</source>
         <translation>Aggregation_Result</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="37"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="38"/>
         <source>Dossier de sortie :</source>
         <translation>Output directory:</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="40"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="41"/>
         <source>Parcourir...</source>
         <translation>Browse...</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="59"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="60"/>
         <source>Étendue spatiale</source>
         <translation>Spatial extent</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="61"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="62"/>
         <source>Intersection (zone commune)</source>
         <translation>Intersection (common area)</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="62"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="63"/>
         <source>Union (couvrir toute la zone)</source>
         <translation>Union (cover the entire area)</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="70"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="71"/>
         <source>Méthode de rééchantillonnage :</source>
         <translation>Resampling method:</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="78"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="79"/>
         <source>Définir la fonction d&apos;agrégation...</source>
         <translation>Define the aggregation function...</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="79"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="80"/>
         <source>Aucune fonction définie</source>
         <translation>No defined function</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="97"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="98"/>
         <source>Aide</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="104"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="105"/>
         <source>Annuler</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="120"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="121"/>
         <source>Aide - Agrégation raster</source>
         <translation>Help - Raster aggregation</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="129"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="130"/>
         <source>Ce module permet d&apos;agréger deux rasters avec une fonction floue.
 
 Étapes :
@@ -1622,27 +1675,27 @@ Steps:
 The result is a GeoTIFF raster saved in the selected folder.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="133"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="134"/>
         <source>Choisir dossier de sortie</source>
         <translation>Select output folder</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="188"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="191"/>
         <source>Fonction manquante</source>
         <translation>Missing function</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="189"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="193"/>
         <source>Veuillez définir une fonction d’agrégation avant de continuer.</source>
         <translation>Please define an aggregate function before continuing.</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="198"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="201"/>
         <source>Vérification de la combinaison</source>
         <translation>Verification of the combination</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="199"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="202"/>
         <source>La combinaison semble incohérente :
 
 {details}
@@ -1655,12 +1708,12 @@ Voulez-vous continuer ?</source>
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="213"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="216"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="214"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="218"/>
         <source>Impossible de construire la fonction d’agrégation.
 
 {e}</source>
@@ -1693,12 +1746,12 @@ Voulez-vous continuer ?</comment>
 <context>
     <name>RasterMetadataDialog</name>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="571"/>
+        <location filename="../fuzzyraster_dialog.py" line="564"/>
         <source>Erreur</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../fuzzyraster_dialog.py" line="571"/>
+        <location filename="../fuzzyraster_dialog.py" line="564"/>
         <source>Fichier métadonnées non trouvé :
 {fzy_path}</source>
         <translation>Metadata file not found:
@@ -1708,12 +1761,12 @@ Voulez-vous continuer ?</comment>
 <context>
     <name>self.self</name>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="250"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="253"/>
         <source>Règle 1 violée : R3 (A=0,5 ; B=1) doit être &gt;= max(R1, R2).</source>
         <translation>Rule 1 violated: R3 (A=0.5; B=1) must be &gt;= max(R1, R2).</translation>
     </message>
     <message>
-        <location filename="../fuzzyaggregation_raster_dialog.py" line="254"/>
+        <location filename="../fuzzyaggregation_raster_dialog.py" line="257"/>
         <source>Règle 2 violée : R3 (A=0,5 ; B=1) doit être &gt;= 0,5.</source>
         <translation>Rule 2 violated : R3 (A=0,5 ; B=1)  must be  &gt;= 0,5.</translation>
     </message>

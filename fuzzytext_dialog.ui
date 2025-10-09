@@ -29,7 +29,13 @@
      </item>
     </layout>
    </item>
-
+	 <item>
+	 <widget class="QPushButton" name="btnAssignFuzzy">
+	  <property name="text">
+	   <string>Affecter valeur fuzzy aux lignes sélectionnées</string>
+	  </property>
+	 </widget>
+	</item>
    <!-- Table mapping -->
    <item>
     <widget class="QTableWidget" name="tableMapping"/>

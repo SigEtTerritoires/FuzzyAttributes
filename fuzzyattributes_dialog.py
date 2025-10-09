@@ -540,13 +540,6 @@ class FuzzyAttributesDialog(QDialog, Ui_FuzzyAttributesDialog):
             if layer.name() == layer_name:
                 self.current_layer = layer
                 break
-    def open_aggregation_function_dialog(self):
-        dlg = AggregationFunctionDialog()
-        if dlg.exec():
-            result_code = dlg.get_selected_values()
-            self.functionCodeLabel.setText(result_code)  # à adapter selon votre interface
-    
-
 
     def apply_fuzzy_transformation(self):
         config = self.get_parameters()

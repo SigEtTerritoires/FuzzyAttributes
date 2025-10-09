@@ -33,52 +33,6 @@ def is_geographic(crs):
     """Retourne True si le CRS est géographique (degrés)."""
     return "4326" in crs.authid()
 
-def run_raster_aggregate(self):
-    """
-    Méthode plugin : ouvre le dialogue et appelle le traitement
-    """
-    from .fuzzyaggregation_raster_dialog import RasterAggregationDialog
-
-
-    dlg = RasterAggregationDialog(self.iface.mainWindow())
-
-    # Remplir les combos avec les rasters du projet
-    for layer in QgsProject.instance().mapLayers().values():
-        if isinstance(layer, QgsRasterLayer):
-            dlg.comboRaster1.addItem(layer.name(), layer.id())
-            dlg.comboRaster2.addItem(layer.name(), layer.id())
-
-    if dlg.exec():
-        config = dlg.get_config()
-        try:
-            # ⚡ traitement raster
-            output_layer = raster_processing.run_raster_aggregation(config)
-
-            # Debug affichage config
-            debug_msg = [
-                "=== DEBUG Agrégation Raster ===",
-                f"Raster1: {config['raster1_name']} (id={config['raster1']})",
-                f"Raster2: {config['raster2_name']} (id={config['raster2']})",
-                f"CRS: {config['crs']}",
-                f"Résolution: {config['resolution']} (X={config['res_x']} Y={config['res_y']})",
-                f"Étendue: {config['extent']}",
-                f"Resampling: {config['resampling']}",
-                f"Function code: {config['function_code']}",
-                f"Function obj: {config['function']}",
-            ]
-            debug_text = "\n".join(debug_msg)
-
-            self.iface.messageBar().pushInfo("Agrégation Raster", debug_text)
-            print(debug_text)
-
-            if output_layer:
-                QgsProject.instance().addMapLayer(output_layer)
-
-        except Exception as e:
-            self.iface.messageBar().pushWarning("Erreur agrégation raster", str(e))
-            import traceback
-            print("Erreur run_raster_aggregate:", traceback.format_exc())
-
 
 
 def is_geographic(crs):

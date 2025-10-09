@@ -209,14 +209,7 @@ class FuzzyRasterDialog(QDialog, Ui_FuzzyRasterDialog):
             if layer.name() == layer_name:
                 self.current_layer = layer
                 break
-    def open_aggregation_function_dialog(self):
-        dlg = AggregationFunctionDialog()
-        if dlg.exec():
-            result_code = dlg.get_selected_values()
-            self.functionCodeLabel.setText(result_code)  # à adapter selon votre interface
     
-
-
     def apply_fuzzy_transformation(self):
         idx = self.layerComboBox.currentIndex()
         if idx < 0:
